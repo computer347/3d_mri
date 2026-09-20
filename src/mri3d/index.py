@@ -77,7 +77,11 @@ def load_cases(which: str = "all") -> list[Case]:
     sources = {
         "gli_train": lambda: _gli_cases(paths.GLI_TRAIN, "train"),
         "gli_val": lambda: _gli_cases(paths.GLI_VAL, "val"),
-        "men_train": lambda: _men_cases(paths.MEN_TRAIN, "train"),
+        # Prefer the resampled copy when it exists: identical case IDs, so
+        # splits stay valid, but already on a 1 mm grid.
+        "men_train": lambda: _men_cases(
+            paths.MEN_TRAIN_1MM if paths.MEN_TRAIN_1MM.exists() else paths.MEN_TRAIN, "train"),
+        "men_train_raw": lambda: _men_cases(paths.MEN_TRAIN, "train"),
     }
     if which == "all":
         return [c for fn in sources.values() for c in fn()]

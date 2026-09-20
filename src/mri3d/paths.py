@@ -15,6 +15,9 @@ DATA = Path(os.environ.get("MRI3D_DATA", ROOT / "data"))
 GLI_TRAIN = DATA / "brats2024_gli" / "train"
 GLI_VAL = DATA / "brats2024_gli" / "val"
 MEN_TRAIN = DATA / "brats2024_men_rt" / "train"
+# Written by mri3d.preprocess: the same cases resampled to 1 mm isotropic.
+# Preferred automatically when present (see mri3d.index).
+MEN_TRAIN_1MM = DATA / "brats2024_men_rt" / "train_1mm"
 
 OUTPUTS = ROOT / "outputs"
 REPORTS = ROOT / "reports"

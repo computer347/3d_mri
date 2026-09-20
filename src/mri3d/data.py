@@ -30,6 +30,7 @@ from __future__ import annotations
 from monai import transforms as T
 from monai.data import CacheDataset, DataLoader, Dataset
 
+from . import paths
 from .index import load_cases
 from .splits import load_split
 
@@ -141,7 +142,11 @@ def loaders(dataset: str = "gli", batch_size: int = 1, workers: int = 4,
         if cache_rate > 0 else (lambda f, t: Dataset(f, t))
 
     # MEN-RT arrives at mixed voxel sizes and needs resampling; GLI does not.
-    spacing = (1.0, 1.0, 1.0) if dataset == "men_rt" else None
+    # If mri3d.preprocess has already written the 1 mm copy, skip it - resampling
+    # again would cost memory for nothing (and it was that per-epoch resampling
+    # that exhausted system RAM on the first attempt).
+    spacing = ((1.0, 1.0, 1.0)
+               if dataset == "men_rt" and not paths.MEN_TRAIN_1MM.exists() else None)
     tf = (full_volume_transforms(n_classes, spacing) if mode == "full"
           else train_transforms(n_classes, patch, spacing))
     train_ds = make(train_files, tf)
