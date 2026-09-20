@@ -1,26 +1,69 @@
-# mri_3d — 3D brain MRI tumour segmentation / classification
+# Brain tumour segmentation on BraTS 2024
 
-Deep-learning project on the BraTS 2024 challenge data (multi-parametric 3D brain MRI, NIfTI `.nii.gz`).
+3D brain tumour segmentation and lesion detection on multi-parametric MRI, trained on a
+single 8 GB consumer GPU (RTX 3070 Ti). Built on the BraTS 2024 challenge cohorts:
+1350 labelled post-treatment glioma cases and 500 meningioma radiotherapy cases.
+
+**The imaging data is not in this repository** and cannot be — it is CC-BY-NC and
+access-controlled through Synapse. Everything here regenerates from it.
+
+## What's here
+
+| | |
+|---|---|
+| **Tumour atlas** | `reports/tumour_atlas.html` — where tumours occur across all 1350 cases, in three planes |
+| **Prediction review** | `reports/predictions_*.html` — what the model called a tumour, vs. what a radiologist drew |
+| **Leakage audit** | `reports/duplicates.csv` — found 3 pairs of identical scans under different patient IDs |
+| **Case index** | `reports/case_index.csv` — per-case class volumes, tumour centroid, bbox, geometry |
+| **Design note** | `docs/patch-vs-full-volume.md` — measured, not assumed |
+
+## Pipeline
+
+```bash
+python -m mri3d.scan --which all        # one pass over ~45 GB: stats, heatmaps, fingerprints
+python -m mri3d.duplicates              # leakage audit -> reports/duplicates.csv
+python -m mri3d.splits                  # patient-level train/val/test -> configs/splits.json
+python -m mri3d.template                # mean brain for the atlas backdrop
+python -m mri3d.heatmap_page            # -> reports/tumour_atlas.html
+
+python -m mri3d.train --overfit 5 --epochs 250    # correctness gate: Dice must approach 1.0
+python -m mri3d.train --epochs 300                # the real run
+python -m mri3d.predict --run <run> --split test --save-masks
+python -m mri3d.case_viewer --run <run> --split test
+```
+
+## Method
+
+- **3D SegResNet** (residual encoder-decoder CNN). Transformer variants don't beat a
+  well-tuned CNN at this data scale and don't fit in 8 GB.
+- **Dice + cross-entropy loss.** Cross entropy alone is optimised by predicting background
+  everywhere — tumour is ~1% of voxels, so that scores 99% "accuracy". Dice is a per-class
+  ratio, so a small tumour counts as much as the huge background.
+- **Class-balanced patch sampling.** Uniform random patches would rarely contain the rare
+  classes; NETC appears in only 42% of cases.
+- **Softmax over mutually-exclusive classes**, because BraTS 2024 scores the four sub-regions
+  directly. Pre-2024 BraTS code assumes overlapping regions (WT ⊃ TC ⊃ ET) and sigmoid outputs
+  — that does not apply here.
+- **Lesion-wise Dice** as the headline metric, matching the challenge: each connected tumour
+  is scored separately, so a missed satellite lesion costs a full zero. This is also the
+  detection metric — connected components of the segmentation *are* the detections.
 
 ## Layout
 
 ```
 mri_3d/
-├── data/
-│   ├── raw/                        Original downloads, untouched (safe to delete once happy)
-│   ├── brats2024_men_rt/train/     Meningioma radiotherapy — 500 cases, labelled
-│   ├── brats2024_gli/
-│   │   ├── train/                  Glioma training — 1350 cases, labelled
-│   │   └── val/                    Glioma validation — 188 cases, NO labels
-│   ├── samples/                    Tiny "fastlane" sets (3 cases each, labelled) for smoke tests
-│   │   ├── gli/  men_rt/  path/
-│   └── metadata/                   Clinical/demographic spreadsheets + Synapse manifest
-├── docs/citations/                 BibTeX to cite for each BraTS sub-challenge
-├── tools/brats2024_mlcubes/        Official MLCube prep/eval configs (Docker-based eval)
-├── src/                            Python package code (datasets, models, training)
-├── notebooks/                      Exploration / visualisation
-├── configs/                        Experiment configs
-└── outputs/                        Checkpoints, logs, predictions (gitignore this)
+├── src/mri3d/                      the package (scan, splits, duplicates, data, model, train, …)
+├── reports/                        committed outputs: atlas, prediction review, audits, scores
+├── configs/splits.json             patient-level split manifest
+├── docs/                           design notes and BibTeX citations
+├── tools/brats2024_mlcubes/        official MLCube prep/eval configs
+├── outputs/                        checkpoints, predictions, large arrays (gitignored)
+└── data/                           the imagery (gitignored, never committed)
+    ├── raw/                        original Synapse downloads
+    ├── brats2024_gli/train|val/    glioma: 1350 labelled, 188 unlabelled
+    ├── brats2024_men_rt/train/     meningioma: 500 labelled
+    ├── samples/                    3-case "fastlane" sets for smoke tests
+    └── metadata/                   clinical spreadsheets, Synapse manifest
 ```
 
 ## Datasets

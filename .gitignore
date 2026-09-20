@@ -17,3 +17,4 @@ runs/
 __pycache__/
 *.egg-info/
 .ipynb_checkpoints/
+reports/predictions_*.html

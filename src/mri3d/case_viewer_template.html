@@ -1,0 +1,306 @@
+<title>Tumour Prediction Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --ground: #f2f4f6; --panel: #ffffff; --line: #dde2e8; --ink: #151a21;
+    --muted: #5d6874; --accent: #0f766e; --accent-ink: #ffffff; --viewport: #06080b;
+    --good: #15803d; --bad: #b91c1c;
+    --shadow: 0 1px 2px rgba(18,26,38,.06), 0 8px 24px rgba(18,26,38,.06);
+  }
+  :root:not([data-theme="light"]) {
+    @media (prefers-color-scheme: dark) {
+      --ground: #0b0e13; --panel: #141922; --line: #242e3b; --ink: #e6ecf3;
+      --muted: #8d99a9; --accent: #2dd4bf; --accent-ink: #06231f;
+      --good: #4ade80; --bad: #f87171;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0b0e13; --panel: #141922; --line: #242e3b; --ink: #e6ecf3;
+    --muted: #8d99a9; --accent: #2dd4bf; --accent-ink: #06231f;
+    --good: #4ade80; --bad: #f87171;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
+  }
+
+  body { background: var(--ground); color: var(--ink); font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif; line-height: 1.5; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding-inline: 16px; padding-block: 28px 40px; }
+  h1 { font-size: clamp(1.45rem, 1.2rem + 1.1vw, 1.95rem); font-weight: 600; letter-spacing: -.02em; margin: 0 0 6px; text-wrap: balance; }
+  .lede { color: var(--muted); max-width: 66ch; margin: 0 0 22px; font-size: .95rem; }
+  .lede b { color: var(--ink); font-weight: 500; }
+
+  .layout { display: grid; grid-template-columns: 210px minmax(0,1fr) 270px; gap: 18px; align-items: start; }
+  @media (max-width: 1000px) { .layout { grid-template-columns: minmax(0,1fr); } }
+
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; box-shadow: var(--shadow); }
+  .pad { padding: 14px; display: grid; gap: 16px; }
+  h2 { font-size: .68rem; text-transform: uppercase; letter-spacing: .09em; color: var(--muted); font-weight: 600; margin: 0 0 8px; }
+
+  .caselist { max-height: 560px; overflow-y: auto; display: grid; gap: 3px; }
+  .caselist button {
+    display: grid; grid-template-columns: 1fr auto; gap: 6px; align-items: baseline;
+    border: 0; background: transparent; color: var(--ink); text-align: left; cursor: pointer;
+    font: inherit; font-size: .8rem; padding: 7px 8px; border-radius: 6px; width: 100%;
+  }
+  .caselist button:hover { background: var(--ground); }
+  .caselist button[aria-current="true"] { background: var(--accent); color: var(--accent-ink); }
+  .caselist .score { font-family: "IBM Plex Mono", monospace; font-size: .74rem; font-variant-numeric: tabular-nums; opacity: .85; }
+  .caselist .cid { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  .viewport { background: var(--viewport); display: grid; place-items: center; padding: 12px; border-radius: 10px 10px 0 0; }
+  canvas#view { width: 100%; height: auto; display: block; border-radius: 4px; }
+  .scrub { display: flex; align-items: center; gap: 10px; padding: 11px 13px; border-top: 1px solid var(--line); }
+  .scrub input[type=range] { flex: 1; accent-color: var(--accent); min-width: 0; }
+  .mono { font-family: "IBM Plex Mono", monospace; font-size: .78rem; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+  .segmented { display: flex; background: var(--ground); border: 1px solid var(--line); border-radius: 7px; padding: 3px; gap: 3px; }
+  .segmented button { flex: 1; border: 0; background: transparent; color: var(--muted); cursor: pointer; font: inherit; font-size: .8rem; padding: 5px 4px; border-radius: 5px; }
+  .segmented button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); font-weight: 500; }
+  button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .legend { display: grid; gap: 6px; font-size: .8rem; }
+  .legend div { display: grid; grid-template-columns: 12px 1fr; gap: 8px; align-items: center; }
+  .chip { width: 12px; height: 12px; border-radius: 3px; }
+
+  table { border-collapse: collapse; width: 100%; font-size: .78rem; }
+  th, td { text-align: right; padding: 4px 3px; border-bottom: 1px solid var(--line); }
+  th:first-child, td:first-child { text-align: left; }
+  thead th { color: var(--muted); font-weight: 500; font-size: .7rem; text-transform: uppercase; letter-spacing: .05em; }
+  td.num { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; }
+  .absent { color: var(--muted); font-style: italic; }
+
+  .slider label { font-size: .8rem; color: var(--muted); display: flex; justify-content: space-between; }
+  .slider input { width: 100%; accent-color: var(--accent); }
+  footer { margin-top: 24px; font-size: .78rem; color: var(--muted); max-width: 76ch; }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <h1>Tumour Prediction Review</h1>
+  <p class="lede">
+    What the model marked as tumour, next to what a radiologist drew. Switch to
+    <b>Agreement</b> to see the three ways a prediction can be wrong or right:
+    matched tissue, tissue the model missed, and tissue it invented. Cases are listed
+    worst-scoring first — <b id="runname">—</b>.
+  </p>
+
+  <div class="layout">
+    <div class="panel pad">
+      <div>
+        <h2>Cases</h2>
+        <div class="caselist" id="caselist"></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="viewport"><canvas id="view" width="400" height="400"></canvas></div>
+      <div class="scrub">
+        <button id="prev" class="mono" style="border:1px solid var(--line);background:var(--ground);color:var(--ink);border-radius:6px;padding:4px 9px;cursor:pointer" aria-label="Previous slice">◀</button>
+        <input type="range" id="slice" min="0" max="10" value="5" aria-label="Slice">
+        <button id="next" class="mono" style="border:1px solid var(--line);background:var(--ground);color:var(--ink);border-radius:6px;padding:4px 9px;cursor:pointer" aria-label="Next slice">▶</button>
+        <span class="mono" id="slicelabel">—</span>
+      </div>
+    </div>
+
+    <div class="panel pad">
+      <div>
+        <h2>View</h2>
+        <div class="segmented" id="modes">
+          <button type="button" data-mode="agreement" aria-pressed="true">Agreement</button>
+          <button type="button" data-mode="overlay" aria-pressed="false">Classes</button>
+        </div>
+      </div>
+      <div>
+        <h2 id="legendtitle">Legend</h2>
+        <div class="legend" id="legend"></div>
+      </div>
+      <div class="slider">
+        <label for="opacity">Overlay strength <span class="mono" id="opacityval">70%</span></label>
+        <input type="range" id="opacity" min="10" max="100" value="70">
+      </div>
+      <div>
+        <h2>Scores for this case</h2>
+        <table id="scores"><tbody></tbody></table>
+      </div>
+    </div>
+  </div>
+
+  <footer id="foot"></footer>
+</div>
+
+<script>
+const META = __META_JSON__;
+const ASSETS = __ASSETS_JSON__;
+
+const CLASS_COLOURS = { NETC: "#3b82f6", SNFH: "#eab308", ET: "#ef4444", RC: "#a855f7", GTV: "#ef4444" };
+const AGREE = {
+  tp: { colour: "#22c55e", label: "Matched — model and radiologist agree" },
+  fn: { colour: "#3b82f6", label: "Missed — radiologist marked it, model did not" },
+  fp: { colour: "#f43f5e", label: "False alarm — model marked it, radiologist did not" },
+};
+
+const state = { case: 0, slice: 0, mode: "agreement", opacity: 0.7 };
+const imgs = {};
+const work = document.createElement("canvas");
+const wctx = work.getContext("2d", { willReadFrequently: true });
+const view = document.getElementById("view");
+const vctx = view.getContext("2d");
+
+function current() { return META.cases[state.case]; }
+
+function tile(key, k) {
+  const g = current().geom;
+  const r = Math.floor(k / g.cols), c = k % g.cols;
+  work.width = g.tile_w; work.height = g.tile_h;
+  wctx.clearRect(0, 0, g.tile_w, g.tile_h);
+  wctx.drawImage(imgs[key], c * g.tile_w, r * g.tile_h, g.tile_w, g.tile_h, 0, 0, g.tile_w, g.tile_h);
+  const d = wctx.getImageData(0, 0, g.tile_w, g.tile_h).data;
+  const out = new Uint8ClampedArray(g.tile_w * g.tile_h);
+  for (let i = 0, j = 0; i < d.length; i += 4, j++) out[j] = d[i];
+  return out;
+}
+
+function hex(h) { return [parseInt(h.slice(1,3),16), parseInt(h.slice(3,5),16), parseInt(h.slice(5,7),16)]; }
+
+function render() {
+  const cse = current(), g = cse.geom;
+  const scan = tile(`${cse.case_id}_scan`, state.slice);
+  const truth = tile(`${cse.case_id}_truth`, state.slice);
+  const pred = tile(`${cse.case_id}_pred`, state.slice);
+
+  work.width = g.tile_w; work.height = g.tile_h;
+  const img = wctx.createImageData(g.tile_w, g.tile_h);
+  const px = img.data;
+  const a = state.opacity;
+
+  for (let i = 0, o = 0; i < scan.length; i++, o += 4) {
+    const v = scan[i];
+    let r = v, gg = v, b = v;
+    const t = truth[i], p = pred[i];
+    let colour = null;
+    if (state.mode === "agreement") {
+      if (t > 0 && p > 0) colour = AGREE.tp.colour;
+      else if (t > 0) colour = AGREE.fn.colour;
+      else if (p > 0) colour = AGREE.fp.colour;
+    } else if (p > 0) {
+      const name = (META.classes.find(c => c.value === p) || {}).name;
+      colour = CLASS_COLOURS[name] || "#22d3ee";
+    }
+    if (colour) {
+      const [cr, cg, cb] = hex(colour);
+      r += (cr - r) * a; gg += (cg - gg) * a; b += (cb - b) * a;
+    }
+    px[o] = r; px[o+1] = gg; px[o+2] = b; px[o+3] = 255;
+  }
+  wctx.putImageData(img, 0, 0);
+
+  const scale = Math.max(2, Math.min(5, Math.round(720 / g.tile_w)));
+  view.width = g.tile_w * scale; view.height = g.tile_h * scale;
+  vctx.imageSmoothingEnabled = true; vctx.imageSmoothingQuality = "high";
+  vctx.drawImage(work, 0, 0, view.width, view.height);
+
+  document.getElementById("slicelabel").textContent =
+    `axial ${cse.slice_offset + state.slice} · ${state.slice + 1}/${g.n_slices}`;
+}
+
+function drawLegend() {
+  const box = document.getElementById("legend");
+  document.getElementById("legendtitle").textContent =
+    state.mode === "agreement" ? "Agreement" : "Predicted class";
+  if (state.mode === "agreement") {
+    box.innerHTML = Object.values(AGREE)
+      .map(a => `<div><span class="chip" style="background:${a.colour}"></span><span>${a.label}</span></div>`).join("");
+  } else {
+    box.innerHTML = META.classes
+      .map(c => `<div><span class="chip" style="background:${CLASS_COLOURS[c.name] || "#22d3ee"}"></span>` +
+                `<span>${c.name}</span></div>`).join("") +
+      `<div style="color:var(--muted);margin-top:4px">Showing the model's output only.</div>`;
+  }
+}
+
+function drawScores() {
+  const s = current().scores;
+  const rows = META.classes.map(c => {
+    const present = s[`present_${c.name}`];
+    const d = s[`dice_${c.name}`], lw = s[`lesion_dice_${c.name}`];
+    const miss = s[`lesions_missed_${c.name}`], fp = s[`lesions_false_${c.name}`];
+    if (!present) {
+      return `<tr><td>${c.name}</td><td colspan="3" class="absent">not present in this case</td></tr>`;
+    }
+    return `<tr><td>${c.name}</td><td class="num">${d.toFixed(3)}</td>` +
+           `<td class="num">${lw.toFixed(3)}</td>` +
+           `<td class="num" title="lesions missed / false">${miss}/${fp}</td></tr>`;
+  }).join("");
+  document.getElementById("scores").innerHTML =
+    `<thead><tr><th>Class</th><th>Dice</th><th>Lesion</th><th>M/F</th></tr></thead><tbody>${rows}</tbody>`;
+}
+
+function selectCase(i) {
+  state.case = i;
+  const g = current().geom;
+  state.slice = Math.floor(g.n_slices / 2);
+  const sl = document.getElementById("slice");
+  sl.max = g.n_slices - 1; sl.value = state.slice;
+  for (const b of document.querySelectorAll("#caselist button"))
+    b.setAttribute("aria-current", String(+b.dataset.i === i));
+  drawScores();
+  render();
+}
+
+const list = document.getElementById("caselist");
+META.cases.forEach((c, i) => {
+  const b = document.createElement("button");
+  b.dataset.i = i;
+  b.innerHTML = `<span class="cid">${c.case_id.replace("BraTS-", "")}</span>` +
+                `<span class="score">${c.mean_lesion_dice.toFixed(3)}</span>`;
+  b.title = `${c.case_id} — mean lesion-wise Dice ${c.mean_lesion_dice}`;
+  b.addEventListener("click", () => selectCase(i));
+  list.appendChild(b);
+});
+
+document.getElementById("modes").addEventListener("click", e => {
+  const b = e.target.closest("button[data-mode]");
+  if (!b) return;
+  state.mode = b.dataset.mode;
+  for (const x of document.querySelectorAll("#modes button"))
+    x.setAttribute("aria-pressed", String(x === b));
+  drawLegend(); render();
+});
+
+const sliceInput = document.getElementById("slice");
+sliceInput.addEventListener("input", () => { state.slice = +sliceInput.value; render(); });
+const step = d => {
+  const g = current().geom;
+  state.slice = Math.max(0, Math.min(g.n_slices - 1, state.slice + d));
+  sliceInput.value = state.slice; render();
+};
+document.getElementById("prev").addEventListener("click", () => step(-1));
+document.getElementById("next").addEventListener("click", () => step(1));
+addEventListener("keydown", e => {
+  if (e.key === "ArrowLeft") { step(-1); e.preventDefault(); }
+  if (e.key === "ArrowRight") { step(1); e.preventDefault(); }
+});
+const op = document.getElementById("opacity");
+op.addEventListener("input", () => {
+  state.opacity = +op.value / 100;
+  document.getElementById("opacityval").textContent = op.value + "%";
+  render();
+});
+
+document.getElementById("runname").textContent = `run ${META.run}, ${META.split} split`;
+document.getElementById("foot").innerHTML =
+  `Predictions from <code>${META.run}</code> on the held-out <code>${META.split}</code> split of the ` +
+  `BraTS 2024 ${META.dataset === "gli" ? "post-treatment glioma" : "meningioma radiotherapy"} cohort. ` +
+  `<b>Dice</b> is volumetric overlap; <b>Lesion</b> scores each connected tumour separately, so a missed ` +
+  `satellite lesion cannot hide behind one large correct one. <b>M/F</b> counts lesions missed entirely ` +
+  `and lesions invented. Slices shown are those containing tumour, plus a little context. ` +
+  `Imagery is CC-BY-NC BraTS data, shown for evaluation.`;
+
+Promise.all(Object.entries(ASSETS).map(([k, src]) => new Promise(res => {
+  const im = new Image();
+  im.onload = () => { imgs[k] = im; res(); };
+  im.onerror = () => res();
+  im.src = src;
+}))).then(() => { drawLegend(); selectCase(0); });
+</script>
