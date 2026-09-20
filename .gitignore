@@ -1,0 +1,19 @@
+# Patient imagery and archives - CC-BY-NC, access-controlled via Synapse.
+# Never commit these.
+data/
+*.nii
+*.nii.gz
+*.zip
+
+# Training artefacts and large derived arrays (regenerate with `python -m mri3d.scan`)
+outputs/
+reports/heatmap_assets/
+*.pt
+*.pth
+runs/
+
+# Python
+.venv/
+__pycache__/
+*.egg-info/
+.ipynb_checkpoints/

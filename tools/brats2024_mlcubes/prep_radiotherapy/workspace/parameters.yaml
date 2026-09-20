@@ -1,0 +1,4 @@
+task: segmentation-radiotherapy
+segmentation_modalities: ["t1c"]
+label_modality: gtv
+separator: "_"

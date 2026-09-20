@@ -1,0 +1,394 @@
+<title>Glioma Tumour Atlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --ground: #f2f4f6;
+    --panel: #ffffff;
+    --line: #dde2e8;
+    --ink: #151a21;
+    --muted: #5d6874;
+    --accent: #0f766e;
+    --accent-ink: #ffffff;
+    --viewport: #06080b;
+    --shadow: 0 1px 2px rgba(18, 26, 38, .06), 0 8px 24px rgba(18, 26, 38, .06);
+  }
+  :root:not([data-theme="light"]) {
+    @media (prefers-color-scheme: dark) {
+      --ground: #0b0e13;
+      --panel: #141922;
+      --line: #242e3b;
+      --ink: #e6ecf3;
+      --muted: #8d99a9;
+      --accent: #2dd4bf;
+      --accent-ink: #06231f;
+      --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 8px 24px rgba(0, 0, 0, .35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0b0e13;
+    --panel: #141922;
+    --line: #242e3b;
+    --ink: #e6ecf3;
+    --muted: #8d99a9;
+    --accent: #2dd4bf;
+    --accent-ink: #06231f;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 8px 24px rgba(0, 0, 0, .35);
+  }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; padding-inline: 16px; padding-block: 28px 40px; }
+
+  header { margin-bottom: 22px; }
+  h1 {
+    font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.05rem);
+    font-weight: 600; letter-spacing: -.02em; margin: 0 0 6px; text-wrap: balance;
+  }
+  .lede { color: var(--muted); max-width: 64ch; margin: 0; font-size: .95rem; }
+  .lede strong { color: var(--ink); font-weight: 500; }
+
+  .layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 20px; align-items: start; }
+  @media (max-width: 860px) { .layout { grid-template-columns: minmax(0, 1fr); } }
+
+  .stage {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+    box-shadow: var(--shadow); overflow: hidden;
+  }
+  .viewport { background: var(--viewport); display: grid; place-items: center; padding: 14px; }
+  canvas#view { width: 100%; max-width: 100%; height: auto; display: block; border-radius: 4px; }
+
+  .scrub { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-top: 1px solid var(--line); }
+  .scrub input[type="range"] { flex: 1; accent-color: var(--accent); min-width: 0; }
+  .counter {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: .8rem;
+    color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap;
+  }
+
+  .panel {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+    box-shadow: var(--shadow); padding: 16px; display: grid; gap: 18px;
+  }
+  .group { display: grid; gap: 9px; }
+  .group > h2 {
+    font-size: .68rem; text-transform: uppercase; letter-spacing: .09em;
+    color: var(--muted); font-weight: 600; margin: 0;
+  }
+
+  .segmented { display: flex; background: var(--ground); border: 1px solid var(--line); border-radius: 7px; padding: 3px; gap: 3px; }
+  .segmented button {
+    flex: 1; border: 0; background: transparent; color: var(--muted); cursor: pointer;
+    font: inherit; font-size: .82rem; padding: 5px 4px; border-radius: 5px;
+  }
+  .segmented button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); font-weight: 500; }
+  .segmented button:focus-visible, .cls:focus-within { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .cls { display: grid; grid-template-columns: auto auto 1fr auto; align-items: center; gap: 9px; cursor: pointer; }
+  .cls input { accent-color: var(--accent); margin: 0; }
+  .swatch { width: 11px; height: 11px; border-radius: 3px; }
+  .cls .name { font-size: .87rem; }
+  .cls .name small { color: var(--muted); display: block; font-size: .72rem; line-height: 1.3; }
+  .cls .pct {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: .78rem;
+    color: var(--muted); font-variant-numeric: tabular-nums;
+  }
+
+  .slider { display: grid; gap: 5px; }
+  .slider label { font-size: .8rem; color: var(--muted); display: flex; justify-content: space-between; gap: 8px; }
+  .slider label span { font-family: "IBM Plex Mono", ui-monospace, monospace; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .slider input { width: 100%; accent-color: var(--accent); }
+
+  .toggle-row { display: flex; align-items: center; gap: 8px; font-size: .85rem; }
+
+  .readout {
+    border-top: 1px solid var(--line); padding-top: 14px;
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: .76rem;
+    color: var(--muted); display: grid; gap: 3px; font-variant-numeric: tabular-nums;
+  }
+  .readout b { color: var(--ink); font-weight: 500; }
+  .readout .hint { font-family: "IBM Plex Sans", sans-serif; }
+
+  footer { margin-top: 26px; font-size: .78rem; color: var(--muted); max-width: 72ch; }
+  footer code { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: .95em; }
+
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Glioma Tumour Atlas</h1>
+    <p class="lede">
+      Where brain tumours actually sit. Every labelled segmentation from the
+      <strong>BraTS 2024 post-treatment glioma</strong> training set — <strong id="ncases">—</strong> cases —
+      summed voxel by voxel in a shared anatomical space. Brighter means more patients had that
+      tissue type at that exact location.
+    </p>
+  </header>
+
+  <div class="layout">
+    <div class="stage">
+      <div class="viewport"><canvas id="view" width="400" height="400"></canvas></div>
+      <div class="scrub">
+        <button id="prev" class="counter" style="border:1px solid var(--line);background:var(--ground);color:var(--ink);border-radius:6px;padding:4px 9px;cursor:pointer" aria-label="Previous slice">◀</button>
+        <input type="range" id="slice" min="0" max="90" value="45" aria-label="Slice">
+        <button id="next" class="counter" style="border:1px solid var(--line);background:var(--ground);color:var(--ink);border-radius:6px;padding:4px 9px;cursor:pointer" aria-label="Next slice">▶</button>
+        <span class="counter" id="slicelabel">slice 45 / 91</span>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="group">
+        <h2>Plane</h2>
+        <div class="segmented" id="planes">
+          <button type="button" data-plane="axial" aria-pressed="true">Axial</button>
+          <button type="button" data-plane="coronal" aria-pressed="false">Coronal</button>
+          <button type="button" data-plane="sagittal" aria-pressed="false">Sagittal</button>
+        </div>
+        <label class="toggle-row"><input type="checkbox" id="mip"> Collapse all slices (max projection)</label>
+      </div>
+
+      <div class="group">
+        <h2>Tissue classes</h2>
+        <div id="classes"></div>
+      </div>
+
+      <div class="group">
+        <h2>Display</h2>
+        <div class="slider">
+          <label for="opacity">Overlay strength <span id="opacityval">85%</span></label>
+          <input type="range" id="opacity" min="10" max="100" value="85">
+        </div>
+        <div class="slider">
+          <label for="threshold">Hide below <span id="thresholdval">2%</span> of class peak</label>
+          <input type="range" id="threshold" min="0" max="50" value="2">
+        </div>
+      </div>
+
+      <div class="readout" id="readout">
+        <div class="hint">Hover the image to read case counts at a voxel.</div>
+      </div>
+    </div>
+  </div>
+
+  <footer id="foot"></footer>
+</div>
+
+<script>
+const META = __META_JSON__;
+const ASSETS = __ASSETS_JSON__;
+
+const state = {
+  plane: "axial",
+  slice: {},
+  active: Object.fromEntries(META.classes.map(c => [c.name, true])),
+  opacity: 0.85,
+  threshold: 0.02,
+  mip: false,
+};
+for (const p of Object.keys(META.planes)) state.slice[p] = Math.floor(META.planes[p].n_slices / 2);
+
+const imgs = {};
+const work = document.createElement("canvas");
+const wctx = work.getContext("2d", { willReadFrequently: true });
+const view = document.getElementById("view");
+const vctx = view.getContext("2d");
+const mipCache = new Map();
+let current = null; // {tw, th, template, heat:{name:Uint8ClampedArray}}
+
+function geom() { return META.planes[state.plane]; }
+
+function tileOf(key, k) {
+  const g = geom();
+  const r = Math.floor(k / g.cols), c = k % g.cols;
+  work.width = g.tile_w; work.height = g.tile_h;
+  wctx.clearRect(0, 0, g.tile_w, g.tile_h);
+  wctx.drawImage(imgs[key], c * g.tile_w, r * g.tile_h, g.tile_w, g.tile_h, 0, 0, g.tile_w, g.tile_h);
+  const d = wctx.getImageData(0, 0, g.tile_w, g.tile_h).data;
+  const out = new Uint8ClampedArray(g.tile_w * g.tile_h);
+  for (let i = 0, j = 0; i < d.length; i += 4, j++) out[j] = d[i];
+  return out;
+}
+
+function projection(key) {
+  const ck = key;
+  if (mipCache.has(ck)) return mipCache.get(ck);
+  const g = geom();
+  const acc = new Uint8ClampedArray(g.tile_w * g.tile_h);
+  for (let k = 0; k < g.n_slices; k++) {
+    const s = tileOf(key, k);
+    for (let i = 0; i < acc.length; i++) if (s[i] > acc[i]) acc[i] = s[i];
+  }
+  mipCache.set(ck, acc);
+  return acc;
+}
+
+function gather() {
+  const g = geom();
+  const k = state.slice[state.plane];
+  const grab = name => state.mip ? projection(`${name}_${state.plane}`) : tileOf(`${name}_${state.plane}`, k);
+  const heat = {};
+  for (const c of META.classes) heat[c.name] = grab(c.name);
+  current = { tw: g.tile_w, th: g.tile_h, template: grab("template"), heat };
+}
+
+function hexToRgb(h) {
+  return [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)];
+}
+const COLOURS = Object.fromEntries(META.classes.map(c => [c.name, hexToRgb(c.colour)]));
+
+function render() {
+  if (!current) return;
+  const { tw, th, template, heat } = current;
+  work.width = tw; work.height = th;
+  const img = wctx.createImageData(tw, th);
+  const px = img.data;
+
+  for (let i = 0, o = 0; i < template.length; i++, o += 4) {
+    // Anatomy stays a cool grey so the four overlay hues remain readable on it.
+    const t = template[i] / 255;
+    let r = t * 214, g = t * 224, b = t * 236;
+    for (const c of META.classes) {
+      if (!state.active[c.name]) continue;
+      const f = heat[c.name][i] / 255;
+      if (f <= state.threshold) continue;
+      // Gamma below 1 lifts the long tail: rare locations stay visible next to the peak.
+      const a = Math.min(1, Math.pow(f, 0.6) * state.opacity);
+      const [cr, cg, cb] = COLOURS[c.name];
+      r += (cr - r) * a; g += (cg - g) * a; b += (cb - b) * a;
+    }
+    px[o] = r; px[o + 1] = g; px[o + 2] = b; px[o + 3] = 255;
+  }
+  wctx.putImageData(img, 0, 0);
+
+  const scale = Math.max(2, Math.min(6, Math.round(760 / tw)));
+  view.width = tw * scale; view.height = th * scale;
+  vctx.imageSmoothingEnabled = true;
+  vctx.imageSmoothingQuality = "high";
+  vctx.clearRect(0, 0, view.width, view.height);
+  vctx.drawImage(work, 0, 0, view.width, view.height);
+
+  const g = geom();
+  document.getElementById("slicelabel").textContent =
+    state.mip ? `all ${g.n_slices} slices` : `slice ${state.slice[state.plane]} / ${g.n_slices}`;
+}
+
+function refresh() { gather(); render(); }
+
+// ---- controls -------------------------------------------------------------
+document.getElementById("planes").addEventListener("click", e => {
+  const b = e.target.closest("button[data-plane]");
+  if (!b) return;
+  state.plane = b.dataset.plane;
+  mipCache.clear();
+  for (const btn of document.querySelectorAll("#planes button"))
+    btn.setAttribute("aria-pressed", String(btn === b));
+  const g = geom();
+  const sl = document.getElementById("slice");
+  sl.max = g.n_slices - 1; sl.value = state.slice[state.plane];
+  refresh();
+});
+
+const sliceInput = document.getElementById("slice");
+sliceInput.addEventListener("input", () => {
+  state.slice[state.plane] = +sliceInput.value;
+  refresh();
+});
+const step = d => {
+  const g = geom();
+  state.slice[state.plane] = Math.max(0, Math.min(g.n_slices - 1, state.slice[state.plane] + d));
+  sliceInput.value = state.slice[state.plane];
+  refresh();
+};
+document.getElementById("prev").addEventListener("click", () => step(-1));
+document.getElementById("next").addEventListener("click", () => step(1));
+addEventListener("keydown", e => {
+  if (e.key === "ArrowLeft") { step(-1); e.preventDefault(); }
+  if (e.key === "ArrowRight") { step(1); e.preventDefault(); }
+});
+
+document.getElementById("mip").addEventListener("change", e => {
+  state.mip = e.target.checked;
+  sliceInput.disabled = state.mip;
+  refresh();
+});
+
+const op = document.getElementById("opacity");
+op.addEventListener("input", () => {
+  state.opacity = +op.value / 100;
+  document.getElementById("opacityval").textContent = op.value + "%";
+  render();
+});
+const th = document.getElementById("threshold");
+th.addEventListener("input", () => {
+  state.threshold = +th.value / 100;
+  document.getElementById("thresholdval").textContent = th.value + "%";
+  render();
+});
+
+const classBox = document.getElementById("classes");
+for (const c of META.classes) {
+  const row = document.createElement("label");
+  row.className = "cls";
+  row.innerHTML =
+    `<input type="checkbox" id="cls-${c.name}" checked>` +
+    `<span class="swatch" style="background:${c.colour}"></span>` +
+    `<span class="name">${c.name}<small>${c.label}</small></span>` +
+    `<span class="pct">${c.present_pct}%</span>`;
+  row.title = `${c.name} appears in ${c.present_cases} of ${META.n_cases} cases; ` +
+              `its most common location is shared by ${c.peak_cases} cases`;
+  row.querySelector("input").addEventListener("change", e => {
+    state.active[c.name] = e.target.checked;
+    render();
+  });
+  classBox.appendChild(row);
+}
+
+// ---- hover readout --------------------------------------------------------
+const readout = document.getElementById("readout");
+view.addEventListener("mousemove", e => {
+  if (!current) return;
+  const r = view.getBoundingClientRect();
+  const x = Math.floor((e.clientX - r.left) / r.width * current.tw);
+  const y = Math.floor((e.clientY - r.top) / r.height * current.th);
+  if (x < 0 || y < 0 || x >= current.tw || y >= current.th) return;
+  const i = y * current.tw + x;
+  const lines = META.classes.map(c => {
+    const n = Math.round(current.heat[c.name][i] / 255 * c.peak_cases);
+    const pct = (100 * n / META.n_cases).toFixed(1);
+    return `<div><b style="color:${c.colour}">${c.name.padEnd(4)}</b> ${String(n).padStart(4)} cases · ${pct}%</div>`;
+  });
+  readout.innerHTML =
+    `<div><b>${state.plane}</b> ${state.mip ? "projection" : "slice " + state.slice[state.plane]} · voxel ${x},${y}</div>` +
+    lines.join("");
+});
+view.addEventListener("mouseleave", () => {
+  readout.innerHTML = '<div class="hint">Hover the image to read case counts at a voxel.</div>';
+});
+
+// ---- boot -----------------------------------------------------------------
+document.getElementById("ncases").textContent = META.n_cases.toLocaleString();
+document.getElementById("foot").innerHTML =
+  `Built from ${META.n_cases.toLocaleString()} labelled cases at ${META.voxel_mm} mm resolution ` +
+  `(the 1 mm segmentations downsampled 2×, one case counted once per voxel). ` +
+  `Anatomical backdrop is the mean T1c of 200 training scans in the same space. ` +
+  `Source: BraTS 2024 adult glioma post-treatment cohort, used under CC-BY-NC — ` +
+  `no patient imagery is reproduced here, only counts across the cohort. ` +
+  `Generated by <code>python -m mri3d.heatmap_page</code>.`;
+
+Promise.all(Object.entries(ASSETS).map(([k, src]) => new Promise(res => {
+  const im = new Image();
+  im.onload = () => { imgs[k] = im; res(); };
+  im.onerror = () => res();
+  im.src = src;
+}))).then(() => {
+  const g = geom();
+  sliceInput.max = g.n_slices - 1;
+  sliceInput.value = state.slice[state.plane];
+  refresh();
+});
+</script>
