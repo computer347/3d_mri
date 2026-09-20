@@ -7,12 +7,32 @@ single 8 GB consumer GPU (RTX 3070 Ti). Built on the BraTS 2024 challenge cohort
 **The imaging data is not in this repository** and cannot be — it is CC-BY-NC and
 access-controlled through Synapse. Everything here regenerates from it.
 
+## Results
+
+Scored once on 203 held-out patients. Full table and discussion in
+[`reports/results.md`](reports/results.md).
+
+| Region | Lesion-wise Dice | Volumetric Dice |
+|---|---|---|
+| NETC | 0.478 | 0.482 |
+| SNFH | 0.575 | 0.851 |
+| ET | 0.614 | 0.766 |
+| RC | 0.675 | 0.725 |
+| **mean** | **0.589** | |
+
+The 0.30 gap between the two columns on SNFH is the interesting part: the model
+segments the main tumour well but invents roughly one spurious lesion per case.
+Volumetric Dice barely notices; lesion-wise Dice charges a full zero for each.
+Reporting only the familiar metric would have hidden the defect entirely.
+
 ## What's here
 
 | | |
 |---|---|
+| **Results** | `reports/results.md` — test scores, next to the challenge leaderboard |
 | **Tumour atlas** | `reports/tumour_atlas.html` — where tumours occur across all 1350 cases, in three planes |
 | **Prediction review** | `reports/predictions_*.html` — what the model called a tumour, vs. what a radiologist drew |
+| **Training curves** | `reports/curves_*.html` — loss and per-class Dice per epoch |
 | **Leakage audit** | `reports/duplicates.csv` — found 3 pairs of identical scans under different patient IDs |
 | **Case index** | `reports/case_index.csv` — per-case class volumes, tumour centroid, bbox, geometry |
 | **Design note** | `docs/patch-vs-full-volume.md` — measured, not assumed |

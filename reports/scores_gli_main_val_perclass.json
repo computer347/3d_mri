@@ -1,0 +1,107 @@
+{
+  "thresholds": {
+    "NETC": 0,
+    "SNFH": 400,
+    "ET": 100,
+    "RC": 400
+  },
+  "before": {
+    "n_cases": 203,
+    "min_voxels": 0,
+    "NETC": {
+      "lesion": 0.5438,
+      "volumetric": 0.5649,
+      "false_lesions": 50,
+      "missed_lesions": 10,
+      "n": 83
+    },
+    "SNFH": {
+      "lesion": 0.5143,
+      "volumetric": 0.8575,
+      "false_lesions": 273,
+      "missed_lesions": 36,
+      "n": 203
+    },
+    "ET": {
+      "lesion": 0.5722,
+      "volumetric": 0.7357,
+      "false_lesions": 86,
+      "missed_lesions": 24,
+      "n": 158
+    },
+    "RC": {
+      "lesion": 0.6243,
+      "volumetric": 0.7195,
+      "false_lesions": 67,
+      "missed_lesions": 11,
+      "n": 172
+    },
+    "TC": {
+      "lesion": 0.5706,
+      "volumetric": 0.7306,
+      "false_lesions": 87,
+      "missed_lesions": 25,
+      "n": 159
+    },
+    "WT": {
+      "lesion": 0.5337,
+      "volumetric": 0.8709,
+      "false_lesions": 233,
+      "missed_lesions": 34,
+      "n": 203
+    },
+    "mean_lesion": 0.5598
+  },
+  "after": {
+    "n_cases": 203,
+    "min_voxels": {
+      "1": 0,
+      "2": 400,
+      "3": 100,
+      "4": 400
+    },
+    "NETC": {
+      "lesion": 0.5438,
+      "volumetric": 0.5649,
+      "false_lesions": 50,
+      "missed_lesions": 10,
+      "n": 83
+    },
+    "SNFH": {
+      "lesion": 0.5927,
+      "volumetric": 0.8583,
+      "false_lesions": 49,
+      "missed_lesions": 125,
+      "n": 203
+    },
+    "ET": {
+      "lesion": 0.5822,
+      "volumetric": 0.7195,
+      "false_lesions": 50,
+      "missed_lesions": 63,
+      "n": 158
+    },
+    "RC": {
+      "lesion": 0.6651,
+      "volumetric": 0.7119,
+      "false_lesions": 18,
+      "missed_lesions": 32,
+      "n": 172
+    },
+    "TC": {
+      "lesion": 0.5789,
+      "volumetric": 0.7144,
+      "false_lesions": 51,
+      "missed_lesions": 63,
+      "n": 159
+    },
+    "WT": {
+      "lesion": 0.632,
+      "volumetric": 0.871,
+      "false_lesions": 55,
+      "missed_lesions": 85,
+      "n": 203
+    },
+    "mean_lesion": 0.5991
+  }
+}
