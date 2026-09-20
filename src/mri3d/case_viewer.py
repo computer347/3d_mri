@@ -143,7 +143,11 @@ def main() -> None:
         "run": args.run,
         "split": args.split,
         "dataset": args.dataset,
-        "classes": [{"value": v, "name": n_} for v, n_ in class_values.items() if v],
+        # Sub-regions carry a label value (the overlay colours them); the
+        # composites TC and WT are scored but not drawn, so they have none.
+        "classes": ([{"value": v, "name": n_} for v, n_ in class_values.items() if v]
+                    + ([{"value": None, "name": r} for r in ("TC", "WT")]
+                       if args.dataset == "gli" else [])),
         "cases": cases,
     }
     template = (Path(__file__).parent / "case_viewer_template.html").read_text(encoding="utf-8")

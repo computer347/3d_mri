@@ -74,13 +74,41 @@ def lesion_wise_dice(pred: np.ndarray, ref: np.ndarray,
     return float(np.mean(scores)), {"tp": len(scores) - fn - fp, "fn": fn, "fp": fp}
 
 
-def score_case(pred: np.ndarray, ref: np.ndarray, class_values: dict[int, str]) -> dict:
-    """Per-class volumetric and lesion-wise Dice for one case."""
+# Composite regions, scored by the challenge alongside the four sub-regions.
+# Definitions quoted from the BraTS 2024 post-treatment glioma paper
+# (arXiv:2405.18368):
+#   "Tumor core (ET plus NETC) describes what is typically resected during a
+#    surgical procedure."
+#   "Whole tumor (ET plus SNFH plus NETC) defines the whole extent of the
+#    tumor, including the tumor core, infiltrating tumor, peritumoral edema and
+#    treatment-related changes."
+# Note that NEITHER includes the resection cavity - RC is scored only on its
+# own. Assuming otherwise would silently inflate both composites on this
+# cohort, where 85% of cases contain a cavity.
+GLI_REGIONS = {
+    "TC": (1, 3),        # NETC + ET
+    "WT": (1, 2, 3),     # NETC + SNFH + ET
+}
+
+
+def score_case(pred: np.ndarray, ref: np.ndarray, class_values: dict[int, str],
+               regions: dict[str, tuple] | None = None) -> dict:
+    """Volumetric and lesion-wise Dice per class, plus the composite regions.
+
+    Reported the same way the challenge leaderboard reports it, so numbers here
+    are directly comparable to it.
+    """
     out: dict[str, float] = {}
-    for value, name in class_values.items():
-        if value == 0:
-            continue
-        p, r = pred == value, ref == value
+    targets: list[tuple[str, tuple]] = [
+        (name, (value,)) for value, name in class_values.items() if value != 0
+    ]
+    if regions is None and set(class_values) >= {1, 2, 3}:
+        regions = GLI_REGIONS
+    targets += list((regions or {}).items())
+
+    for name, values in targets:
+        p = np.isin(pred, values)
+        r = np.isin(ref, values)
         out[f"dice_{name}"] = dice(p, r)
         lw, counts = lesion_wise_dice(p, r)
         out[f"lesion_dice_{name}"] = lw

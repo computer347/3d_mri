@@ -184,7 +184,7 @@ function render() {
       else if (t > 0) colour = AGREE.fn.colour;
       else if (p > 0) colour = AGREE.fp.colour;
     } else if (p > 0) {
-      const name = (META.classes.find(c => c.value === p) || {}).name;
+      const name = (META.classes.find(c => c.value === p) || {}).name;  // composites have value null
       colour = CLASS_COLOURS[name] || "#22d3ee";
     }
     if (colour) {
@@ -212,7 +212,7 @@ function drawLegend() {
     box.innerHTML = Object.values(AGREE)
       .map(a => `<div><span class="chip" style="background:${a.colour}"></span><span>${a.label}</span></div>`).join("");
   } else {
-    box.innerHTML = META.classes
+    box.innerHTML = META.classes.filter(c => c.value !== null)
       .map(c => `<div><span class="chip" style="background:${CLASS_COLOURS[c.name] || "#22d3ee"}"></span>` +
                 `<span>${c.name}</span></div>`).join("") +
       `<div style="color:var(--muted);margin-top:4px">Showing the model's output only.</div>`;
@@ -222,7 +222,16 @@ function drawLegend() {
 function drawScores() {
   const s = current().scores;
   const rows = META.classes.map(c => {
+    const composite = c.value === null;
     const present = s[`present_${c.name}`];
+    if (composite && present) {
+      const d = s[`dice_${c.name}`], lw = s[`lesion_dice_${c.name}`];
+      const miss = s[`lesions_missed_${c.name}`], fp = s[`lesions_false_${c.name}`];
+      const note = c.name === "TC" ? "ET+NETC" : "ET+NETC+SNFH";
+      return `<tr><td title="${note}" style="color:var(--muted)">${c.name}</td>` +
+             `<td class="num">${d.toFixed(3)}</td><td class="num">${lw.toFixed(3)}</td>` +
+             `<td class="num">${miss}/${fp}</td></tr>`;
+    }
     const d = s[`dice_${c.name}`], lw = s[`lesion_dice_${c.name}`];
     const miss = s[`lesions_missed_${c.name}`], fp = s[`lesions_false_${c.name}`];
     if (!present) {
