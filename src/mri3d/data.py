@@ -57,14 +57,26 @@ def case_dicts(dataset: str = "gli", split: str = "train") -> list[dict]:
     return out
 
 
-def base_transforms(n_classes: int) -> list:
+def base_transforms(n_classes: int, spacing: tuple | None = None) -> list:
     """Load, orient and normalise - shared by training and validation."""
-    return [
+    steps = [
         T.LoadImaged(keys=["image", "label"], image_only=True, ensure_channel_first=True),
         # Stack the modalities into channels; single-modality datasets pass through.
         T.ConcatItemsd(keys="image", name="image", dim=0),
         T.EnsureTyped(keys=["image", "label"]),
+        # Source data is LAS; everything downstream assumes RAS. Predictions must be
+        # written with the RAS affine or they come out mirrored - see
+        # tests/test_orientation.py.
         T.Orientationd(keys=["image", "label"], axcodes="RAS"),
+    ]
+    if spacing is not None:
+        # Only needed for MEN-RT, whose voxels range from 0.37 to 1.5 mm across
+        # cases. Without this a fixed-size patch covers wildly different amounts
+        # of anatomy from one scan to the next. The glioma set is already 1 mm
+        # isotropic, so it skips this and the resampling cost.
+        steps.append(T.Spacingd(keys=["image", "label"], pixdim=spacing,
+                                mode=("bilinear", "nearest")))
+    return steps + [
         # Per channel, per case: BraTS intensities have no absolute meaning, and
         # nonzero-only statistics stop the black air around the head from
         # dominating the mean.
@@ -72,8 +84,8 @@ def base_transforms(n_classes: int) -> list:
     ]
 
 
-def train_transforms(n_classes: int = 5, patch=PATCH) -> T.Compose:
-    return T.Compose(base_transforms(n_classes) + [
+def train_transforms(n_classes: int = 5, patch=PATCH, spacing=None) -> T.Compose:
+    return T.Compose(base_transforms(n_classes, spacing) + [
         T.CropForegroundd(keys=["image", "label"], source_key="image", allow_smaller=True),
         T.SpatialPadd(keys=["image", "label"], spatial_size=patch),
         T.RandCropByLabelClassesd(
@@ -88,7 +100,7 @@ def train_transforms(n_classes: int = 5, patch=PATCH) -> T.Compose:
     ])
 
 
-def full_volume_transforms(n_classes: int = 5) -> T.Compose:
+def full_volume_transforms(n_classes: int = 5, spacing=None) -> T.Compose:
     """Train on whole heads instead of patches.
 
     Viable only at width 8 on this card. The model sees every case in full
@@ -96,7 +108,7 @@ def full_volume_transforms(n_classes: int = 5) -> T.Compose:
     class-balanced sampling that ``RandCropByLabelClassesd`` provides, so rare
     classes are represented only as often as they naturally occur.
     """
-    return T.Compose(base_transforms(n_classes) + [
+    return T.Compose(base_transforms(n_classes, spacing) + [
         T.CropForegroundd(keys=["image", "label"], source_key="image", allow_smaller=True),
         T.DivisiblePadd(keys=["image", "label"], k=8),  # SegResNet downsamples 3x
         T.RandFlipd(keys=["image", "label"], prob=0.5, spatial_axis=0),
@@ -107,10 +119,10 @@ def full_volume_transforms(n_classes: int = 5) -> T.Compose:
     ])
 
 
-def val_transforms(n_classes: int = 5) -> T.Compose:
+def val_transforms(n_classes: int = 5, spacing=None) -> T.Compose:
     # No cropping or augmentation: validation scores whole volumes, the way
     # inference will run.
-    return T.Compose(base_transforms(n_classes))
+    return T.Compose(base_transforms(n_classes, spacing))
 
 
 def loaders(dataset: str = "gli", batch_size: int = 1, workers: int = 4,
@@ -128,9 +140,12 @@ def loaders(dataset: str = "gli", batch_size: int = 1, workers: int = 4,
     make = (lambda f, t: CacheDataset(f, t, cache_rate=cache_rate, num_workers=workers)) \
         if cache_rate > 0 else (lambda f, t: Dataset(f, t))
 
-    tf = full_volume_transforms(n_classes) if mode == "full" else train_transforms(n_classes, patch)
+    # MEN-RT arrives at mixed voxel sizes and needs resampling; GLI does not.
+    spacing = (1.0, 1.0, 1.0) if dataset == "men_rt" else None
+    tf = (full_volume_transforms(n_classes, spacing) if mode == "full"
+          else train_transforms(n_classes, patch, spacing))
     train_ds = make(train_files, tf)
-    val_ds = make(val_files, val_transforms(n_classes))
+    val_ds = make(val_files, val_transforms(n_classes, spacing))
     return (
         DataLoader(train_ds, batch_size=batch_size, shuffle=True, num_workers=workers,
                    pin_memory=True, persistent_workers=workers > 0, drop_last=True),

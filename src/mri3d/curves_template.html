@@ -1,0 +1,264 @@
+<title>Training Curves</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --ground: #f2f4f6; --panel: #ffffff; --surface-1: #fcfcfb; --line: #dde2e8;
+    --ink: #151a21; --muted: #5d6874; --grid: #e6eaef; --accent: #0d9488;
+    --shadow: 0 1px 2px rgba(18,26,38,.06), 0 8px 24px rgba(18,26,38,.06);
+    --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100;
+    --netc: #2a78d6; --snfh: #b07500; --et: #d33f3f; --rc: #7c4dbd;
+  }
+  :root:not([data-theme="light"]) {
+    @media (prefers-color-scheme: dark) {
+      --ground: #0b0e13; --panel: #141922; --surface-1: #1a1a19; --line: #242e3b;
+      --ink: #e6ecf3; --muted: #8d99a9; --grid: #232c39; --accent: #2dd4bf;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
+      --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500;
+      --netc: #3987e5; --snfh: #c98500; --et: #e66767; --rc: #9085e9;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0b0e13; --panel: #141922; --surface-1: #1a1a19; --line: #242e3b;
+    --ink: #e6ecf3; --muted: #8d99a9; --grid: #232c39; --accent: #2dd4bf;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500;
+    --netc: #3987e5; --snfh: #c98500; --et: #e66767; --rc: #9085e9;
+  }
+
+  body { background: var(--ground); color: var(--ink); font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif; line-height: 1.5; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding-inline: 16px; padding-block: 28px 40px; }
+  h1 { font-size: clamp(1.45rem, 1.2rem + 1.1vw, 1.95rem); font-weight: 600; letter-spacing: -.02em; margin: 0 0 6px; text-wrap: balance; }
+  .lede { color: var(--muted); max-width: 66ch; margin: 0 0 22px; font-size: .95rem; }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 20px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 13px 15px; box-shadow: var(--shadow); }
+  .card .label { font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 600; }
+  .card .value { font-family: "IBM Plex Mono", monospace; font-size: 1.5rem; font-variant-numeric: tabular-nums; margin-top: 3px; }
+  .card .sub { font-size: .76rem; color: var(--muted); }
+
+  figure { margin: 0 0 20px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; box-shadow: var(--shadow); overflow: hidden; }
+  figcaption { padding: 14px 16px 0; }
+  figcaption h2 { font-size: .95rem; font-weight: 600; margin: 0 0 2px; }
+  figcaption p { margin: 0; font-size: .82rem; color: var(--muted); max-width: 70ch; }
+  .plot { padding: 8px 10px 14px; position: relative; }
+  svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .legend { display: flex; flex-wrap: wrap; gap: 12px; padding: 0 16px 14px; font-size: .8rem; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); }
+  .legend i { width: 14px; height: 3px; border-radius: 2px; display: inline-block; }
+
+  .tip {
+    position: absolute; pointer-events: none; background: var(--panel); color: var(--ink);
+    border: 1px solid var(--line); border-radius: 7px; padding: 7px 9px; font-size: .76rem;
+    box-shadow: var(--shadow); white-space: nowrap; opacity: 0; transition: opacity .1s;
+    font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; z-index: 5;
+  }
+  .tip b { font-family: "IBM Plex Sans", sans-serif; font-weight: 500; }
+  .tip .row { display: flex; align-items: center; gap: 6px; }
+  .tip i { width: 8px; height: 8px; border-radius: 2px; display: inline-block; }
+
+  table { border-collapse: collapse; width: 100%; font-size: .8rem; }
+  th, td { text-align: right; padding: 6px 8px; border-bottom: 1px solid var(--line); }
+  th:first-child, td:first-child { text-align: left; }
+  thead th { color: var(--muted); font-weight: 500; font-size: .7rem; text-transform: uppercase; letter-spacing: .05em; }
+  td.num { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; }
+  details { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; box-shadow: var(--shadow); }
+  summary { cursor: pointer; font-size: .85rem; font-weight: 500; }
+  footer { margin-top: 22px; font-size: .78rem; color: var(--muted); max-width: 76ch; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <h1 id="title">Training Curves</h1>
+  <p class="lede" id="lede"></p>
+  <div class="cards" id="cards"></div>
+  <div id="figures"></div>
+  <details>
+    <summary>Validation Dice by epoch (table)</summary>
+    <div style="overflow-x:auto;margin-top:10px"><table id="table"></table></div>
+  </details>
+  <footer id="foot"></footer>
+</div>
+
+<script>
+const META = __META_JSON__;
+const CLASS_VAR = { NETC: "--netc", SNFH: "--snfh", ET: "--et", RC: "--rc", GTV: "--et" };
+const SERIES_VAR = ["--s1", "--s2", "--s3", "--s4"];
+const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+const W = 860, H = 300, M = { t: 14, r: 16, b: 34, l: 46 };
+
+function scale(dom, rng) {
+  const [d0, d1] = dom, [r0, r1] = rng;
+  const span = (d1 - d0) || 1;
+  return v => r0 + (v - d0) / span * (r1 - r0);
+}
+
+function ticks(lo, hi, n) {
+  const span = (hi - lo) || 1;
+  const raw = span / n;
+  const mag = Math.pow(10, Math.floor(Math.log10(raw)));
+  const step = [1, 2, 2.5, 5, 10].map(m => m * mag).find(s => s >= raw) || mag * 10;
+  const out = [];
+  for (let v = Math.ceil(lo / step) * step; v <= hi + 1e-9; v += step) out.push(+v.toFixed(10));
+  return out;
+}
+
+function lineChart({ title, caption, series, yLabel, yDomain }) {
+  const fig = document.createElement("figure");
+  const allX = series.flatMap(s => s.points.map(p => p.x));
+  const allY = series.flatMap(s => s.points.map(p => p.y));
+  if (!allX.length) return null;
+  const xd = [Math.min(...allX), Math.max(...allX)];
+  const yd = yDomain || [Math.min(...allY, 0), Math.max(...allY)];
+  const x = scale(xd, [M.l, W - M.r]);
+  const y = scale(yd, [H - M.b, M.t]);
+
+  const gridLines = ticks(yd[0], yd[1], 5).map(t =>
+    `<line x1="${M.l}" x2="${W - M.r}" y1="${y(t).toFixed(1)}" y2="${y(t).toFixed(1)}" stroke="${cssVar("--grid")}" stroke-width="1"/>` +
+    `<text x="${M.l - 8}" y="${(y(t) + 4).toFixed(1)}" text-anchor="end" font-size="11" fill="${cssVar("--muted")}">${(+t).toFixed(yd[1] <= 1.01 ? 2 : 2)}</text>`
+  ).join("");
+
+  const xTicks = ticks(xd[0], xd[1], 6).filter(t => t >= xd[0] && t <= xd[1]).map(t =>
+    `<text x="${x(t).toFixed(1)}" y="${H - M.b + 18}" text-anchor="middle" font-size="11" fill="${cssVar("--muted")}">${t}</text>`
+  ).join("");
+
+  const paths = series.map(s => {
+    const d = s.points.map((p, i) => `${i ? "L" : "M"}${x(p.x).toFixed(1)},${y(p.y).toFixed(1)}`).join("");
+    const last = s.points[s.points.length - 1];
+    return `<path d="${d}" fill="none" stroke="${s.colour}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>` +
+           `<circle cx="${x(last.x).toFixed(1)}" cy="${y(last.y).toFixed(1)}" r="4" fill="${s.colour}" stroke="${cssVar("--panel")}" stroke-width="2"/>`;
+  }).join("");
+
+  fig.innerHTML =
+    `<figcaption><h2>${title}</h2><p>${caption}</p></figcaption>` +
+    `<div class="plot">` +
+    `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${title}">` +
+    gridLines + xTicks + paths +
+    `<line x1="${M.l}" x2="${W - M.r}" y1="${H - M.b}" y2="${H - M.b}" stroke="${cssVar("--line")}" stroke-width="1"/>` +
+    `<text x="${M.l}" y="${H - 4}" font-size="11" fill="${cssVar("--muted")}">epoch</text>` +
+    `<text x="${M.l - 34}" y="${M.t + 4}" font-size="11" fill="${cssVar("--muted")}">${yLabel}</text>` +
+    `<rect id="hit" x="${M.l}" y="${M.t}" width="${W - M.l - M.r}" height="${H - M.t - M.b}" fill="transparent"/>` +
+    `<line class="cross" x1="0" x2="0" y1="${M.t}" y2="${H - M.b}" stroke="${cssVar("--muted")}" stroke-width="1" stroke-dasharray="3 3" opacity="0"/>` +
+    `</svg><div class="tip"></div></div>` +
+    (series.length > 1 ? `<div class="legend">` + series.map(s =>
+      `<span><i style="background:${s.colour}"></i>${s.name}</span>`).join("") + `</div>` : "");
+
+  // Crosshair + tooltip: nearest epoch across all series.
+  const svg = fig.querySelector("svg"), tip = fig.querySelector(".tip"), cross = fig.querySelector(".cross");
+  const plot = fig.querySelector(".plot");
+  svg.addEventListener("pointermove", e => {
+    const r = svg.getBoundingClientRect();
+    const px = (e.clientX - r.left) / r.width * W;
+    if (px < M.l || px > W - M.r) return;
+    const target = xd[0] + (px - M.l) / (W - M.l - M.r) * (xd[1] - xd[0]);
+    const rows = series.map(s => {
+      let best = s.points[0];
+      for (const p of s.points) if (Math.abs(p.x - target) < Math.abs(best.x - target)) best = p;
+      return { s, p: best };
+    }).filter(r => r.p);
+    if (!rows.length) return;
+    const ep = rows[0].p.x;
+    cross.setAttribute("x1", x(ep)); cross.setAttribute("x2", x(ep));
+    cross.setAttribute("opacity", "1");
+    tip.innerHTML = `<b>epoch ${ep}</b>` + rows.map(r =>
+      `<div class="row"><i style="background:${r.s.colour}"></i>${r.s.name} ${r.p.y.toFixed(4)}</div>`).join("");
+    tip.style.opacity = "1";
+    const relX = x(ep) / W * plot.clientWidth;
+    tip.style.left = Math.min(Math.max(relX + 12, 4), plot.clientWidth - tip.offsetWidth - 4) + "px";
+    tip.style.top = "14px";
+  });
+  svg.addEventListener("pointerleave", () => { tip.style.opacity = "0"; cross.setAttribute("opacity", "0"); });
+  return fig;
+}
+
+function build() {
+  document.getElementById("title").textContent = META.title;
+  const runs = META.runs;
+  const dark = matchMedia("(prefers-color-scheme: dark)").matches
+    && document.documentElement.getAttribute("data-theme") !== "light"
+    || document.documentElement.getAttribute("data-theme") === "dark";
+
+  document.getElementById("lede").textContent =
+    runs.length > 1
+      ? `${runs.length} runs, charted on one scale. Hover for values at any epoch.`
+      : `Loss and per-class validation Dice across ${runs[0].epochs.length} epochs. ` +
+        `Validation uses whole volumes with sliding-window inference, the same way inference runs.`;
+
+  // Summary tiles
+  const cards = document.getElementById("cards");
+  for (const [i, r] of runs.entries()) {
+    const best = r.val.length ? Math.max(...r.val.map(v => v.mean)) : NaN;
+    const bestEp = r.val.length ? r.val.find(v => v.mean === best).epoch : "—";
+    const hrs = r.secs.filter(Boolean).reduce((a, b) => a + b, 0) / 3600;
+    cards.insertAdjacentHTML("beforeend",
+      `<div class="card"><div class="label">${r.run}</div>` +
+      `<div class="value" style="color:${cssVar(SERIES_VAR[i])}">${isNaN(best) ? "—" : best.toFixed(4)}</div>` +
+      `<div class="sub">best mean Dice · epoch ${bestEp} of ${r.epochs.length} · ${hrs.toFixed(1)} h</div></div>`);
+  }
+
+  const figs = document.getElementById("figures");
+  const colour = i => cssVar(SERIES_VAR[i]);
+
+  const lossFig = lineChart({
+    title: "Training loss",
+    caption: "Dice + cross-entropy on training patches. A curve that flattens early while validation " +
+             "still climbs means the learning rate has decayed, not that the model has converged.",
+    yLabel: "loss",
+    series: runs.map((r, i) => ({
+      name: r.run, colour: colour(i),
+      points: r.epochs.map((e, k) => ({ x: e, y: r.loss[k] })),
+    })),
+  });
+  if (lossFig) figs.appendChild(lossFig);
+
+  const valFig = lineChart({
+    title: "Validation Dice (mean over classes)",
+    caption: "Whole-volume Dice on held-out patients, excluding background. This is what selects the " +
+             "saved checkpoint.",
+    yLabel: "Dice", yDomain: [0, 1],
+    series: runs.filter(r => r.val.length).map((r, i) => ({
+      name: r.run, colour: colour(i),
+      points: r.val.map(v => ({ x: v.epoch, y: v.mean })),
+    })),
+  });
+  if (valFig) figs.appendChild(valFig);
+
+  // Per-class, one chart per run (never two y-scales on one plot).
+  for (const [i, r] of runs.entries()) {
+    if (!r.val.length) continue;
+    const fig = lineChart({
+      title: `Validation Dice by class — ${r.run}`,
+      caption: "The rare classes are the hard ones: NETC appears in 42% of cases and 0.047% of voxels. " +
+               "A run that looks healthy on the mean can be losing a class entirely.",
+      yLabel: "Dice", yDomain: [0, 1],
+      series: r.classes.map((c, ci) => ({
+        name: c, colour: cssVar(CLASS_VAR[c] || "--s1"),
+        points: r.val.map(v => ({ x: v.epoch, y: v.per_class[ci] })),
+      })),
+    });
+    if (fig) figs.appendChild(fig);
+  }
+
+  // Table view - identity never by colour alone.
+  const r0 = runs[0];
+  if (r0.val.length) {
+    const head = `<thead><tr><th>Epoch</th><th>Mean</th>` +
+      r0.classes.map(c => `<th>${c}</th>`).join("") + `</tr></thead>`;
+    const body = r0.val.map(v =>
+      `<tr><td class="num">${v.epoch}</td><td class="num">${v.mean.toFixed(4)}</td>` +
+      v.per_class.map(d => `<td class="num">${d.toFixed(4)}</td>`).join("") + `</tr>`).join("");
+    document.getElementById("table").innerHTML = head + `<tbody>${body}</tbody>`;
+  }
+
+  document.getElementById("foot").innerHTML =
+    `Dice is volumetric overlap per class, averaged over validation cases; a case with no tissue of a ` +
+    `class and no prediction of it scores 1.0, following the BraTS convention. Lesion-wise scores, which ` +
+    `rank the challenge, are computed at test time by <code>mri3d.predict</code>. ` +
+    `Series colours are checked for colour-vision separation with the dataviz validator.`;
+}
+
+build();
+addEventListener("resize", () => { document.getElementById("figures").innerHTML = ""; document.getElementById("cards").innerHTML = ""; build(); });
+</script>

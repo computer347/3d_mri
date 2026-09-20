@@ -21,6 +21,7 @@ from pathlib import Path
 import numpy as np
 import torch
 from monai.inferers import sliding_window_inference
+from torch.utils.tensorboard import SummaryWriter
 
 from . import paths
 from .data import PATCH, loaders
@@ -98,7 +99,12 @@ def main() -> None:
     sched = torch.optim.lr_scheduler.CosineAnnealingLR(opt, T_max=args.epochs)
 
     shape_note = f"patch {patch}" if args.mode == "patch" else "full volumes"
+    writer = SummaryWriter(log_dir=str(out_dir / "tb"))
+    class_names = list((paths.GLI_LABELS if args.dataset == "gli"
+                        else paths.MEN_LABELS).values())[1:]
+
     print(f"run {run} | {describe(model)} | {shape_note} | {n_classes} classes")
+    print(f"tensorboard --logdir {paths.OUTPUTS / 'runs'}")
     print(f"train {len(train_loader.dataset)} | val {len(val_loader.dataset)} | device {device}")
     if args.overfit:
         print("OVERFIT MODE: train == val. Dice near 1.0 proves the pipeline; "
@@ -122,10 +128,16 @@ def main() -> None:
 
         line = {"epoch": epoch, "loss": float(np.mean(losses)),
                 "lr": sched.get_last_lr()[0], "secs": round(time.time() - t0, 1)}
+        writer.add_scalar("train/loss", line["loss"], epoch)
+        writer.add_scalar("train/lr", line["lr"], epoch)
+        writer.add_scalar("train/epoch_seconds", line["secs"], epoch)
 
         if epoch % args.val_every == 0 or epoch == args.epochs:
             v = validate(model, val_loader, device, n_classes, val_roi, amp_dtype)
             line.update(val_mean=v["mean"], val_per_class=v["per_class"])
+            writer.add_scalar("val/dice_mean", v["mean"], epoch)
+            for name, d in zip(class_names, v["per_class"]):
+                writer.add_scalar(f"val/dice_{name}", d, epoch)
             if v["mean"] > best:
                 best = v["mean"]
                 torch.save({"model": model.state_dict(), "args": vars(args),
@@ -143,6 +155,7 @@ def main() -> None:
         history.append(line)
         (out_dir / "history.json").write_text(json.dumps(history, indent=1), encoding="utf-8")
 
+    writer.close()
     print(f"\nbest validation Dice {best:.4f} -> {out_dir / 'best.pt'}")
 
 

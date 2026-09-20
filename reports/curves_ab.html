@@ -1,0 +1,264 @@
+<title>Training Curves</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --ground: #f2f4f6; --panel: #ffffff; --surface-1: #fcfcfb; --line: #dde2e8;
+    --ink: #151a21; --muted: #5d6874; --grid: #e6eaef; --accent: #0d9488;
+    --shadow: 0 1px 2px rgba(18,26,38,.06), 0 8px 24px rgba(18,26,38,.06);
+    --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100;
+    --netc: #2a78d6; --snfh: #b07500; --et: #d33f3f; --rc: #7c4dbd;
+  }
+  :root:not([data-theme="light"]) {
+    @media (prefers-color-scheme: dark) {
+      --ground: #0b0e13; --panel: #141922; --surface-1: #1a1a19; --line: #242e3b;
+      --ink: #e6ecf3; --muted: #8d99a9; --grid: #232c39; --accent: #2dd4bf;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
+      --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500;
+      --netc: #3987e5; --snfh: #c98500; --et: #e66767; --rc: #9085e9;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0b0e13; --panel: #141922; --surface-1: #1a1a19; --line: #242e3b;
+    --ink: #e6ecf3; --muted: #8d99a9; --grid: #232c39; --accent: #2dd4bf;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500;
+    --netc: #3987e5; --snfh: #c98500; --et: #e66767; --rc: #9085e9;
+  }
+
+  body { background: var(--ground); color: var(--ink); font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif; line-height: 1.5; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding-inline: 16px; padding-block: 28px 40px; }
+  h1 { font-size: clamp(1.45rem, 1.2rem + 1.1vw, 1.95rem); font-weight: 600; letter-spacing: -.02em; margin: 0 0 6px; text-wrap: balance; }
+  .lede { color: var(--muted); max-width: 66ch; margin: 0 0 22px; font-size: .95rem; }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 20px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 13px 15px; box-shadow: var(--shadow); }
+  .card .label { font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 600; }
+  .card .value { font-family: "IBM Plex Mono", monospace; font-size: 1.5rem; font-variant-numeric: tabular-nums; margin-top: 3px; }
+  .card .sub { font-size: .76rem; color: var(--muted); }
+
+  figure { margin: 0 0 20px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; box-shadow: var(--shadow); overflow: hidden; }
+  figcaption { padding: 14px 16px 0; }
+  figcaption h2 { font-size: .95rem; font-weight: 600; margin: 0 0 2px; }
+  figcaption p { margin: 0; font-size: .82rem; color: var(--muted); max-width: 70ch; }
+  .plot { padding: 8px 10px 14px; position: relative; }
+  svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .legend { display: flex; flex-wrap: wrap; gap: 12px; padding: 0 16px 14px; font-size: .8rem; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); }
+  .legend i { width: 14px; height: 3px; border-radius: 2px; display: inline-block; }
+
+  .tip {
+    position: absolute; pointer-events: none; background: var(--panel); color: var(--ink);
+    border: 1px solid var(--line); border-radius: 7px; padding: 7px 9px; font-size: .76rem;
+    box-shadow: var(--shadow); white-space: nowrap; opacity: 0; transition: opacity .1s;
+    font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; z-index: 5;
+  }
+  .tip b { font-family: "IBM Plex Sans", sans-serif; font-weight: 500; }
+  .tip .row { display: flex; align-items: center; gap: 6px; }
+  .tip i { width: 8px; height: 8px; border-radius: 2px; display: inline-block; }
+
+  table { border-collapse: collapse; width: 100%; font-size: .8rem; }
+  th, td { text-align: right; padding: 6px 8px; border-bottom: 1px solid var(--line); }
+  th:first-child, td:first-child { text-align: left; }
+  thead th { color: var(--muted); font-weight: 500; font-size: .7rem; text-transform: uppercase; letter-spacing: .05em; }
+  td.num { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; }
+  details { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; box-shadow: var(--shadow); }
+  summary { cursor: pointer; font-size: .85rem; font-weight: 500; }
+  footer { margin-top: 22px; font-size: .78rem; color: var(--muted); max-width: 76ch; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <h1 id="title">Training Curves</h1>
+  <p class="lede" id="lede"></p>
+  <div class="cards" id="cards"></div>
+  <div id="figures"></div>
+  <details>
+    <summary>Validation Dice by epoch (table)</summary>
+    <div style="overflow-x:auto;margin-top:10px"><table id="table"></table></div>
+  </details>
+  <footer id="foot"></footer>
+</div>
+
+<script>
+const META = {"title": "Patch vs Whole-Volume Training", "runs": [{"run": "ab_A_patch_w16", "classes": ["NETC", "SNFH", "ET", "RC"], "epochs": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35], "loss": [1.616902196407318, 1.0239332085847854, 0.862205239534378, 0.8032487154006958, 0.7604184955358505, 0.7389762115478515, 0.7203444385528565, 0.718986976146698, 0.6578126236796379, 0.6335670140385627, 0.6300676912069321, 0.6244886308908463, 0.6051387447118759, 0.5861072278022766, 0.5585580033063888, 0.5520166099071503, 0.5368991704285144, 0.5238097657263279, 0.5188481621444225, 0.5067495825886726, 0.4867514778673649, 0.47382563561201096, 0.4688041363656521, 0.45590646237134935, 0.44729813873767854, 0.4509317383170128, 0.4268813434243202, 0.42134953185915947, 0.415162036716938, 0.4107190649211407, 0.40127928495407106, 0.40205742433667185, 0.39612574711441995, 0.3995331685245037, 0.3947269286215305], "lr": [0.0009979871469976197, 0.0009919647942993148, 0.0009819814303479266, 0.0009681174353198686, 0.0009504844339512095, 0.000929224396800933, 0.0009045084971874736, 0.0008765357330018054, 0.0008455313244934323, 0.0008117449009293667, 0.0007754484907260511, 0.0007369343312364992, 0.0006965125158269617, 0.0006545084971874735, 0.000611260466978157, 0.0005671166329088276, 0.0005224324151752573, 0.00047756758482474243, 0.0004328833670911722, 0.00038873953302184273, 0.0003454915028125262, 0.00030348748417303827, 0.0002630656687635006, 0.00022455150927394875, 0.00018825509907063323, 0.0001544686755065677, 0.00012346426699819455, 9.549150281252631e-05, 7.077560319906693e-05, 4.951556604879047e-05, 3.188256468013139e-05, 1.8018569652073372e-05, 8.035205700685162e-06, 2.012853002380465e-06, 0.0], "secs": [63.8, 31.1, 31.9, 31.3, 31.1, 31.6, 31.6, 31.3, 31.1, 31.2, 31.4, 31.6, 31.7, 31.1, 31.1, 31.0, 31.0, 31.1, 31.3, 31.2, 31.1, 31.6, 31.5, 31.1, 31.3, 31.5, 31.6, 31.2, 31.7, 31.2, 31.3, 31.5, 31.3, 31.2, 31.6], "val": [{"epoch": 7, "mean": 0.2490345339506943, "per_class": [0.05915075999252595, 0.5758387181233957, 0.28280399739105344, 0.07834466029580206]}, {"epoch": 14, "mean": 0.4201034873941646, "per_class": [0.16271559227501348, 0.7285216071504472, 0.5566637355097738, 0.23251301464142393]}, {"epoch": 21, "mean": 0.5067426221662306, "per_class": [0.3705852367300191, 0.7605405986038123, 0.6072858505713505, 0.28855880275974044]}, {"epoch": 28, "mean": 0.546037566278352, "per_class": [0.46726787178698026, 0.7740116266781379, 0.6355632207197554, 0.30730754592853443]}, {"epoch": 35, "mean": 0.560791153447928, "per_class": [0.49433301677706576, 0.7928696388117704, 0.6312746725849732, 0.3246872856179022]}], "has_checkpoint": true, "colour": "#2a78d6", "colour_dark": "#3987e5"}, {"run": "ab_C_patch_w8", "classes": ["NETC", "SNFH", "ET", "RC"], "epochs": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35], "loss": [2.3086136984825134, 1.6126099860668182, 1.1649234968423843, 0.9494261640310288, 0.8497617894411087, 0.7851101803779602, 0.7581368029117584, 0.734464282989502, 0.7224597471952439, 0.6918575716018677, 0.658354679942131, 0.6457561835646629, 0.6346356117725372, 0.6169429013133049, 0.5962643602490425, 0.5769417253136635, 0.5750994417071342, 0.5588138434290886, 0.5463509917259216, 0.5411456751823426, 0.5289771038293839, 0.5156124156713485, 0.5087482297420501, 0.5001738968491555, 0.49916465193033216, 0.49060954570770265, 0.4825194978713989, 0.47182277917861937, 0.46512107938528063, 0.4636662971973419, 0.4491358877718449, 0.44652786940336225, 0.4475947146117687, 0.4454773639142513, 0.4475964169204235], "lr": [0.0009979871469976197, 0.0009919647942993148, 0.0009819814303479266, 0.0009681174353198686, 0.0009504844339512095, 0.000929224396800933, 0.0009045084971874736, 0.0008765357330018054, 0.0008455313244934323, 0.0008117449009293667, 0.0007754484907260511, 0.0007369343312364992, 0.0006965125158269617, 0.0006545084971874735, 0.000611260466978157, 0.0005671166329088276, 0.0005224324151752573, 0.00047756758482474243, 0.0004328833670911722, 0.00038873953302184273, 0.0003454915028125262, 0.00030348748417303827, 0.0002630656687635006, 0.00022455150927394875, 0.00018825509907063323, 0.0001544686755065677, 0.00012346426699819455, 9.549150281252631e-05, 7.077560319906693e-05, 4.951556604879047e-05, 3.188256468013139e-05, 1.8018569652073372e-05, 8.035205700685162e-06, 2.012853002380465e-06, 0.0], "secs": [55.6, 24.2, 23.9, 24.3, 23.9, 23.8, 23.9, 24.4, 24.0, 24.8, 24.1, 24.3, 24.3, 24.2, 24.4, 24.0, 24.1, 24.2, 24.3, 24.3, 24.1, 24.3, 24.0, 24.1, 24.4, 24.2, 24.7, 24.3, 24.4, 24.6, 24.6, 24.1, 24.6, 24.3, 24.2], "val": [{"epoch": 7, "mean": 0.4144172605599057, "per_class": [0.4, 0.6577524117274886, 0.46658329717880076, 0.13333333333333333]}, {"epoch": 14, "mean": 0.4502004532149613, "per_class": [0.4, 0.7135082050520134, 0.518579531595523, 0.1687140762123088]}, {"epoch": 21, "mean": 0.45112371380800714, "per_class": [0.23333333333333334, 0.764616905511186, 0.6215419028944889, 0.18500271349302025]}, {"epoch": 28, "mean": 0.46334954412997476, "per_class": [0.22157969579576917, 0.8055049039307074, 0.624380517934775, 0.20193305885864754]}, {"epoch": 35, "mean": 0.47882080244040487, "per_class": [0.3313481825223807, 0.8096367178741031, 0.6205811479736768, 0.15371716139145894]}], "has_checkpoint": true, "colour": "#eb6834", "colour_dark": "#d95926"}, {"run": "ab_B_full_w8", "classes": ["NETC", "SNFH", "ET", "RC"], "epochs": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35], "loss": [2.3571898686885833, 1.7250185704231262, 1.263486872315407, 0.9918320673704147, 0.8671469724178315, 0.7886613655090332, 0.7383268827199936, 0.7123664575815201, 0.7111750695109368, 0.6674954357743264, 0.6430107569694519, 0.6301448732614517, 0.6086428886651993, 0.5832857894897461, 0.5785357421636581, 0.5854828190803528, 0.5618184724450112, 0.5572900766134262, 0.559608274102211, 0.5352746228873729, 0.5307902078330516, 0.5147710487246513, 0.5041387078166008, 0.5150829657912255, 0.5005938589572907, 0.49010495901107787, 0.4883997318148613, 0.485930580496788, 0.47481712341308596, 0.4760036864876747, 0.4651885089278221, 0.45960970878601076, 0.46437060058116914, 0.4531858238577843, 0.4565476784110069], "lr": [0.0009979871469976197, 0.0009919647942993148, 0.0009819814303479266, 0.0009681174353198686, 0.0009504844339512095, 0.000929224396800933, 0.0009045084971874736, 0.0008765357330018054, 0.0008455313244934323, 0.0008117449009293667, 0.0007754484907260511, 0.0007369343312364992, 0.0006965125158269617, 0.0006545084971874735, 0.000611260466978157, 0.0005671166329088276, 0.0005224324151752573, 0.00047756758482474243, 0.0004328833670911722, 0.00038873953302184273, 0.0003454915028125262, 0.00030348748417303827, 0.0002630656687635006, 0.00022455150927394875, 0.00018825509907063323, 0.0001544686755065677, 0.00012346426699819455, 9.549150281252631e-05, 7.077560319906693e-05, 4.951556604879047e-05, 3.188256468013139e-05, 1.8018569652073372e-05, 8.035205700685162e-06, 2.012853002380465e-06, 0.0], "secs": [56.0, 24.2, 23.9, 23.6, 24.2, 23.9, 23.7, 22.9, 23.0, 23.1, 23.6, 23.1, 23.4, 23.0, 23.1, 23.3, 23.1, 23.7, 23.4, 23.2, 23.4, 23.2, 23.4, 23.1, 23.2, 23.0, 24.0, 23.2, 23.0, 23.5, 23.8, 22.6, 23.3, 23.1, 23.3], "val": [{"epoch": 7, "mean": 0.38679554109462055, "per_class": [0.4, 0.5546171353797927, 0.4608357957080255, 0.13172923329066397]}, {"epoch": 14, "mean": 0.32996163567723796, "per_class": [0.10807846719969022, 0.603260534095931, 0.49415729023094646, 0.11435025118238433]}, {"epoch": 21, "mean": 0.3705257463221497, "per_class": [0.13537759179349176, 0.6319734789859783, 0.4992348132057543, 0.21551710130337437]}, {"epoch": 28, "mean": 0.3581697777973312, "per_class": [0.16645115426671717, 0.6415593850131427, 0.4883834825293523, 0.1362850893801126]}, {"epoch": 35, "mean": 0.3691742613271254, "per_class": [0.18466173894555246, 0.6454302940794441, 0.49450108161959877, 0.15210393066390615]}], "has_checkpoint": true, "colour": "#1baf7a", "colour_dark": "#199e70"}], "class_colours": {"NETC": "#3b82f6", "SNFH": "#eab308", "ET": "#ef4444", "RC": "#a855f7", "GTV": "#ef4444"}};
+const CLASS_VAR = { NETC: "--netc", SNFH: "--snfh", ET: "--et", RC: "--rc", GTV: "--et" };
+const SERIES_VAR = ["--s1", "--s2", "--s3", "--s4"];
+const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+const W = 860, H = 300, M = { t: 14, r: 16, b: 34, l: 46 };
+
+function scale(dom, rng) {
+  const [d0, d1] = dom, [r0, r1] = rng;
+  const span = (d1 - d0) || 1;
+  return v => r0 + (v - d0) / span * (r1 - r0);
+}
+
+function ticks(lo, hi, n) {
+  const span = (hi - lo) || 1;
+  const raw = span / n;
+  const mag = Math.pow(10, Math.floor(Math.log10(raw)));
+  const step = [1, 2, 2.5, 5, 10].map(m => m * mag).find(s => s >= raw) || mag * 10;
+  const out = [];
+  for (let v = Math.ceil(lo / step) * step; v <= hi + 1e-9; v += step) out.push(+v.toFixed(10));
+  return out;
+}
+
+function lineChart({ title, caption, series, yLabel, yDomain }) {
+  const fig = document.createElement("figure");
+  const allX = series.flatMap(s => s.points.map(p => p.x));
+  const allY = series.flatMap(s => s.points.map(p => p.y));
+  if (!allX.length) return null;
+  const xd = [Math.min(...allX), Math.max(...allX)];
+  const yd = yDomain || [Math.min(...allY, 0), Math.max(...allY)];
+  const x = scale(xd, [M.l, W - M.r]);
+  const y = scale(yd, [H - M.b, M.t]);
+
+  const gridLines = ticks(yd[0], yd[1], 5).map(t =>
+    `<line x1="${M.l}" x2="${W - M.r}" y1="${y(t).toFixed(1)}" y2="${y(t).toFixed(1)}" stroke="${cssVar("--grid")}" stroke-width="1"/>` +
+    `<text x="${M.l - 8}" y="${(y(t) + 4).toFixed(1)}" text-anchor="end" font-size="11" fill="${cssVar("--muted")}">${(+t).toFixed(yd[1] <= 1.01 ? 2 : 2)}</text>`
+  ).join("");
+
+  const xTicks = ticks(xd[0], xd[1], 6).filter(t => t >= xd[0] && t <= xd[1]).map(t =>
+    `<text x="${x(t).toFixed(1)}" y="${H - M.b + 18}" text-anchor="middle" font-size="11" fill="${cssVar("--muted")}">${t}</text>`
+  ).join("");
+
+  const paths = series.map(s => {
+    const d = s.points.map((p, i) => `${i ? "L" : "M"}${x(p.x).toFixed(1)},${y(p.y).toFixed(1)}`).join("");
+    const last = s.points[s.points.length - 1];
+    return `<path d="${d}" fill="none" stroke="${s.colour}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>` +
+           `<circle cx="${x(last.x).toFixed(1)}" cy="${y(last.y).toFixed(1)}" r="4" fill="${s.colour}" stroke="${cssVar("--panel")}" stroke-width="2"/>`;
+  }).join("");
+
+  fig.innerHTML =
+    `<figcaption><h2>${title}</h2><p>${caption}</p></figcaption>` +
+    `<div class="plot">` +
+    `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${title}">` +
+    gridLines + xTicks + paths +
+    `<line x1="${M.l}" x2="${W - M.r}" y1="${H - M.b}" y2="${H - M.b}" stroke="${cssVar("--line")}" stroke-width="1"/>` +
+    `<text x="${M.l}" y="${H - 4}" font-size="11" fill="${cssVar("--muted")}">epoch</text>` +
+    `<text x="${M.l - 34}" y="${M.t + 4}" font-size="11" fill="${cssVar("--muted")}">${yLabel}</text>` +
+    `<rect id="hit" x="${M.l}" y="${M.t}" width="${W - M.l - M.r}" height="${H - M.t - M.b}" fill="transparent"/>` +
+    `<line class="cross" x1="0" x2="0" y1="${M.t}" y2="${H - M.b}" stroke="${cssVar("--muted")}" stroke-width="1" stroke-dasharray="3 3" opacity="0"/>` +
+    `</svg><div class="tip"></div></div>` +
+    (series.length > 1 ? `<div class="legend">` + series.map(s =>
+      `<span><i style="background:${s.colour}"></i>${s.name}</span>`).join("") + `</div>` : "");
+
+  // Crosshair + tooltip: nearest epoch across all series.
+  const svg = fig.querySelector("svg"), tip = fig.querySelector(".tip"), cross = fig.querySelector(".cross");
+  const plot = fig.querySelector(".plot");
+  svg.addEventListener("pointermove", e => {
+    const r = svg.getBoundingClientRect();
+    const px = (e.clientX - r.left) / r.width * W;
+    if (px < M.l || px > W - M.r) return;
+    const target = xd[0] + (px - M.l) / (W - M.l - M.r) * (xd[1] - xd[0]);
+    const rows = series.map(s => {
+      let best = s.points[0];
+      for (const p of s.points) if (Math.abs(p.x - target) < Math.abs(best.x - target)) best = p;
+      return { s, p: best };
+    }).filter(r => r.p);
+    if (!rows.length) return;
+    const ep = rows[0].p.x;
+    cross.setAttribute("x1", x(ep)); cross.setAttribute("x2", x(ep));
+    cross.setAttribute("opacity", "1");
+    tip.innerHTML = `<b>epoch ${ep}</b>` + rows.map(r =>
+      `<div class="row"><i style="background:${r.s.colour}"></i>${r.s.name} ${r.p.y.toFixed(4)}</div>`).join("");
+    tip.style.opacity = "1";
+    const relX = x(ep) / W * plot.clientWidth;
+    tip.style.left = Math.min(Math.max(relX + 12, 4), plot.clientWidth - tip.offsetWidth - 4) + "px";
+    tip.style.top = "14px";
+  });
+  svg.addEventListener("pointerleave", () => { tip.style.opacity = "0"; cross.setAttribute("opacity", "0"); });
+  return fig;
+}
+
+function build() {
+  document.getElementById("title").textContent = META.title;
+  const runs = META.runs;
+  const dark = matchMedia("(prefers-color-scheme: dark)").matches
+    && document.documentElement.getAttribute("data-theme") !== "light"
+    || document.documentElement.getAttribute("data-theme") === "dark";
+
+  document.getElementById("lede").textContent =
+    runs.length > 1
+      ? `${runs.length} runs, charted on one scale. Hover for values at any epoch.`
+      : `Loss and per-class validation Dice across ${runs[0].epochs.length} epochs. ` +
+        `Validation uses whole volumes with sliding-window inference, the same way inference runs.`;
+
+  // Summary tiles
+  const cards = document.getElementById("cards");
+  for (const [i, r] of runs.entries()) {
+    const best = r.val.length ? Math.max(...r.val.map(v => v.mean)) : NaN;
+    const bestEp = r.val.length ? r.val.find(v => v.mean === best).epoch : "—";
+    const hrs = r.secs.filter(Boolean).reduce((a, b) => a + b, 0) / 3600;
+    cards.insertAdjacentHTML("beforeend",
+      `<div class="card"><div class="label">${r.run}</div>` +
+      `<div class="value" style="color:${cssVar(SERIES_VAR[i])}">${isNaN(best) ? "—" : best.toFixed(4)}</div>` +
+      `<div class="sub">best mean Dice · epoch ${bestEp} of ${r.epochs.length} · ${hrs.toFixed(1)} h</div></div>`);
+  }
+
+  const figs = document.getElementById("figures");
+  const colour = i => cssVar(SERIES_VAR[i]);
+
+  const lossFig = lineChart({
+    title: "Training loss",
+    caption: "Dice + cross-entropy on training patches. A curve that flattens early while validation " +
+             "still climbs means the learning rate has decayed, not that the model has converged.",
+    yLabel: "loss",
+    series: runs.map((r, i) => ({
+      name: r.run, colour: colour(i),
+      points: r.epochs.map((e, k) => ({ x: e, y: r.loss[k] })),
+    })),
+  });
+  if (lossFig) figs.appendChild(lossFig);
+
+  const valFig = lineChart({
+    title: "Validation Dice (mean over classes)",
+    caption: "Whole-volume Dice on held-out patients, excluding background. This is what selects the " +
+             "saved checkpoint.",
+    yLabel: "Dice", yDomain: [0, 1],
+    series: runs.filter(r => r.val.length).map((r, i) => ({
+      name: r.run, colour: colour(i),
+      points: r.val.map(v => ({ x: v.epoch, y: v.mean })),
+    })),
+  });
+  if (valFig) figs.appendChild(valFig);
+
+  // Per-class, one chart per run (never two y-scales on one plot).
+  for (const [i, r] of runs.entries()) {
+    if (!r.val.length) continue;
+    const fig = lineChart({
+      title: `Validation Dice by class — ${r.run}`,
+      caption: "The rare classes are the hard ones: NETC appears in 42% of cases and 0.047% of voxels. " +
+               "A run that looks healthy on the mean can be losing a class entirely.",
+      yLabel: "Dice", yDomain: [0, 1],
+      series: r.classes.map((c, ci) => ({
+        name: c, colour: cssVar(CLASS_VAR[c] || "--s1"),
+        points: r.val.map(v => ({ x: v.epoch, y: v.per_class[ci] })),
+      })),
+    });
+    if (fig) figs.appendChild(fig);
+  }
+
+  // Table view - identity never by colour alone.
+  const r0 = runs[0];
+  if (r0.val.length) {
+    const head = `<thead><tr><th>Epoch</th><th>Mean</th>` +
+      r0.classes.map(c => `<th>${c}</th>`).join("") + `</tr></thead>`;
+    const body = r0.val.map(v =>
+      `<tr><td class="num">${v.epoch}</td><td class="num">${v.mean.toFixed(4)}</td>` +
+      v.per_class.map(d => `<td class="num">${d.toFixed(4)}</td>`).join("") + `</tr>`).join("");
+    document.getElementById("table").innerHTML = head + `<tbody>${body}</tbody>`;
+  }
+
+  document.getElementById("foot").innerHTML =
+    `Dice is volumetric overlap per class, averaged over validation cases; a case with no tissue of a ` +
+    `class and no prediction of it scores 1.0, following the BraTS convention. Lesion-wise scores, which ` +
+    `rank the challenge, are computed at test time by <code>mri3d.predict</code>. ` +
+    `Series colours are checked for colour-vision separation with the dataviz validator.`;
+}
+
+build();
+addEventListener("resize", () => { document.getElementById("figures").innerHTML = ""; document.getElementById("cards").innerHTML = ""; build(); });
+</script>
