@@ -67,14 +67,42 @@ test would have turned a held-out score into a fitted one, and - given the
 validation gain overstated the test gain threefold - would have produced a
 number that looked better and meant less.
 
-## Meningioma (BraTS 2024 MEN-RT)
+## Meningioma (BraTS 2024 MEN-RT), test split
 
-Validation GTV Dice 0.456 after 40 epochs, still climbing steeply when the
-schedule ended. Retrained for 120 epochs; see the training-curve report for the
-converged figure.
+75 held-out patients, single T1c modality, one binary gross-tumour-volume mask.
 
-Preprocessing to 1 mm isotropic (`mri3d.preprocess`) halved epoch time from 317s
-to 166s and removed the per-epoch resampling that had exhausted system memory.
+| | Ours | BraTS best | BraTS median |
+|---|---|---|---|
+| Lesion-wise Dice | 0.509 | 0.849 | 0.794 |
+| Volumetric Dice | 0.626 (median 0.786) | | |
+
+Validation Dice 0.6695 at epoch 120.
+
+### The mean hides a bimodal distribution
+
+| Volumetric Dice | Cases |
+|---|---|
+| 0.9 - 1.0 | 14 |
+| 0.8 - 0.9 | 19 |
+| 0.5 - 0.8 | 20 |
+| 0.2 - 0.5 | 9 |
+| **0.0 - 0.2** | **13** |
+
+The model is not uniformly mediocre. It segments 33 of 75 cases above 0.8, and
+misses 13 cases (17%) almost entirely. The mean of 0.626 describes neither
+group. The median, 0.786, describes the typical case far better, and the tail
+of 13 failures is what separates this model from the leaderboard.
+
+That reframes the next step: chasing general accuracy is worth less than
+diagnosing what those 13 cases have in common. They are visible in the
+prediction review page, which samples across the score range.
+
+### Preprocessing
+
+Resampling to 1 mm isotropic once (`mri3d.preprocess`) rather than per epoch
+halved epoch time, 317s -> 166s, and removed the memory pressure that had
+killed an earlier run. Training 40 epochs reached 0.456; 120 epochs reached
+0.670, so the first schedule was simply too short - worth +0.21 Dice.
 
 ## What would improve these numbers
 

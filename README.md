@@ -9,8 +9,10 @@ access-controlled through Synapse. Everything here regenerates from it.
 
 ## Results
 
-Scored once on 203 held-out patients. Full table and discussion in
-[`reports/results.md`](reports/results.md).
+Each model scored once on a held-out, patient-level split. Full tables and
+discussion in [`reports/results.md`](reports/results.md).
+
+**Glioma** — 203 patients, four tumour sub-regions:
 
 | Region | Lesion-wise Dice | Volumetric Dice |
 |---|---|---|
@@ -20,10 +22,19 @@ Scored once on 203 held-out patients. Full table and discussion in
 | RC | 0.675 | 0.725 |
 | **mean** | **0.589** | |
 
-The 0.30 gap between the two columns on SNFH is the interesting part: the model
-segments the main tumour well but invents roughly one spurious lesion per case.
-Volumetric Dice barely notices; lesion-wise Dice charges a full zero for each.
-Reporting only the familiar metric would have hidden the defect entirely.
+**Meningioma** — 75 patients, binary gross tumour volume: lesion-wise 0.509,
+volumetric 0.626 (median 0.786).
+
+Two things in those numbers are worth more than the numbers themselves:
+
+- **The 0.30 gap between the glioma columns.** SNFH scores 0.851 volumetric and
+  0.575 lesion-wise, because the model invents roughly one spurious lesion per
+  case. Volumetric Dice barely notices; lesion-wise charges a full zero for each.
+  Reporting only the familiar metric would have hidden the defect entirely.
+- **The meningioma mean describes no actual case.** 33 of 75 cases score above
+  0.8 and 13 score below 0.2 — the model is usually good and occasionally blind.
+  The median, 0.786, is the honest summary, and those 13 failures are the real
+  target for the next iteration.
 
 ## What's here
 
