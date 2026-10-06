@@ -7,6 +7,12 @@ single 8 GB consumer GPU (RTX 3070 Ti). Built on the BraTS 2024 challenge cohort
 **The imaging data is not in this repository** and cannot be — it is CC-BY-NC and
 access-controlled through Synapse. Everything here regenerates from it.
 
+**Live demos** (open in the browser, no install):
+- [Lesions in 3D](https://computer347.github.io/3d_mri/reports/lesion_3d_demo.html) — one test case, rotatable, every predicted lesion coloured by whether the selector kept or deleted it
+- [Tumour atlas](https://computer347.github.io/3d_mri/reports/tumour_atlas.html) — where tumours occur across all 1350 glioma cases
+- [What separates real from invented lesions](https://computer347.github.io/3d_mri/reports/component_separation.html)
+- [Training curves](https://computer347.github.io/3d_mri/reports/curves_gli_main.html)
+
 ## Results
 
 Each model scored once on a held-out, patient-level split. Full tables and
@@ -179,5 +185,13 @@ through a 3D U-Net at a useful width, so train on random patches (e.g. 128³ or 
 sliding-window inference over the full volume. Use AMP (bfloat16 works on sm_86) and expect
 batch size 1–2.
 
-## Citations
+## Data attribution and citations
+
+Data used in this project were obtained as part of the Brain Tumor Segmentation (BraTS)
+Challenge project through Synapse ID: syn53708249. The data is licensed CC-BY-NC 4.0
+(non-commercial use only) and is not redistributed here. The single-case demo page
+shows model output for one de-identified challenge case.
+
 If you publish anything, cite per `docs/citations/` (`brats2024_all.bib` covers the core set).
+
+Research project only. Not a medical device and not intended for clinical use.
