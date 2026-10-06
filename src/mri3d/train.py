@@ -27,6 +27,7 @@ from . import paths
 from .data import PATCH, loaders
 from .metrics import dice
 from .model import build_loss, build_model, describe
+from .seeding import set_seed
 
 
 def validate(model, loader, device, n_classes, patch, amp_dtype) -> dict:
@@ -68,7 +69,14 @@ def main() -> None:
                     help="use only the first N training cases (for A/B comparisons)")
     ap.add_argument("--val-limit", type=int, default=0,
                     help="validate on only the first N val cases (keeps A/B runs comparable)")
+    ap.add_argument("--seed", type=int, default=0,
+                    help="seed for python/numpy/torch/MONAI; recorded in the checkpoint")
     args = ap.parse_args()
+
+    # Seed before anything that draws: weight init, the augmentation transforms
+    # and the class-balanced patch sampler all consume randomness. See
+    # mri3d.seeding for what this does and does not guarantee.
+    set_seed(args.seed)
 
     if args.mode == "full" and args.width > 8:
         print(f"warning: full-volume training at width {args.width} needs ~9.9 GB and will "

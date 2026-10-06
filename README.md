@@ -14,13 +14,13 @@ discussion in [`reports/results.md`](reports/results.md).
 
 **Glioma** — 203 patients, four tumour sub-regions:
 
-| Region | Lesion-wise Dice | Volumetric Dice |
-|---|---|---|
-| NETC | 0.478 | 0.482 |
-| SNFH | 0.575 | 0.851 |
-| ET | 0.614 | 0.766 |
-| RC | 0.675 | 0.725 |
-| **mean** | **0.589** | |
+| Region | Lesion-wise Dice | + lesion selector | Volumetric Dice |
+|---|---|---|---|
+| NETC | 0.478 | 0.488 | 0.482 |
+| SNFH | 0.533 | 0.618 | 0.851 |
+| ET | 0.625 | 0.650 | 0.766 |
+| RC | 0.655 | 0.696 | 0.725 |
+| **mean** (6 regions, incl. TC and WT) | **0.576** | **0.620** | |
 
 **Meningioma** — 75 patients, binary gross tumour volume: lesion-wise 0.509,
 volumetric 0.626 (median 0.786).
@@ -28,9 +28,17 @@ volumetric 0.626 (median 0.786).
 Two things in those numbers are worth more than the numbers themselves:
 
 - **The 0.30 gap between the glioma columns.** SNFH scores 0.851 volumetric and
-  0.575 lesion-wise, because the model invents roughly one spurious lesion per
+  0.533 lesion-wise, because the model invents roughly one spurious lesion per
   case. Volumetric Dice barely notices; lesion-wise charges a full zero for each.
   Reporting only the familiar metric would have hidden the defect entirely.
+- **Deleting those lesions is worth +0.044, and a size threshold could not do
+  it** (+0.013). The selector scores each predicted component on confidence,
+  geometry and spatial context, then keeps it if the posterior clears a
+  threshold **derived from the lesion-wise scoring function** — `p* = L/(L+d)`
+  = 0.557 — rather than swept. False positives fall 2.28 → 0.59 per case for 8
+  points of per-lesion sensitivity. The cost is stated in `reports/results.md`:
+  the 17 test cases with a lesion more than 40 mm from the main tumour are made
+  *worse*, and the metric rewards that trade anyway.
 - **The meningioma mean describes no actual case.** 33 of 75 cases score above
   0.8 and 13 score below 0.2 — the model is usually good and occasionally blind.
   The median, 0.786, is the honest summary, and those 13 failures are the real
@@ -44,6 +52,10 @@ Two things in those numbers are worth more than the numbers themselves:
 | **Tumour atlas** | `reports/tumour_atlas.html` — where tumours occur across all 1350 cases, in three planes |
 | **Prediction review** | `reports/predictions_*.html` — what the model called a tumour, vs. what a radiologist drew |
 | **Training curves** | `reports/curves_*.html` — loss and per-class Dice per epoch |
+| **Lesions in 3D** | `reports/lesion_3d_demo.html` (one public demo case; per-patient pages for a full split stay local) — rotatable brain, with every predicted component coloured by the selector's verdict |
+| **Lesion separation** | `reports/component_separation.html` — what distinguishes a real predicted lesion from an invented one |
+| **Detection curve** | `reports/froc_gli_main.png` — sensitivity vs. false positives per case, with the derived threshold marked |
+| **Calibration** | `reports/reliability_gli_main.png` — why the raw softmax cannot be used as a probability |
 | **Leakage audit** | `reports/duplicates.csv` — found 3 pairs of identical scans under different patient IDs |
 | **Case index** | `reports/case_index.csv` — per-case class volumes, tumour centroid, bbox, geometry |
 | **Design note** | `docs/patch-vs-full-volume.md` — measured, not assumed |
@@ -61,7 +73,18 @@ python -m mri3d.train --overfit 5 --epochs 250    # correctness gate: Dice must 
 python -m mri3d.train --epochs 300                # the real run
 python -m mri3d.predict --run <run> --split test --save-masks
 python -m mri3d.case_viewer --run <run> --split test
+
+# Lesion selection: keep or drop each predicted component, on a derived threshold
+python -m mri3d.predict --run <run> --split val  --save-masks --save-components --mc-dropout 8
+python -m mri3d.predict --run <run> --split test --save-masks --save-components --mc-dropout 8
+python -m mri3d.select  --run <run> --diagnose    # does anything separate real from spurious?
+python -m mri3d.select  --run <run> --fit         # fit on val, derive p*, check calibration
+python -m mri3d.select  --run <run> --apply --split test    # once
+python -m mri3d.lesion_3d --run <run> --split test          # -> rotatable 3D review
 ```
+
+Every entry point takes `--seed` (default 0) and seeds python, numpy, torch and
+MONAI through `mri3d.seeding`.
 
 ## Method
 
@@ -77,13 +100,20 @@ python -m mri3d.case_viewer --run <run> --split test
   — that does not apply here.
 - **Lesion-wise Dice** as the headline metric, matching the challenge: each connected tumour
   is scored separately, so a missed satellite lesion costs a full zero. This is also the
-  detection metric — connected components of the segmentation *are* the detections.
+  detection metric — connected components of the segmentation *are* the detections, and they
+  are reported as such: per-lesion sensitivity 0.914, 2.28 false-positive lesions per case,
+  and an FROC curve over the selector's threshold.
+- **A derived operating point, not a tuned one.** `mri3d.select` thresholds the posterior
+  that a component is real at `p* = L/(L+d)`, which falls out of what lesion-wise Dice pays
+  for a detection versus what it charges for a false alarm. `L` and `d` are measured on the
+  validation split; the test split is scored once.
 
 ## Layout
 
 ```
 mri_3d/
-├── src/mri3d/                      the package (scan, splits, duplicates, data, model, train, …)
+├── src/mri3d/                      the package (scan, splits, duplicates, data, model, train,
+│                                   predict, metrics, postprocess, select, seeding, …)
 ├── reports/                        committed outputs: atlas, prediction review, audits, scores
 ├── configs/splits.json             patient-level split manifest
 ├── docs/                           design notes and BibTeX citations

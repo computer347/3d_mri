@@ -1,0 +1,285 @@
+{
+  "run": "gli_main",
+  "split": "val",
+  "n_cases": 203,
+  "false_positives": {
+    "NETC": {
+      "total": 61,
+      "reference_says": {
+        "SNFH": 18,
+        "ET": 18,
+        "NETC": 9,
+        "RC": 14,
+        "background": 2
+      },
+      "mean_tumour_voxel_fraction": 0.967
+    },
+    "SNFH": {
+      "total": 273,
+      "reference_says": {
+        "SNFH": 7,
+        "RC": 10,
+        "background": 242,
+        "ET": 5,
+        "NETC": 9
+      },
+      "mean_tumour_voxel_fraction": 0.12
+    },
+    "ET": {
+      "total": 123,
+      "reference_says": {
+        "background": 46,
+        "SNFH": 44,
+        "RC": 32,
+        "ET": 1
+      },
+      "mean_tumour_voxel_fraction": 0.586
+    },
+    "RC": {
+      "total": 91,
+      "reference_says": {
+        "NETC": 22,
+        "background": 51,
+        "SNFH": 18
+      },
+      "mean_tumour_voxel_fraction": 0.452
+    }
+  },
+  "missed_lesions": {
+    "NETC": {
+      "total": 10,
+      "predicted_as": {
+        "ET": 1,
+        "nothing": 3,
+        "SNFH": 2,
+        "RC": 4
+      }
+    },
+    "SNFH": {
+      "total": 36,
+      "predicted_as": {
+        "nothing": 33,
+        "NETC": 1,
+        "RC": 1,
+        "ET": 1
+      }
+    },
+    "ET": {
+      "total": 24,
+      "predicted_as": {
+        "nothing": 17,
+        "SNFH": 7
+      }
+    },
+    "RC": {
+      "total": 11,
+      "predicted_as": {
+        "nothing": 7,
+        "SNFH": 2,
+        "NETC": 2
+      }
+    }
+  },
+  "n_false_positives_renamed": 207,
+  "n_false_positives_total": 548,
+  "concentration": {
+    "cases_with_no_false_positive": 39,
+    "cases_with_a_missed_lesion": 54,
+    "cases_with_both": 46,
+    "share_held_by_worst": {
+      "10%": 0.303,
+      "20%": 0.482,
+      "50%": 0.841
+    }
+  },
+  "attribution": {
+    "none": {
+      "n_cases": 203,
+      "min_voxels": "none",
+      "NETC": {
+        "lesion": 0.5438,
+        "volumetric": 0.5649,
+        "false_lesions": 50,
+        "missed_lesions": 10,
+        "n": 83
+      },
+      "SNFH": {
+        "lesion": 0.5143,
+        "volumetric": 0.8575,
+        "false_lesions": 273,
+        "missed_lesions": 36,
+        "n": 203
+      },
+      "ET": {
+        "lesion": 0.5722,
+        "volumetric": 0.7357,
+        "false_lesions": 86,
+        "missed_lesions": 24,
+        "n": 158
+      },
+      "RC": {
+        "lesion": 0.6243,
+        "volumetric": 0.7195,
+        "false_lesions": 67,
+        "missed_lesions": 11,
+        "n": 172
+      },
+      "TC": {
+        "lesion": 0.5706,
+        "volumetric": 0.7306,
+        "false_lesions": 87,
+        "missed_lesions": 25,
+        "n": 159
+      },
+      "WT": {
+        "lesion": 0.5337,
+        "volumetric": 0.8709,
+        "false_lesions": 233,
+        "missed_lesions": 34,
+        "n": 203
+      },
+      "mean_lesion": 0.5598
+    },
+    "relabel": {
+      "n_cases": 203,
+      "min_voxels": "relabel",
+      "NETC": {
+        "lesion": 0.6883,
+        "volumetric": 0.6145,
+        "false_lesions": 11,
+        "missed_lesions": 7,
+        "n": 83
+      },
+      "SNFH": {
+        "lesion": 0.5214,
+        "volumetric": 0.8584,
+        "false_lesions": 249,
+        "missed_lesions": 36,
+        "n": 203
+      },
+      "ET": {
+        "lesion": 0.6306,
+        "volumetric": 0.7432,
+        "false_lesions": 41,
+        "missed_lesions": 24,
+        "n": 158
+      },
+      "RC": {
+        "lesion": 0.668,
+        "volumetric": 0.7434,
+        "false_lesions": 40,
+        "missed_lesions": 9,
+        "n": 172
+      },
+      "TC": {
+        "lesion": 0.6321,
+        "volumetric": 0.7427,
+        "false_lesions": 41,
+        "missed_lesions": 25,
+        "n": 159
+      },
+      "WT": {
+        "lesion": 0.5507,
+        "volumetric": 0.8722,
+        "false_lesions": 216,
+        "missed_lesions": 35,
+        "n": 203
+      },
+      "mean_lesion": 0.6152
+    },
+    "delete": {
+      "n_cases": 203,
+      "min_voxels": "delete",
+      "NETC": {
+        "lesion": 0.6681,
+        "volumetric": 0.5774,
+        "false_lesions": 0,
+        "missed_lesions": 10,
+        "n": 83
+      },
+      "SNFH": {
+        "lesion": 0.7112,
+        "volumetric": 0.8707,
+        "false_lesions": 0,
+        "missed_lesions": 36,
+        "n": 203
+      },
+      "ET": {
+        "lesion": 0.7218,
+        "volumetric": 0.7479,
+        "false_lesions": 0,
+        "missed_lesions": 24,
+        "n": 158
+      },
+      "RC": {
+        "lesion": 0.7139,
+        "volumetric": 0.7371,
+        "false_lesions": 0,
+        "missed_lesions": 11,
+        "n": 172
+      },
+      "TC": {
+        "lesion": 0.7202,
+        "volumetric": 0.7453,
+        "false_lesions": 0,
+        "missed_lesions": 25,
+        "n": 159
+      },
+      "WT": {
+        "lesion": 0.746,
+        "volumetric": 0.8837,
+        "false_lesions": 2,
+        "missed_lesions": 35,
+        "n": 203
+      },
+      "mean_lesion": 0.7135
+    },
+    "both": {
+      "n_cases": 203,
+      "min_voxels": "both",
+      "NETC": {
+        "lesion": 0.6907,
+        "volumetric": 0.6148,
+        "false_lesions": 9,
+        "missed_lesions": 7,
+        "n": 83
+      },
+      "SNFH": {
+        "lesion": 0.7042,
+        "volumetric": 0.8713,
+        "false_lesions": 7,
+        "missed_lesions": 36,
+        "n": 203
+      },
+      "ET": {
+        "lesion": 0.719,
+        "volumetric": 0.748,
+        "false_lesions": 1,
+        "missed_lesions": 24,
+        "n": 158
+      },
+      "RC": {
+        "lesion": 0.7272,
+        "volumetric": 0.7512,
+        "false_lesions": 1,
+        "missed_lesions": 9,
+        "n": 172
+      },
+      "TC": {
+        "lesion": 0.7197,
+        "volumetric": 0.7474,
+        "false_lesions": 1,
+        "missed_lesions": 25,
+        "n": 159
+      },
+      "WT": {
+        "lesion": 0.7448,
+        "volumetric": 0.8848,
+        "false_lesions": 4,
+        "missed_lesions": 35,
+        "n": 203
+      },
+      "mean_lesion": 0.7176
+    }
+  }
+}

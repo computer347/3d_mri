@@ -15,6 +15,11 @@ runs/
 # Python
 .venv/
 __pycache__/
+.pytest_cache/
 *.egg-info/
 .ipynb_checkpoints/
 reports/predictions_*.html
+
+# Per-patient 3D review pages stay local; only the single-case demo is published
+reports/lesion_3d_*.html
+!reports/lesion_3d_demo.html

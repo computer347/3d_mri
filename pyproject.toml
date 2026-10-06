@@ -3,6 +3,25 @@ name = "mri3d"
 version = "0.1.0"
 description = "3D brain tumour segmentation and detection on BraTS 2024 MRI"
 requires-python = ">=3.12"
+# Lower bounds only, at the versions this was developed and measured against.
+# `requirements.lock.txt` remains the reproducible install (it pins the exact
+# CUDA build of torch, which cannot be expressed here); this list exists so that
+# `pip install -e .` yields a package that can actually import, which it could
+# not while `dependencies` was absent.
+dependencies = [
+    "torch>=2.11",
+    "monai>=1.6",
+    "nibabel>=5.4",
+    "numpy>=2.0",
+    "scipy>=1.14",
+    "scikit-learn>=1.5",   # logistic-regression lesion selector (mri3d.select)
+    "pillow>=11.0",        # heatmap mosaics
+    "matplotlib>=3.9",     # reliability diagram, FROC curve
+    "tensorboard>=2.18",   # training curves
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
 
 [build-system]
 requires = ["hatchling"]

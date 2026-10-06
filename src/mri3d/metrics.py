@@ -11,9 +11,20 @@ separately, so a missed satellite lesion costs a full zero instead of being
 hidden by one large, well-segmented mass; predicted components that match no
 reference lesion are counted as zeros too, which is what stops a model from
 buying overlap with scattered false positives.
+
+The matching that underpins lesion-wise Dice is exposed separately as
+``match_components``. Anything that wants to reason about individual predicted
+components - the lesion selector in ``mri3d.select``, the per-component feature
+extraction in ``mri3d.predict`` - must use the *same* notion of matched,
+missed and spurious as the metric it is trying to move, or it will optimise a
+target the leaderboard does not score. ``lesion_wise_dice`` is now a thin
+reduction over ``match_components``; ``tests/test_metrics.py`` pins that the
+returned numbers did not change.
 """
 
 from __future__ import annotations
+
+from dataclasses import dataclass, field
 
 import numpy as np
 from scipy import ndimage
@@ -32,42 +43,146 @@ def dice(pred: np.ndarray, ref: np.ndarray) -> float:
     return float(2 * np.logical_and(pred, ref).sum() / (p + r))
 
 
+@dataclass
+class PredComponent:
+    """One connected component of the *prediction*."""
+
+    comp_id: int
+    n_voxels: int
+    #: Overlaps ``>= 1`` voxel of a scored reference lesion. Note that a
+    #: component is matched regardless of its own size - size only decides
+    #: whether an *un*matched component is charged as a false positive.
+    matched: bool
+    #: Which scored reference lesions it touches (label ids in ``ref_lab``).
+    matched_ref_ids: list[int] = field(default_factory=list)
+    #: Dice of this component against the union of the scored reference
+    #: lesions it touches. 0.0 when it touches none.
+    dice_with_matched: float = 0.0
+    #: Charged as a false positive by ``lesion_wise_dice``: unmatched *and*
+    #: at least ``min_voxels`` large.
+    false_positive: bool = False
+
+
+@dataclass
+class RefLesion:
+    """One connected component of the *reference*."""
+
+    ref_id: int
+    n_voxels: int
+    #: Below ``min_voxels``: not scored at all, in either direction.
+    scored: bool
+    #: Any predicted component touches it (size of that component irrelevant).
+    detected: bool
+    #: The lesion-wise Dice entry this lesion contributes; 0.0 when missed.
+    dice: float
+    #: Which predicted components touch it.
+    matched_comp_ids: list[int] = field(default_factory=list)
+
+
+@dataclass
+class Matching:
+    pred_lab: np.ndarray
+    ref_lab: np.ndarray
+    comps: list[PredComponent]
+    refs: list[RefLesion]
+
+    @property
+    def scored_refs(self) -> list[RefLesion]:
+        return [r for r in self.refs if r.scored]
+
+
+def match_components(pred: np.ndarray, ref: np.ndarray,
+                     min_voxels: int = MIN_LESION_VOXELS) -> Matching:
+    """Connected-component matching, exactly as ``lesion_wise_dice`` scores it.
+
+    Three conventions, all of them load-bearing:
+
+    1. Reference lesions below ``min_voxels`` are dropped entirely. They are
+       neither scored nor able to rescue a predicted component that touches
+       only them.
+    2. A predicted component matches if it overlaps **at least one voxel** of a
+       scored reference lesion. There is no overlap-fraction threshold; BraTS
+       lesion-wise scoring is a detection test, not an IoU test.
+    3. A reference lesion is scored against the **union** of every predicted
+       component touching it, so a single prediction bridging two reference
+       lesions is not counted twice and is not penalised twice.
+
+    Implementation note: the obvious loop (``for i in range(n_ref): ref_lab == i``)
+    is O(n_lesions x volume) and was measurably slow once this ran over 406
+    cases x 4 classes. Everything below is derived from one pass over the
+    voxels where both labellings are non-zero, giving the full pred x ref
+    overlap table; sizes come from ``bincount``. The results are exact, not
+    approximate - only the arithmetic order changed.
+    """
+    ref_lab, n_ref = ndimage.label(ref)
+    pred_lab, n_pred = ndimage.label(pred)
+
+    pred_sizes = np.bincount(pred_lab.ravel(), minlength=n_pred + 1)
+    ref_sizes = np.bincount(ref_lab.ravel(), minlength=n_ref + 1)
+
+    # Sparse overlap table: overlap[(j, i)] = |pred component j n ref lesion i|.
+    overlap: dict[tuple[int, int], int] = {}
+    if n_pred and n_ref:
+        both = (pred_lab > 0) & (ref_lab > 0)
+        if both.any():
+            key = pred_lab[both].astype(np.int64) * (n_ref + 1) + ref_lab[both].astype(np.int64)
+            uniq, counts = np.unique(key, return_counts=True)
+            for k, c in zip(uniq.tolist(), counts.tolist()):
+                overlap[(k // (n_ref + 1), k % (n_ref + 1))] = c
+
+    by_ref: dict[int, list[int]] = {}
+    by_comp: dict[int, list[int]] = {}
+    for (j, i) in overlap:
+        by_ref.setdefault(i, []).append(j)
+        by_comp.setdefault(j, []).append(i)
+
+    scored_ref = {i for i in range(1, n_ref + 1) if ref_sizes[i] >= min_voxels}
+
+    refs: list[RefLesion] = []
+    matched_pred: set[int] = set()
+    for i in range(1, n_ref + 1):
+        hits = sorted(by_ref.get(i, []))
+        if i not in scored_ref:
+            refs.append(RefLesion(i, int(ref_sizes[i]), scored=False,
+                                  detected=bool(hits), dice=0.0, matched_comp_ids=hits))
+            continue
+        if not hits:
+            refs.append(RefLesion(i, int(ref_sizes[i]), scored=True, detected=False, dice=0.0))
+            continue
+        inter = sum(overlap[(j, i)] for j in hits)
+        union_pred = sum(int(pred_sizes[j]) for j in hits)
+        d = float(2 * inter / (union_pred + int(ref_sizes[i])))
+        refs.append(RefLesion(i, int(ref_sizes[i]), scored=True, detected=True,
+                              dice=d, matched_comp_ids=hits))
+        matched_pred.update(hits)
+
+    comps: list[PredComponent] = []
+    for j in range(1, n_pred + 1):
+        touched = sorted(i for i in by_comp.get(j, []) if i in scored_ref)
+        matched = bool(touched)
+        d = 0.0
+        if matched:
+            inter = sum(overlap[(j, i)] for i in touched)
+            d = float(2 * inter / (int(pred_sizes[j]) + sum(int(ref_sizes[i]) for i in touched)))
+        comps.append(PredComponent(
+            comp_id=j, n_voxels=int(pred_sizes[j]), matched=matched,
+            matched_ref_ids=touched, dice_with_matched=d,
+            false_positive=(not matched) and int(pred_sizes[j]) >= min_voxels))
+
+    return Matching(pred_lab=pred_lab, ref_lab=ref_lab, comps=comps, refs=refs)
+
+
 def lesion_wise_dice(pred: np.ndarray, ref: np.ndarray,
                      min_voxels: int = MIN_LESION_VOXELS) -> tuple[float, dict]:
     """Mean Dice over reference lesions, with unmatched predictions as zeros."""
     if pred.sum() == 0 and ref.sum() == 0:
         return 1.0, {"tp": 0, "fn": 0, "fp": 0}
 
-    ref_lab, n_ref = ndimage.label(ref)
-    pred_lab, n_pred = ndimage.label(pred)
-
-    scores: list[float] = []
-    matched_pred: set[int] = set()
-    fn = 0
-    for i in range(1, n_ref + 1):
-        lesion = ref_lab == i
-        if lesion.sum() < min_voxels:
-            continue
-        hits = np.unique(pred_lab[lesion])
-        hits = hits[hits > 0]
-        if hits.size == 0:
-            scores.append(0.0)  # missed entirely
-            fn += 1
-            continue
-        # Score the lesion against every predicted component touching it, so a
-        # prediction that bridges two reference lesions is not double-counted.
-        comp = np.isin(pred_lab, hits)
-        scores.append(dice(comp, lesion))
-        matched_pred.update(int(h) for h in hits)
-
-    fp = 0
-    for j in range(1, n_pred + 1):
-        if j in matched_pred:
-            continue
-        if (pred_lab == j).sum() < min_voxels:
-            continue
-        scores.append(0.0)  # spurious lesion
-        fp += 1
+    m = match_components(pred, ref, min_voxels)
+    scores = [r.dice for r in m.scored_refs]
+    fn = sum(1 for r in m.scored_refs if not r.detected)
+    fp = sum(1 for c in m.comps if c.false_positive)
+    scores += [0.0] * fp  # spurious lesions each contribute a full zero
 
     if not scores:
         return 1.0, {"tp": 0, "fn": 0, "fp": 0}

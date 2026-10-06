@@ -1,18 +1,30 @@
-"""Drop spurious small lesions from predicted masks.
+"""Drop spurious lesions from predicted masks.
 
-The trained model segments the main tumour well but scatters small extra blobs:
-on the glioma test split it invented ~192 SNFH and ~162 WT lesions across 203
+The trained model segments the main tumour well but scatters extra blobs: on
+the glioma test split it invented ~192 SNFH and ~162 WT lesions across 203
 cases, roughly one per case. Volumetric Dice barely registers them - they are
-tiny - but lesion-wise Dice charges a full zero for each, which is why SNFH
-scored 0.851 volumetric and 0.533 lesion-wise.
+small relative to the true mass - but lesion-wise Dice charges a full zero for
+each, which is why SNFH scored 0.851 volumetric and 0.533 lesion-wise.
 
-Removing connected components below a size threshold is the standard fix and
-costs no retraining. The threshold is a *hyperparameter*, so it is swept on the
-validation split and only then applied to test; tuning it on test would turn a
-held-out score into a fitted one.
+Two filters live here, and they differ in what they are allowed to look at.
 
-    python -m mri3d.postprocess --run gli_main --sweep        # choose on val
+``filter_small`` removes connected components below a size threshold. It is the
+standard fix, it costs no retraining, and it mostly failed: size does not
+separate real components from spurious ones, because the scoring already
+ignores anything under 50 voxels, so every threshold large enough to remove an
+invented lesion also deletes true ones. Its threshold is a *hyperparameter*,
+swept on validation and only then applied to test.
+
+``filter_by_selector`` (from ``mri3d.select``) scores each component with a
+logistic regression over confidence, geometry and spatial context, and keeps it
+if the posterior clears a threshold *derived* from the lesion-wise scoring
+function rather than swept. It can only exist because ``predict.py
+--save-components`` now preserves the softmax statistics that
+``logits.argmax`` used to discard.
+
+    python -m mri3d.postprocess --run gli_main --sweep        # choose size on val
     python -m mri3d.postprocess --run gli_main --apply 100    # score test with it
+    python -m mri3d.postprocess --run gli_main --selector --split test
 """
 
 from __future__ import annotations
@@ -50,7 +62,10 @@ def filter_small(mask: np.ndarray, min_voxels: int | dict[int, int]) -> np.ndarr
     for value in np.unique(mask):
         if value == 0:
             continue
-        threshold = per_class.get(int(value), 0) if per_class else min_voxels
+        # `if per_class is not None`, not `if per_class`: an empty mapping means
+        # "no class has a threshold", and testing it for truthiness instead sent
+        # the dict itself down the scalar branch to be compared against 0.
+        threshold = per_class.get(int(value), 0) if per_class is not None else min_voxels
         if threshold <= 0:
             continue
         binary = mask == value
@@ -87,7 +102,27 @@ def _load_pair(rec, pred_dir):
     return pred, ref
 
 
-def evaluate(run: str, dataset: str, split: str, min_voxels: int | dict, limit: int = 0) -> dict:
+def selector_filter(run: str, split: str) -> dict:
+    """Everything ``filter_by_selector`` needs, loaded once for a whole split.
+
+    Returns the keep/drop decision per ``(case_id, class_name, comp_id)`` and
+    the voxel count the components CSV recorded, which the filter re-checks
+    against the mask on disk.
+    """
+    from . import select
+
+    model = select.load_selector(run)
+    comps = select.load_components(run, split)
+    keep = select.keep_table(model["model"], comps, model["p_star"])
+    sizes = {(c["case_id"], c["class_name"], c["comp_id"]): c["n_voxels"] for c in comps}
+    return {"keep": keep, "sizes": sizes, "p_star": model["p_star"]}
+
+
+def evaluate_rows(run: str, dataset: str, split: str, min_voxels: int | dict,
+                  limit: int = 0, selector: dict | None = None) -> list[dict]:
+    """Per-case scores after post-processing. ``selector`` overrides ``min_voxels``."""
+    from .select import filter_by_selector
+
     pred_dir = paths.OUTPUTS / "runs" / run / f"pred_{split}"
     class_values = paths.GLI_LABELS if dataset == "gli" else paths.MEN_LABELS
     recs = [r for r in case_dicts(dataset, split)
@@ -98,8 +133,16 @@ def evaluate(run: str, dataset: str, split: str, min_voxels: int | dict, limit: 
     rows = []
     for rec in recs:
         pred, ref = _load_pair(rec, pred_dir)
-        rows.append(score_case(filter_small(pred, min_voxels), ref, class_values))
+        if selector is not None:
+            pred = filter_by_selector(pred, rec["case_id"], class_values,
+                                      selector["keep"], selector["sizes"])
+        else:
+            pred = filter_small(pred, min_voxels)
+        rows.append({"case_id": rec["case_id"], **score_case(pred, ref, class_values)})
+    return rows
 
+
+def summarise(rows: list[dict], min_voxels: int | dict) -> dict:
     regions = [k[len("lesion_dice_"):] for k in rows[0] if k.startswith("lesion_dice_")]
     out: dict = {"n_cases": len(rows),
                  "min_voxels": min_voxels if not isinstance(min_voxels, dict)
@@ -117,6 +160,11 @@ def evaluate(run: str, dataset: str, split: str, min_voxels: int | dict, limit: 
     return out
 
 
+def evaluate(run: str, dataset: str, split: str, min_voxels: int | dict,
+             limit: int = 0, selector: dict | None = None) -> dict:
+    return summarise(evaluate_rows(run, dataset, split, min_voxels, limit, selector), min_voxels)
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--run", required=True)
@@ -128,6 +176,11 @@ def main() -> None:
                     help="use the per-class thresholds the sweep selected, checking them on "
                          "validation first and only then scoring test")
     ap.add_argument("--grid", type=int, nargs="+", default=DEFAULT_GRID)
+    ap.add_argument("--selector", action="store_true",
+                    help="filter with the fitted lesion selector (reports/selector_{run}.json) "
+                         "instead of a size threshold")
+    ap.add_argument("--split", default="test", choices=["train", "val", "test"],
+                    help="which split --selector scores")
     ap.add_argument("--limit", type=int, default=0)
     args = ap.parse_args()
 
@@ -173,6 +226,27 @@ def main() -> None:
             path.write_text(json.dumps({"thresholds": named, "before": before, "after": after},
                                        indent=2), encoding="utf-8")
         print("wrote per-split JSON to reports/")
+
+    if args.selector:
+        sel = selector_filter(args.run, args.split)
+        print(f"\nscoring the {args.split.upper()} split with the learned selector, "
+              f"p* = {sel['p_star']}")
+        before = evaluate(args.run, args.dataset, args.split, 0, args.limit)
+        after = evaluate(args.run, args.dataset, args.split, 0, args.limit, selector=sel)
+        regions = [k for k in after if k not in ("n_cases", "min_voxels", "mean_lesion")]
+        print(f"\n{'region':<6} {'lesion before':>14} {'after':>8} {'change':>8}   "
+              f"{'false before':>13} {'after':>6}  {'missed':>7} {'after':>6}")
+        for r in regions:
+            d = after[r]["lesion"] - before[r]["lesion"]
+            print(f"{r:<6} {before[r]['lesion']:>14.4f} {after[r]['lesion']:>8.4f} "
+                  f"{d:>+8.4f}   {before[r]['false_lesions']:>13} {after[r]['false_lesions']:>6}"
+                  f"  {before[r]['missed_lesions']:>7} {after[r]['missed_lesions']:>6}")
+        print(f"\nmean lesion-Dice {before['mean_lesion']:.4f} -> {after['mean_lesion']:.4f} "
+              f"({after['mean_lesion'] - before['mean_lesion']:+.4f})")
+        path = paths.REPORTS / f"scores_{args.run}_{args.split}_selector.json"
+        path.write_text(json.dumps({"p_star": sel["p_star"], "before": before, "after": after},
+                                   indent=2), encoding="utf-8")
+        print(f"wrote {path}")
 
     if args.apply is not None:
         print(f"\nscoring the TEST split with min lesion size {args.apply} voxels")
