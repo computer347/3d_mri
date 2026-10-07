@@ -46,6 +46,10 @@ Two things in those numbers are worth more than the numbers themselves:
   points of per-lesion sensitivity. The cost is stated in `reports/results.md`:
   the 17 test cases with a lesion more than 40 mm from the main tumour are made
   *worse*, and the metric rewards that trade anyway.
+- **Test-time flip averaging and the selector fix the same mistake.** Averaging
+  over 8 flips adds +0.019 on its own, but only +0.0006 on top of the selector:
+  it removes invented lesions the selector was already deleting. The headline
+  stays on the cheaper single-pass model.
 - **The meningioma mean describes no actual case.** 41 of 75 cases score above
   0.8 and 13 score below 0.2 — the model is usually good and occasionally blind.
   Training 2.5× longer cut the cases with an invented lesion from 27 to 16 but

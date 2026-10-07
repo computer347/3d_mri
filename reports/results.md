@@ -521,6 +521,38 @@ the throughput is worth more than bit-reproducibility of a checkpoint. The
 general lesson is narrower than "seed everything": a seed fixes the random
 draws, and on a GPU the random draws were never the part that was drifting.
 
+### Test-time augmentation: real on its own, redundant with the selector
+
+`predict.py --tta` averages softmax probabilities over all 8 combinations of
+flipping the three spatial axes - the flips the model saw in training - and
+undoes each flip before averaging (`tests/test_tta.py`). Same checkpoint,
+nothing retrained. It was run as a separate run name, `gli_main_tta`, through
+the whole pipeline: predict val and test, size sweep on val, selector refit on
+val, test scored once.
+
+| Region | none | + TTA | selector | TTA + selector |
+|---|---|---|---|---|
+| NETC | 0.478 | 0.496 | 0.488 | 0.480 |
+| SNFH | 0.533 | 0.552 | 0.618 | 0.623 |
+| ET | 0.625 | 0.644 | 0.650 | 0.647 |
+| RC | 0.655 | 0.675 | 0.696 | 0.702 |
+| TC | 0.605 | 0.625 | 0.628 | 0.627 |
+| WT | 0.561 | 0.577 | 0.642 | 0.644 |
+| **mean** | **0.576** | **0.595** | **0.620** | **0.621** |
+
+On its own TTA is worth **+0.019**, on every region - squarely in the range it
+usually gives. Stacked on the selector it is worth **+0.0006**, which is noise.
+The reason is in the false-positive counts: TTA brings invented lesions down
+from 2.28 to 1.95 per case before any filtering, and those are lesions the
+selector was already deleting. Two methods, one error. What survives the
+overlap is detection: at the same ~0.6 false positives per case, per-lesion
+sensitivity after the selector is 0.841 with TTA against 0.831 without. The
+refitted selector derived almost the same threshold (p\* = 0.557 both times).
+
+The headline stays on the single-pass model: an 8x inference cost for +0.0006
+is not a trade worth making. Note that the test split was scored for both
+variants and the better one was *not* adopted on that basis.
+
 ## Meningioma (BraTS 2024 MEN-RT), test split
 
 75 held-out patients, single T1c modality, one binary gross-tumour-volume mask.
@@ -584,13 +616,14 @@ In rough order of expected value:
    the *assigned* class only, so the margin to second place is thrown away. It
    is a small change to keep all five, and then the same
    fit-on-validation-apply-once discipline applies.
-3. **Test-time augmentation.** Flip-averaging typically adds 0.01-0.02 for
-   inference time alone, and it is now the most promising selector feature
-   left: disagreement across flips probes an invariance the model was actually
-   trained for (`RandFlipd` on all three axes), where MC dropout only perturbs
-   weights - and MC dropout already earns a coefficient of -0.27. It is the
-   kind of information the image features turned out not to be, because a
-   single forward pass cannot contain it.
+3. **Flip disagreement as a selector feature.** Flip-*averaging* is done (see
+   "Test-time augmentation" above): +0.019 on its own, +0.0006 once the
+   selector runs, because both remove the same invented lesions. What has not
+   been tried is the *disagreement* across the eight flips as a per-component
+   feature: it probes an invariance the model was actually trained for
+   (`RandFlipd` on all three axes), where MC dropout only perturbs weights. It
+   is the kind of information the image features turned out not to be,
+   because a single forward pass cannot contain it.
 4. **Attack the false positives at the source** rather than by filtering. The
    selector is still post-hoc: it recovers +0.0441 of the +0.121 that perfect
    component selection would give, and it pays for it with 8 points of

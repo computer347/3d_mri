@@ -1,0 +1,378 @@
+[
+  {
+    "n_cases": 203,
+    "min_voxels": 0,
+    "NETC": {
+      "lesion": 0.5369,
+      "volumetric": 0.573,
+      "false_lesions": 51,
+      "missed_lesions": 10,
+      "n": 83
+    },
+    "SNFH": {
+      "lesion": 0.5433,
+      "volumetric": 0.8645,
+      "false_lesions": 241,
+      "missed_lesions": 33,
+      "n": 203
+    },
+    "ET": {
+      "lesion": 0.6072,
+      "volumetric": 0.7507,
+      "false_lesions": 70,
+      "missed_lesions": 21,
+      "n": 158
+    },
+    "RC": {
+      "lesion": 0.6447,
+      "volumetric": 0.7391,
+      "false_lesions": 58,
+      "missed_lesions": 13,
+      "n": 172
+    },
+    "TC": {
+      "lesion": 0.6026,
+      "volumetric": 0.7429,
+      "false_lesions": 71,
+      "missed_lesions": 22,
+      "n": 159
+    },
+    "WT": {
+      "lesion": 0.5671,
+      "volumetric": 0.8769,
+      "false_lesions": 212,
+      "missed_lesions": 31,
+      "n": 203
+    },
+    "mean_lesion": 0.5836
+  },
+  {
+    "n_cases": 203,
+    "min_voxels": 25,
+    "NETC": {
+      "lesion": 0.524,
+      "volumetric": 0.5276,
+      "false_lesions": 51,
+      "missed_lesions": 21,
+      "n": 83
+    },
+    "SNFH": {
+      "lesion": 0.5403,
+      "volumetric": 0.8647,
+      "false_lesions": 241,
+      "missed_lesions": 46,
+      "n": 203
+    },
+    "ET": {
+      "lesion": 0.6024,
+      "volumetric": 0.7507,
+      "false_lesions": 70,
+      "missed_lesions": 27,
+      "n": 158
+    },
+    "RC": {
+      "lesion": 0.6441,
+      "volumetric": 0.7395,
+      "false_lesions": 58,
+      "missed_lesions": 16,
+      "n": 172
+    },
+    "TC": {
+      "lesion": 0.5975,
+      "volumetric": 0.7424,
+      "false_lesions": 71,
+      "missed_lesions": 28,
+      "n": 159
+    },
+    "WT": {
+      "lesion": 0.5657,
+      "volumetric": 0.8769,
+      "false_lesions": 211,
+      "missed_lesions": 38,
+      "n": 203
+    },
+    "mean_lesion": 0.579
+  },
+  {
+    "n_cases": 203,
+    "min_voxels": 50,
+    "NETC": {
+      "lesion": 0.5025,
+      "volumetric": 0.4933,
+      "false_lesions": 51,
+      "missed_lesions": 34,
+      "n": 83
+    },
+    "SNFH": {
+      "lesion": 0.5355,
+      "volumetric": 0.8648,
+      "false_lesions": 241,
+      "missed_lesions": 57,
+      "n": 203
+    },
+    "ET": {
+      "lesion": 0.593,
+      "volumetric": 0.7513,
+      "false_lesions": 70,
+      "missed_lesions": 39,
+      "n": 158
+    },
+    "RC": {
+      "lesion": 0.6422,
+      "volumetric": 0.7395,
+      "false_lesions": 58,
+      "missed_lesions": 19,
+      "n": 172
+    },
+    "TC": {
+      "lesion": 0.5896,
+      "volumetric": 0.7422,
+      "false_lesions": 71,
+      "missed_lesions": 39,
+      "n": 159
+    },
+    "WT": {
+      "lesion": 0.5625,
+      "volumetric": 0.8769,
+      "false_lesions": 211,
+      "missed_lesions": 46,
+      "n": 203
+    },
+    "mean_lesion": 0.5709
+  },
+  {
+    "n_cases": 203,
+    "min_voxels": 100,
+    "NETC": {
+      "lesion": 0.5048,
+      "volumetric": 0.4363,
+      "false_lesions": 22,
+      "missed_lesions": 56,
+      "n": 83
+    },
+    "SNFH": {
+      "lesion": 0.5625,
+      "volumetric": 0.8643,
+      "false_lesions": 150,
+      "missed_lesions": 78,
+      "n": 203
+    },
+    "ET": {
+      "lesion": 0.6044,
+      "volumetric": 0.7361,
+      "false_lesions": 42,
+      "missed_lesions": 59,
+      "n": 158
+    },
+    "RC": {
+      "lesion": 0.6682,
+      "volumetric": 0.7387,
+      "false_lesions": 35,
+      "missed_lesions": 24,
+      "n": 172
+    },
+    "TC": {
+      "lesion": 0.6002,
+      "volumetric": 0.7266,
+      "false_lesions": 43,
+      "missed_lesions": 59,
+      "n": 159
+    },
+    "WT": {
+      "lesion": 0.5919,
+      "volumetric": 0.876,
+      "false_lesions": 138,
+      "missed_lesions": 64,
+      "n": 203
+    },
+    "mean_lesion": 0.5887
+  },
+  {
+    "n_cases": 203,
+    "min_voxels": 200,
+    "NETC": {
+      "lesion": 0.4076,
+      "volumetric": 0.3479,
+      "false_lesions": 10,
+      "missed_lesions": 86,
+      "n": 83
+    },
+    "SNFH": {
+      "lesion": 0.5761,
+      "volumetric": 0.8645,
+      "false_lesions": 95,
+      "missed_lesions": 106,
+      "n": 203
+    },
+    "ET": {
+      "lesion": 0.5919,
+      "volumetric": 0.7278,
+      "false_lesions": 25,
+      "missed_lesions": 81,
+      "n": 158
+    },
+    "RC": {
+      "lesion": 0.672,
+      "volumetric": 0.7377,
+      "false_lesions": 26,
+      "missed_lesions": 28,
+      "n": 172
+    },
+    "TC": {
+      "lesion": 0.585,
+      "volumetric": 0.7171,
+      "false_lesions": 26,
+      "missed_lesions": 81,
+      "n": 159
+    },
+    "WT": {
+      "lesion": 0.6257,
+      "volumetric": 0.8758,
+      "false_lesions": 88,
+      "missed_lesions": 79,
+      "n": 203
+    },
+    "mean_lesion": 0.5764
+  },
+  {
+    "n_cases": 203,
+    "min_voxels": 400,
+    "NETC": {
+      "lesion": 0.388,
+      "volumetric": 0.3095,
+      "false_lesions": 3,
+      "missed_lesions": 108,
+      "n": 83
+    },
+    "SNFH": {
+      "lesion": 0.5897,
+      "volumetric": 0.8647,
+      "false_lesions": 53,
+      "missed_lesions": 123,
+      "n": 203
+    },
+    "ET": {
+      "lesion": 0.5533,
+      "volumetric": 0.6837,
+      "false_lesions": 14,
+      "missed_lesions": 101,
+      "n": 158
+    },
+    "RC": {
+      "lesion": 0.6743,
+      "volumetric": 0.7271,
+      "false_lesions": 18,
+      "missed_lesions": 32,
+      "n": 172
+    },
+    "TC": {
+      "lesion": 0.5461,
+      "volumetric": 0.6726,
+      "false_lesions": 15,
+      "missed_lesions": 101,
+      "n": 159
+    },
+    "WT": {
+      "lesion": 0.6486,
+      "volumetric": 0.8753,
+      "false_lesions": 51,
+      "missed_lesions": 91,
+      "n": 203
+    },
+    "mean_lesion": 0.5667
+  },
+  {
+    "n_cases": 203,
+    "min_voxels": 800,
+    "NETC": {
+      "lesion": 0.3559,
+      "volumetric": 0.2788,
+      "false_lesions": 2,
+      "missed_lesions": 119,
+      "n": 83
+    },
+    "SNFH": {
+      "lesion": 0.5993,
+      "volumetric": 0.8651,
+      "false_lesions": 31,
+      "missed_lesions": 153,
+      "n": 203
+    },
+    "ET": {
+      "lesion": 0.4951,
+      "volumetric": 0.6319,
+      "false_lesions": 10,
+      "missed_lesions": 126,
+      "n": 158
+    },
+    "RC": {
+      "lesion": 0.6607,
+      "volumetric": 0.7055,
+      "false_lesions": 8,
+      "missed_lesions": 42,
+      "n": 172
+    },
+    "TC": {
+      "lesion": 0.4875,
+      "volumetric": 0.6205,
+      "false_lesions": 11,
+      "missed_lesions": 126,
+      "n": 159
+    },
+    "WT": {
+      "lesion": 0.6547,
+      "volumetric": 0.8747,
+      "false_lesions": 31,
+      "missed_lesions": 114,
+      "n": 203
+    },
+    "mean_lesion": 0.5422
+  },
+  {
+    "n_cases": 203,
+    "min_voxels": 1600,
+    "NETC": {
+      "lesion": 0.3217,
+      "volumetric": 0.2204,
+      "false_lesions": 1,
+      "missed_lesions": 132,
+      "n": 83
+    },
+    "SNFH": {
+      "lesion": 0.596,
+      "volumetric": 0.8649,
+      "false_lesions": 24,
+      "missed_lesions": 170,
+      "n": 203
+    },
+    "ET": {
+      "lesion": 0.4225,
+      "volumetric": 0.548,
+      "false_lesions": 6,
+      "missed_lesions": 157,
+      "n": 158
+    },
+    "RC": {
+      "lesion": 0.6146,
+      "volumetric": 0.6535,
+      "false_lesions": 3,
+      "missed_lesions": 59,
+      "n": 172
+    },
+    "TC": {
+      "lesion": 0.4178,
+      "volumetric": 0.5392,
+      "false_lesions": 7,
+      "missed_lesions": 157,
+      "n": 159
+    },
+    "WT": {
+      "lesion": 0.6478,
+      "volumetric": 0.8719,
+      "false_lesions": 24,
+      "missed_lesions": 130,
+      "n": 203
+    },
+    "mean_lesion": 0.5034
+  }
+]

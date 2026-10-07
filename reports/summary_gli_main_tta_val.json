@@ -1,0 +1,62 @@
+{
+  "dice_NETC": {
+    "mean_where_present": 0.573,
+    "n_cases": 83,
+    "mean_all_cases": 0.786
+  },
+  "lesion_dice_NETC": {
+    "mean_where_present": 0.5369,
+    "n_cases": 83,
+    "mean_all_cases": 0.786
+  },
+  "dice_SNFH": {
+    "mean_where_present": 0.8645,
+    "n_cases": 203,
+    "mean_all_cases": 0.8645
+  },
+  "lesion_dice_SNFH": {
+    "mean_where_present": 0.5433,
+    "n_cases": 203,
+    "mean_all_cases": 0.5433
+  },
+  "dice_ET": {
+    "mean_where_present": 0.7507,
+    "n_cases": 158,
+    "mean_all_cases": 0.6532
+  },
+  "lesion_dice_ET": {
+    "mean_where_present": 0.6072,
+    "n_cases": 158,
+    "mean_all_cases": 0.576
+  },
+  "dice_RC": {
+    "mean_where_present": 0.7391,
+    "n_cases": 172,
+    "mean_all_cases": 0.6657
+  },
+  "lesion_dice_RC": {
+    "mean_where_present": 0.6447,
+    "n_cases": 172,
+    "mean_all_cases": 0.6251
+  },
+  "dice_TC": {
+    "mean_where_present": 0.7429,
+    "n_cases": 159,
+    "mean_all_cases": 0.6459
+  },
+  "lesion_dice_TC": {
+    "mean_where_present": 0.6026,
+    "n_cases": 159,
+    "mean_all_cases": 0.5705
+  },
+  "dice_WT": {
+    "mean_where_present": 0.8769,
+    "n_cases": 203,
+    "mean_all_cases": 0.8769
+  },
+  "lesion_dice_WT": {
+    "mean_where_present": 0.5671,
+    "n_cases": 203,
+    "mean_all_cases": 0.5671
+  }
+}
