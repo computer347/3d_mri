@@ -32,6 +32,17 @@ discussion in [`reports/results.md`](reports/results.md).
 volumetric 0.660 (median 0.816), after training 300 epochs instead of 120
 (was 0.509 / 0.626).
 
+**How that compares.** Against the BraTS 2024 leaderboard median, this single
+model on an 8 GB GPU is above the median on one glioma region (resection
+cavity, 0.696 vs 0.672) and within 0.07 of it on two more (ET 0.650 vs 0.712,
+TC 0.628 vs 0.692). Overall it is below the median: glioma mean 0.620 vs ~0.75,
+meningioma 0.589 vs 0.794. By plain volumetric overlap, oedema (0.851) and
+whole tumour (0.861) are at median level; the lesion-wise gap is mostly
+invented extra lesions, which is what the selector work targets. The
+leaderboard figures are validation-phase scores from teams that could resubmit
+and mostly ensembled several models, so they are context, not a like-for-like
+ranking.
+
 Two things in those numbers are worth more than the numbers themselves:
 
 - **The 0.30 gap between the glioma columns.** SNFH scores 0.851 volumetric and
