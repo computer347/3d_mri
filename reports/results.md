@@ -525,31 +525,41 @@ draws, and on a GPU the random draws were never the part that was drifting.
 
 75 held-out patients, single T1c modality, one binary gross-tumour-volume mask.
 
-| | Ours | BraTS best | BraTS median |
-|---|---|---|---|
-| Lesion-wise Dice | 0.509 | 0.849 | 0.794 |
-| Volumetric Dice | 0.626 (median 0.786) | | |
+| | 300 epochs (`men_300`) | 120 epochs (`men_long`) | BraTS best | BraTS median |
+|---|---|---|---|---|
+| Lesion-wise Dice | **0.589** (median 0.732) | 0.509 (median 0.462) | 0.849 | 0.794 |
+| Volumetric Dice | **0.660** (median 0.816) | 0.626 (median 0.786) | | |
+| False lesions per case | 0.53 | 0.57 | | |
+| Cases with any false lesion | 16 | 27 | | |
 
-Validation Dice 0.6695 at epoch 120.
+Validation Dice 0.7317 at epoch 270 of 300 (`men_long`: 0.6695 at epoch 120).
 
-### The mean hides a bimodal distribution
+`men_300` is the same model, data, patch size and validation schedule as
+`men_long`, with only the epoch count changed - item 1 of the list at the end
+of this report, taken. The test split has now been scored twice, once per run;
+both numbers are in the table rather than only the better one.
 
-| Volumetric Dice | Cases |
-|---|---|
-| 0.9 - 1.0 | 14 |
-| 0.8 - 0.9 | 19 |
-| 0.5 - 0.8 | 20 |
-| 0.2 - 0.5 | 9 |
-| **0.0 - 0.2** | **13** |
+### More training cleaned up the good cases, not the failures
 
-The model is not uniformly mediocre. It segments 33 of 75 cases above 0.8, and
-misses 13 cases (17%) almost entirely. The mean of 0.626 describes neither
-group. The median, 0.786, describes the typical case far better, and the tail
-of 13 failures is what separates this model from the leaderboard.
+| Volumetric Dice | `men_300` | `men_long` |
+|---|---|---|
+| 0.9 - 1.0 | 16 | 14 |
+| 0.8 - 0.9 | 25 | 19 |
+| 0.5 - 0.8 | 16 | 20 |
+| 0.2 - 0.5 | 5 | 9 |
+| **0.0 - 0.2** | **13** | **13** |
 
-That reframes the next step: chasing general accuracy is worth less than
-diagnosing what those 13 cases have in common. They are visible in the
-prediction review page, which samples across the score range.
+The distribution is still bimodal, and the gain is all on one side of it. 41 of
+75 cases now score above 0.8 (was 33), and the lesion-wise *median* jumped
+0.462 -> 0.732, because the number of cases carrying at least one invented
+lesion fell from 27 to 16. Per case, 34 improved by more than 0.01 lesion-wise,
+14 got worse, 27 were unchanged.
+
+The near-total misses did not move: still 13. Three of the old ones were
+fixed, three new ones appeared, and **10 cases fail under both runs**. Longer
+training is not going to reach them. Whatever those 10 have in common is now
+the clearest target in the project, and they are visible in the prediction
+review page, which samples across the score range.
 
 ### Preprocessing
 
@@ -562,8 +572,9 @@ killed an earlier run. Training 40 epochs reached 0.456; 120 epochs reached
 
 In rough order of expected value:
 
-1. **More training.** Glioma converged at epoch 80, but the meningioma curve
-   shows how much is lost to an under-length schedule.
+1. ~~**More training.**~~ Done for meningioma: 120 -> 300 epochs moved
+   lesion-wise Dice 0.509 -> 0.589 (see the meningioma section). Glioma
+   converged at epoch 80, so it is not expected to gain the same way.
 2. **A relabeller, not just a deleter.** The largest measured, un-taken win:
    renaming the 229 false-positive components that sit on real tumour is worth
    +0.0611 lesion-wise and improves volumetric Dice at the same time, and it is
@@ -594,12 +605,12 @@ In rough order of expected value:
    margin to perfect selection (0.118). Class-balanced sampling already rescued
    it once during training, from 0.487 to 0.675 on validation; more aggressive
    oversampling may help further.
-7. **Diagnose the 13 meningioma failures.** Not a glioma item, but the largest
-   single number available anywhere in this project: MEN-RT has only 0.57
-   false-positive lesions per case, so the selector has nothing to delete
-   there, and 13 of 75 test cases score 0.010 volumetric - near-total misses.
-   Bringing those to the median of the other 62 would move volumetric Dice
-   0.626 -> 0.767 and lesion-wise 0.509 -> 0.622. They skew small (median GTV
+7. **Diagnose the meningioma failures.** Not a glioma item, but the largest
+   single number available anywhere in this project. MEN-RT has only 0.53
+   false-positive lesions per case, so the selector has little to delete
+   there, and 13 of 75 test cases still score below 0.2 volumetric after
+   300 epochs - 10 of them the same cases that failed after 120. (Figures
+   below are from the 120-epoch analysis.) They skew small (median GTV
    2795 voxels against 11138 for the rest) but four of them exceed 10000
    voxels, so "too small to see" is not the whole explanation.
    `reports/lesion_3d_*.html` is the tool for looking at them.

@@ -24,6 +24,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import itertools
 import json
 import time
 
@@ -72,8 +73,33 @@ def load_run(run: str, device):
     return model, ckpt
 
 
-def _infer(model, image, patch):
-    return sliding_window_inference(image, patch, 1, model, overlap=0.25, mode="gaussian")
+# All 8 combinations of flipping the three spatial axes of a (B, C, X, Y, Z)
+# tensor - the same three axes data.train_transforms flips with RandFlipd.
+FLIP_DIMS = [tuple(d for d, bit in zip((2, 3, 4), bits) if bit)
+             for bits in itertools.product((0, 1), repeat=3)]
+
+
+def _infer(model, image, patch, tta: bool = False):
+    """Sliding-window logits; with ``tta``, averaged over the 8 axis flips.
+
+    The model trained with random flips on every axis, so each flipped copy is
+    an input it has learned to handle, and the disagreement between them is
+    noise that averaging removes. Probabilities are averaged, not logits -
+    a single overconfident view should not be able to outvote the other seven -
+    and the log of the mean is returned so callers can keep applying softmax:
+    softmax(log p) == p when p already sums to one.
+    """
+    if not tta:
+        return sliding_window_inference(image, patch, 1, model, overlap=0.25, mode="gaussian")
+    mean = None
+    for dims in FLIP_DIMS:
+        x = torch.flip(image, dims) if dims else image
+        logits = sliding_window_inference(x, patch, 1, model, overlap=0.25, mode="gaussian")
+        p = torch.softmax(logits.float(), dim=1)
+        p = torch.flip(p, dims) if dims else p
+        mean = p if mean is None else mean + p
+        del logits, p
+    return torch.log((mean / len(FLIP_DIMS)).clamp_min(1e-12))
 
 
 def mc_dropout_variance(model, image, patch, n_passes: int, device) -> np.ndarray:
@@ -276,6 +302,9 @@ def main() -> None:
                     help="T stochastic forward passes for a per-component variance "
                          "feature (0 = off). Costs T x inference, no retraining.")
     ap.add_argument("--suffix", default="", help="appended to the components CSV names")
+    ap.add_argument("--tta", action="store_true",
+                    help="average probabilities over all 8 axis flips (8 x inference). "
+                         "Use with a separate --run name so the plain results are kept.")
     args = ap.parse_args()
 
     # benchmark=False: cuDNN's autotuner picks its algorithm against the free
@@ -304,7 +333,7 @@ def main() -> None:
         image = data["image"].unsqueeze(0).to(device)
         with torch.no_grad(), torch.autocast("cuda", dtype=torch.bfloat16,
                                              enabled=device.type == "cuda"):
-            logits = _infer(image=image, model=model, patch=patch)
+            logits = _infer(image=image, model=model, patch=patch, tta=args.tta)
         # Softmax then argmax, rather than argmax on the logits. Softmax is
         # monotonic per voxel so the saved mask is bit-identical to what this
         # script produced before; the difference is that the probabilities now

@@ -28,8 +28,9 @@ discussion in [`reports/results.md`](reports/results.md).
 | RC | 0.655 | 0.696 | 0.725 |
 | **mean** (6 regions, incl. TC and WT) | **0.576** | **0.620** | |
 
-**Meningioma** — 75 patients, binary gross tumour volume: lesion-wise 0.509,
-volumetric 0.626 (median 0.786).
+**Meningioma** — 75 patients, binary gross tumour volume: lesion-wise **0.589**,
+volumetric 0.660 (median 0.816), after training 300 epochs instead of 120
+(was 0.509 / 0.626).
 
 Two things in those numbers are worth more than the numbers themselves:
 
@@ -45,10 +46,11 @@ Two things in those numbers are worth more than the numbers themselves:
   points of per-lesion sensitivity. The cost is stated in `reports/results.md`:
   the 17 test cases with a lesion more than 40 mm from the main tumour are made
   *worse*, and the metric rewards that trade anyway.
-- **The meningioma mean describes no actual case.** 33 of 75 cases score above
+- **The meningioma mean describes no actual case.** 41 of 75 cases score above
   0.8 and 13 score below 0.2 — the model is usually good and occasionally blind.
-  The median, 0.786, is the honest summary, and those 13 failures are the real
-  target for the next iteration.
+  Training 2.5× longer cut the cases with an invented lesion from 27 to 16 but
+  left the 13 misses at 13, ten of them the same patients. Those are the real
+  target for the next iteration; more epochs will not reach them.
 
 ## What's here
 
