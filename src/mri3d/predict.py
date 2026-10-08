@@ -36,6 +36,7 @@ from scipy import ndimage
 
 from . import paths
 from .data import case_dicts, val_transforms
+from .fallback import fill_if_empty
 from .metrics import GLI_REGIONS, match_components, score_case
 from .model import build_model
 from .seeding import set_seed
@@ -53,6 +54,15 @@ COMPONENT_FIELDS = [
     "dist_to_dominant_mm",
     "rank_by_volume", "rank_by_prob", "n_comps_in_class",
     "matched", "matched_ref_ids", "dice_with_matched",
+    # Mean probability of every class over the component's voxels (class value
+    # 0-4; empty where the dataset has fewer classes), and the best class other
+    # than the assigned one. These are what mri3d.relabel decides from.
+    *[f"prob_c{v}" for v in range(5)],
+    "runner_up_value", "runner_up_prob",
+    # What the reference says is under the component: its majority tumour class,
+    # 0 when less than half of it is tumour. A training target for
+    # mri3d.relabel, never an input to any decision.
+    "ref_majority_value", "ref_tumour_frac",
 ]
 
 REF_LESION_FIELDS = [
@@ -100,6 +110,22 @@ def _infer(model, image, patch, tta: bool = False):
         mean = p if mean is None else mean + p
         del logits, p
     return torch.log((mean / len(FLIP_DIMS)).clamp_min(1e-12))
+
+
+def _ensemble_infer(models, image, patch, tta: bool = False):
+    """Like ``_infer``, but averaging probabilities over several models.
+
+    Probabilities, not logits, for the same reason as the flip average; one
+    model reduces to exactly ``_infer``, so a single --run is unchanged.
+    """
+    if len(models) == 1:
+        return _infer(models[0], image, patch, tta)
+    mean = None
+    for m in models:
+        p = torch.softmax(_infer(m, image, patch, tta).float(), dim=1)
+        mean = p if mean is None else mean + p
+        del p
+    return torch.log((mean / len(models)).clamp_min(1e-12))
 
 
 def mc_dropout_variance(model, image, patch, n_passes: int, device) -> np.ndarray:
@@ -231,6 +257,9 @@ def component_rows(pred: np.ndarray, probs: np.ndarray, ref: np.ndarray,
             if n == 1 and not isinstance(cents, list):
                 cents = [cents]
 
+            class_means = {v: np.atleast_1d(ndimage.mean(probs[v], lab, idx))
+                           for v in class_values}
+
             sizes = np.array([c.n_voxels for c in m.comps], dtype=np.int64)
             # 1 = largest / most confident, so "rank 1" reads the same way in
             # both columns and a higher rank always means a weaker candidate.
@@ -238,6 +267,14 @@ def component_rows(pred: np.ndarray, probs: np.ndarray, ref: np.ndarray,
             rank_prob = (-np.asarray(means)).argsort().argsort() + 1
 
             for k, c in enumerate(m.comps):
+                per_class = {v: float(class_means[v][k]) for v in class_values}
+                others = {v: p_ for v, p_ in per_class.items() if v not in (0, value)}
+                ru = max(others, key=others.get) if others else None
+                under = ref[objs[k]][lab[objs[k]] == c.comp_id]
+                counts = np.bincount(under, minlength=max(class_values) + 1)
+                tumour = int(counts[1:].sum())
+                frac = tumour / max(1, c.n_voxels)
+                majority = int(np.argmax(counts[1:]) + 1) if frac >= 0.5 else 0
                 comp_rows.append({
                     **meta,
                     "class_name": name, "class_value": value, "comp_id": c.comp_id,
@@ -258,6 +295,11 @@ def component_rows(pred: np.ndarray, probs: np.ndarray, ref: np.ndarray,
                     "matched": c.matched,
                     "matched_ref_ids": " ".join(str(i) for i in c.matched_ref_ids),
                     "dice_with_matched": round(c.dice_with_matched, 6),
+                    **{f"prob_c{v}": round(per_class[v], 6) for v in per_class},
+                    "runner_up_value": ru,
+                    "runner_up_prob": None if ru is None else round(others[ru], 6),
+                    "ref_majority_value": majority,
+                    "ref_tumour_frac": round(frac, 4),
                 })
 
         scored = m.scored_refs
@@ -305,7 +347,23 @@ def main() -> None:
     ap.add_argument("--tta", action="store_true",
                     help="average probabilities over all 8 axis flips (8 x inference). "
                          "Use with a separate --run name so the plain results are kept.")
+    ap.add_argument("--members", nargs="+", default=None, metavar="RUN",
+                    help="ensemble: average the probabilities of these runs' checkpoints. "
+                         "Outputs are written under --run, which then needs no best.pt. "
+                         "MC dropout (if on) uses the first member only.")
+    ap.add_argument("--fill-empty", action="store_true",
+                    help="if a case's mask is empty, keep the half-max region around the "
+                         "most confident voxel (mri3d.fallback). For datasets where every "
+                         "case has a target, such as MEN-RT.")
+    ap.add_argument("--relabel", default=None, metavar="JSON",
+                    help="rename components with a fitted mri3d.relabel model before "
+                         "scoring and before the components CSV is written")
+    ap.add_argument("--relabel-oof", action="store_true",
+                    help="use the fold model that never saw each case's patient "
+                         "(for scoring the split the relabeller was fitted on)")
     args = ap.parse_args()
+    relabel_payload = (json.loads(open(args.relabel, encoding="utf-8").read())
+                       if args.relabel else None)
 
     # benchmark=False: cuDNN's autotuner picks its algorithm against the free
     # workspace, so with it on the same seeded inference gives different numbers
@@ -314,7 +372,11 @@ def main() -> None:
     # buys reproducibility with throughput rather than the other way round.
     set_seed(args.seed, benchmark=False)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model, ckpt = load_run(args.run, device)
+    loaded = [load_run(r, device) for r in (args.members or [args.run])]
+    models = [m for m, _ in loaded]
+    model, ckpt = loaded[0]
+    if len({c["n_classes"] for _, c in loaded}) != 1:
+        raise SystemExit("ensemble members must predict the same classes")
     patch = tuple(ckpt["args"].get("patch", (128, 128, 128)))
     class_values = (paths.GLI_LABELS if args.dataset == "gli" else paths.MEN_LABELS)
 
@@ -333,14 +395,25 @@ def main() -> None:
         image = data["image"].unsqueeze(0).to(device)
         with torch.no_grad(), torch.autocast("cuda", dtype=torch.bfloat16,
                                              enabled=device.type == "cuda"):
-            logits = _infer(image=image, model=model, patch=patch, tta=args.tta)
+            logits = _ensemble_infer(models, image, patch, args.tta)
         # Softmax then argmax, rather than argmax on the logits. Softmax is
         # monotonic per voxel so the saved mask is bit-identical to what this
         # script produced before; the difference is that the probabilities now
         # survive long enough to be summarised.
         probs = torch.softmax(logits.float(), dim=1)
         pred = probs.argmax(dim=1)[0].cpu().numpy().astype(np.uint8)
-        probs_np = probs[0].cpu().numpy() if args.save_components else None
+        need_probs = args.save_components or args.fill_empty or relabel_payload is not None
+        probs_np = probs[0].cpu().numpy() if need_probs else None
+        filled = False
+        if args.fill_empty:
+            pred, filled = fill_if_empty(pred, probs_np)
+        n_renamed = 0
+        if relabel_payload is not None:
+            from .relabel import apply as relabel_apply
+            aff = np.asarray(data["label"].affine, dtype=np.float64)
+            pred, n_renamed = relabel_apply(pred, probs_np, np.sqrt((aff[:3, :3] ** 2).sum(axis=0)),
+                                            class_values, relabel_payload,
+                                            rec["case_id"], args.relabel_oof)
         del logits, probs
         ref = data["label"][0].cpu().numpy().astype(np.uint8)
 
@@ -372,7 +445,9 @@ def main() -> None:
 
         done = f"{i}/{len(files)}"
         mean_lw = np.mean([v for k, v in row.items() if k.startswith("lesion_dice_")])
-        print(f"  {done:>9}  {rec['case_id']}  lesion-Dice {mean_lw:.3f}", flush=True)
+        print(f"  {done:>9}  {rec['case_id']}  lesion-Dice {mean_lw:.3f}"
+              f"{'  (filled empty mask)' if filled else ''}"
+              f"{f'  ({n_renamed} renamed)' if n_renamed else ''}", flush=True)
 
     tag = f"{args.run}_{args.split}{args.suffix}"
     if args.save_components:

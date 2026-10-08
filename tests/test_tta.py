@@ -63,3 +63,16 @@ def test_output_is_a_probability_after_softmax_and_averages_the_flips():
             for d in FLIP_DIMS) / 8
     assert torch.allclose(tta.sum(dim=1), torch.ones(1, *shape), atol=1e-5)
     assert torch.allclose(tta, manual, atol=1e-5)
+
+
+def test_ensemble_of_one_is_the_plain_model_and_of_two_is_the_probability_mean():
+    from mri3d.predict import _ensemble_infer
+
+    torch.manual_seed(2)
+    shape = (12, 10, 8)
+    a, b, image = PerVoxel().eval(), PerVoxel().eval(), torch.randn(1, 1, *shape)
+    with torch.no_grad():
+        assert torch.equal(_ensemble_infer([a], image, shape), _infer(a, image, shape))
+        both = torch.softmax(_ensemble_infer([a, b], image, shape), dim=1)
+        manual = (torch.softmax(a(image), dim=1) + torch.softmax(b(image), dim=1)) / 2
+    assert torch.allclose(both, manual, atol=1e-5)
