@@ -1,0 +1,1153 @@
+case_id,run,split,dataset,class_name,class_value,ref_id,n_voxels,volume_mm3,dist_to_dominant_mm,detected,dice,matched_comp_ids
+BraTS-GLI-00505-100,gli_main_rl,val,gli,SNFH,2,1,25394,25394.0,0.0,True,0.834657,1
+BraTS-GLI-00505-100,gli_main_rl,val,gli,ET,3,1,80,80.0,0.0,True,0.569106,6 7
+BraTS-GLI-00505-100,gli_main_rl,val,gli,RC,4,1,13807,13807.0,0.0,True,0.97084,1
+BraTS-GLI-00505-101,gli_main_rl,val,gli,SNFH,2,1,25772,25772.0,0.0,True,0.85949,1 2 4 5 6 7
+BraTS-GLI-00505-101,gli_main_rl,val,gli,ET,3,2,1699,1699.0,0.0,True,0.866649,6
+BraTS-GLI-00505-101,gli_main_rl,val,gli,ET,3,3,122,122.0,0.0,True,0.764286,7
+BraTS-GLI-00505-101,gli_main_rl,val,gli,RC,4,1,12139,12139.0,0.0,True,0.964566,1
+BraTS-GLI-00547-100,gli_main_rl,val,gli,NETC,1,2,2315,2315.0,0.0,True,0.677816,3 4 5
+BraTS-GLI-00547-100,gli_main_rl,val,gli,NETC,1,8,89,89.0,0.0,False,0.0,
+BraTS-GLI-00547-100,gli_main_rl,val,gli,SNFH,2,1,166182,166182.0,0.0,True,0.925136,1 2 4 5 6 7 8 10 11 13 14 19 23 24
+BraTS-GLI-00547-100,gli_main_rl,val,gli,SNFH,2,12,294,294.0,7.28,False,0.0,
+BraTS-GLI-00547-100,gli_main_rl,val,gli,SNFH,2,18,80,80.0,0.0,True,0.186589,15
+BraTS-GLI-00547-100,gli_main_rl,val,gli,SNFH,2,26,122,122.0,0.0,True,0.358442,15
+BraTS-GLI-00547-100,gli_main_rl,val,gli,SNFH,2,35,205,205.0,0.0,True,0.314667,22
+BraTS-GLI-00547-100,gli_main_rl,val,gli,ET,3,1,1182,1182.0,0.0,True,0.773531,1
+BraTS-GLI-00547-100,gli_main_rl,val,gli,ET,3,2,15692,15692.0,0.0,True,0.89203,2
+BraTS-GLI-00547-100,gli_main_rl,val,gli,RC,4,1,652,652.0,0.0,True,0.342649,1
+BraTS-GLI-00547-101,gli_main_rl,val,gli,NETC,1,2,4713,4713.0,0.0,True,0.881606,3 6
+BraTS-GLI-00547-101,gli_main_rl,val,gli,SNFH,2,1,64284,64284.0,0.0,True,0.878016,1 4 5 6 7 10 12 15 17 21 22 23 24 25
+BraTS-GLI-00547-101,gli_main_rl,val,gli,SNFH,2,17,42857,42857.0,7.348,True,0.910791,29 31
+BraTS-GLI-00547-101,gli_main_rl,val,gli,SNFH,2,23,54,54.0,0.0,True,0.222222,28 30
+BraTS-GLI-00547-101,gli_main_rl,val,gli,ET,3,1,1381,1381.0,0.0,True,0.832285,1
+BraTS-GLI-00547-101,gli_main_rl,val,gli,ET,3,2,17168,17168.0,0.0,True,0.913818,2
+BraTS-GLI-00547-101,gli_main_rl,val,gli,RC,4,1,978,978.0,0.0,True,0.053731,1 2
+BraTS-GLI-00557-100,gli_main_rl,val,gli,NETC,1,1,2052,2052.0,0.0,True,0.012591,2
+BraTS-GLI-00557-100,gli_main_rl,val,gli,SNFH,2,1,67485,67485.0,0.0,True,0.948691,2 4 5
+BraTS-GLI-00557-100,gli_main_rl,val,gli,SNFH,2,7,64,64.0,5.099,False,0.0,
+BraTS-GLI-00557-100,gli_main_rl,val,gli,ET,3,2,12705,12705.0,0.0,True,0.851328,3 5 6 7
+BraTS-GLI-00557-100,gli_main_rl,val,gli,RC,4,1,431,431.0,0.0,True,0.89422,1
+BraTS-GLI-00557-100,gli_main_rl,val,gli,RC,4,4,146,146.0,0.0,True,0.16185,8
+BraTS-GLI-00557-101,gli_main_rl,val,gli,NETC,1,1,1800,1800.0,0.0,True,0.335934,5 6 11
+BraTS-GLI-00557-101,gli_main_rl,val,gli,SNFH,2,1,922,922.0,3.162,True,0.070466,1
+BraTS-GLI-00557-101,gli_main_rl,val,gli,SNFH,2,2,57318,57318.0,0.0,True,0.91532,2 3 8 9 10 16
+BraTS-GLI-00557-101,gli_main_rl,val,gli,SNFH,2,8,62,62.0,2.236,True,0.368421,15
+BraTS-GLI-00557-101,gli_main_rl,val,gli,ET,3,1,2694,2694.0,0.0,True,0.729862,1
+BraTS-GLI-00557-101,gli_main_rl,val,gli,ET,3,2,21132,21132.0,0.0,True,0.899034,2 3
+BraTS-GLI-00557-101,gli_main_rl,val,gli,RC,4,1,508,508.0,0.0,True,0.725862,2
+BraTS-GLI-02064-100,gli_main_rl,val,gli,SNFH,2,1,3782,3782.0,21.424,True,0.923576,1
+BraTS-GLI-02064-100,gli_main_rl,val,gli,SNFH,2,2,12249,12249.0,0.0,True,0.912115,2 5
+BraTS-GLI-02064-100,gli_main_rl,val,gli,SNFH,2,3,55,55.0,4.0,True,0.432432,9
+BraTS-GLI-02064-100,gli_main_rl,val,gli,RC,4,1,18782,18782.0,0.0,True,0.926442,1
+BraTS-GLI-02064-101,gli_main_rl,val,gli,SNFH,2,1,20095,20095.0,0.0,True,0.917999,3
+BraTS-GLI-02064-101,gli_main_rl,val,gli,SNFH,2,2,5787,5787.0,16.31,True,0.93083,2
+BraTS-GLI-02064-101,gli_main_rl,val,gli,ET,3,1,846,846.0,0.0,True,0.901373,1
+BraTS-GLI-02064-101,gli_main_rl,val,gli,RC,4,1,19743,19743.0,0.0,True,0.928484,1 4
+BraTS-GLI-02064-102,gli_main_rl,val,gli,SNFH,2,1,6325,6325.0,18.276,True,0.939586,2
+BraTS-GLI-02064-102,gli_main_rl,val,gli,SNFH,2,2,16395,16395.0,0.0,True,0.890935,3
+BraTS-GLI-02064-102,gli_main_rl,val,gli,SNFH,2,3,133,133.0,0.0,True,0.015025,3
+BraTS-GLI-02064-102,gli_main_rl,val,gli,ET,3,1,1286,1286.0,0.0,True,0.873922,1
+BraTS-GLI-02064-102,gli_main_rl,val,gli,RC,4,1,19534,19534.0,0.0,True,0.911252,1
+BraTS-GLI-02076-100,gli_main_rl,val,gli,SNFH,2,1,157458,157458.0,0.0,True,0.94018,1 51
+BraTS-GLI-02076-100,gli_main_rl,val,gli,SNFH,2,2,61,61.0,0.0,True,0.000722,1
+BraTS-GLI-02076-100,gli_main_rl,val,gli,SNFH,2,12,73,73.0,0.0,False,0.0,
+BraTS-GLI-02076-100,gli_main_rl,val,gli,ET,3,1,88,88.0,0.0,False,0.0,
+BraTS-GLI-02076-100,gli_main_rl,val,gli,ET,3,2,14155,14155.0,0.0,True,0.862411,1 5 6 9 12 13
+BraTS-GLI-02076-100,gli_main_rl,val,gli,RC,4,1,22873,22873.0,0.0,True,0.571561,1 3 8 9 10 11 12 15 24
+BraTS-GLI-02076-100,gli_main_rl,val,gli,RC,4,2,287,287.0,0.0,False,0.0,
+BraTS-GLI-02076-100,gli_main_rl,val,gli,RC,4,5,338,338.0,1.0,True,0.0059,18
+BraTS-GLI-02076-101,gli_main_rl,val,gli,SNFH,2,1,156985,156985.0,0.0,True,0.936874,1 4
+BraTS-GLI-02076-101,gli_main_rl,val,gli,SNFH,2,6,83,83.0,1.0,False,0.0,
+BraTS-GLI-02076-101,gli_main_rl,val,gli,SNFH,2,7,366,366.0,0.0,True,0.003079,1 24
+BraTS-GLI-02076-101,gli_main_rl,val,gli,SNFH,2,10,79,79.0,0.0,False,0.0,
+BraTS-GLI-02076-101,gli_main_rl,val,gli,ET,3,1,80,80.0,0.0,False,0.0,
+BraTS-GLI-02076-101,gli_main_rl,val,gli,ET,3,2,12561,12561.0,0.0,True,0.874121,3 4 5 11 14
+BraTS-GLI-02076-101,gli_main_rl,val,gli,RC,4,1,25262,25262.0,0.0,True,0.52367,1 2 3 5 10 11 12 14 18 19 20 24 28
+BraTS-GLI-02079-100,gli_main_rl,val,gli,NETC,1,1,121,121.0,0.0,True,0.576923,7
+BraTS-GLI-02079-100,gli_main_rl,val,gli,SNFH,2,1,250417,250417.0,0.0,True,0.920347,1 5
+BraTS-GLI-02079-100,gli_main_rl,val,gli,SNFH,2,2,124,124.0,0.0,True,0.000946,1
+BraTS-GLI-02079-100,gli_main_rl,val,gli,ET,3,1,181,181.0,0.0,True,0.13759,20
+BraTS-GLI-02079-100,gli_main_rl,val,gli,RC,4,1,368,368.0,0.0,True,0.550124,4
+BraTS-GLI-02079-101,gli_main_rl,val,gli,NETC,1,15,66,66.0,0.0,True,0.086957,7
+BraTS-GLI-02079-101,gli_main_rl,val,gli,NETC,1,26,319,319.0,0.0,True,0.160976,8 12 13
+BraTS-GLI-02079-101,gli_main_rl,val,gli,NETC,1,28,398,398.0,0.0,True,0.019851,6
+BraTS-GLI-02079-101,gli_main_rl,val,gli,NETC,1,46,1062,1062.0,0.0,True,0.61013,10 16 19 20 22
+BraTS-GLI-02079-101,gli_main_rl,val,gli,NETC,1,58,84,84.0,0.0,True,0.786207,11
+BraTS-GLI-02079-101,gli_main_rl,val,gli,SNFH,2,1,271172,271172.0,0.0,True,0.924129,1 3 5 6 7 10 15
+BraTS-GLI-02079-101,gli_main_rl,val,gli,SNFH,2,2,60,60.0,0.0,True,0.000433,1
+BraTS-GLI-02079-101,gli_main_rl,val,gli,SNFH,2,4,86,86.0,7.0,True,0.546032,4
+BraTS-GLI-02079-101,gli_main_rl,val,gli,SNFH,2,5,1089,1089.0,5.657,True,0.769382,8
+BraTS-GLI-02079-101,gli_main_rl,val,gli,SNFH,2,6,72,72.0,2.449,True,0.027397,9
+BraTS-GLI-02079-101,gli_main_rl,val,gli,ET,3,1,8104,8104.0,0.0,True,0.891707,7
+BraTS-GLI-02079-101,gli_main_rl,val,gli,ET,3,4,6518,6518.0,0.0,True,0.752881,5
+BraTS-GLI-02079-101,gli_main_rl,val,gli,ET,3,6,6587,6587.0,0.0,True,0.87791,29
+BraTS-GLI-02079-101,gli_main_rl,val,gli,ET,3,11,58,58.0,0.0,True,0.015333,29
+BraTS-GLI-02079-101,gli_main_rl,val,gli,RC,4,1,213,213.0,0.0,True,0.401222,4
+BraTS-GLI-02083-100,gli_main_rl,val,gli,SNFH,2,1,1867,1867.0,32.757,False,0.0,
+BraTS-GLI-02083-100,gli_main_rl,val,gli,SNFH,2,2,9105,9105.0,0.0,True,0.812841,1 3 4 5
+BraTS-GLI-02083-100,gli_main_rl,val,gli,SNFH,2,3,2658,2658.0,8.246,True,0.601362,2
+BraTS-GLI-02083-100,gli_main_rl,val,gli,SNFH,2,6,86,86.0,5.385,True,0.753623,6
+BraTS-GLI-02083-100,gli_main_rl,val,gli,ET,3,2,145,145.0,0.0,True,0.428571,1
+BraTS-GLI-02083-100,gli_main_rl,val,gli,RC,4,1,1986,1986.0,0.0,True,0.79571,1
+BraTS-GLI-02083-101,gli_main_rl,val,gli,SNFH,2,1,1887,1887.0,29.343,False,0.0,
+BraTS-GLI-02083-101,gli_main_rl,val,gli,SNFH,2,2,15602,15602.0,0.0,True,0.801755,1 2 3 4 5
+BraTS-GLI-02083-101,gli_main_rl,val,gli,SNFH,2,8,227,227.0,4.472,True,0.869955,6
+BraTS-GLI-02083-101,gli_main_rl,val,gli,ET,3,1,129,129.0,1.0,True,0.183099,2
+BraTS-GLI-02083-101,gli_main_rl,val,gli,ET,3,2,264,264.0,21.119,True,0.845316,1
+BraTS-GLI-02083-101,gli_main_rl,val,gli,RC,4,1,1883,1883.0,0.0,True,0.724496,1
+BraTS-GLI-02083-101,gli_main_rl,val,gli,RC,4,2,151,151.0,0.0,True,0.609091,3
+BraTS-GLI-02083-102,gli_main_rl,val,gli,SNFH,2,1,50004,50004.0,0.0,True,0.962435,1
+BraTS-GLI-02083-102,gli_main_rl,val,gli,ET,3,1,2284,2284.0,0.0,True,0.960837,1 3
+BraTS-GLI-02083-102,gli_main_rl,val,gli,ET,3,2,93,93.0,0.0,True,0.873786,2
+BraTS-GLI-02083-102,gli_main_rl,val,gli,ET,3,3,79,79.0,1.0,False,0.0,
+BraTS-GLI-02083-102,gli_main_rl,val,gli,RC,4,1,991,991.0,0.0,True,0.035679,1
+BraTS-GLI-02083-103,gli_main_rl,val,gli,NETC,1,5,84,84.0,0.0,True,0.561151,7 10 11 12
+BraTS-GLI-02083-103,gli_main_rl,val,gli,SNFH,2,1,70340,70340.0,0.0,True,0.957924,1
+BraTS-GLI-02083-103,gli_main_rl,val,gli,ET,3,1,4874,4874.0,0.0,True,0.919425,1 4
+BraTS-GLI-02083-103,gli_main_rl,val,gli,ET,3,2,5350,5350.0,0.0,True,0.951754,2
+BraTS-GLI-02083-103,gli_main_rl,val,gli,RC,4,1,191,191.0,0.0,True,0.010417,2
+BraTS-GLI-02083-103,gli_main_rl,val,gli,RC,4,3,402,402.0,0.0,True,0.055944,5
+BraTS-GLI-02084-100,gli_main_rl,val,gli,SNFH,2,1,17545,17545.0,0.0,True,0.946312,1
+BraTS-GLI-02084-100,gli_main_rl,val,gli,ET,3,1,3689,3689.0,0.0,True,0.919806,1
+BraTS-GLI-02084-100,gli_main_rl,val,gli,ET,3,3,161,161.0,0.0,True,0.934524,2
+BraTS-GLI-02084-100,gli_main_rl,val,gli,RC,4,1,1785,1785.0,0.0,True,0.761433,1 2 3
+BraTS-GLI-02084-101,gli_main_rl,val,gli,NETC,1,1,1810,1810.0,0.0,True,0.063102,3
+BraTS-GLI-02084-101,gli_main_rl,val,gli,NETC,1,3,70,70.0,0.0,True,0.157895,5
+BraTS-GLI-02084-101,gli_main_rl,val,gli,SNFH,2,1,46221,46221.0,0.0,True,0.939208,1 2 4
+BraTS-GLI-02084-101,gli_main_rl,val,gli,SNFH,2,8,53,53.0,0.0,True,0.001641,1
+BraTS-GLI-02084-101,gli_main_rl,val,gli,ET,3,1,21545,21545.0,0.0,True,0.953754,1
+BraTS-GLI-02084-101,gli_main_rl,val,gli,RC,4,1,262,262.0,0.0,True,0.701176,2
+BraTS-GLI-02084-102,gli_main_rl,val,gli,NETC,1,2,129,129.0,0.0,True,0.599034,10 14
+BraTS-GLI-02084-102,gli_main_rl,val,gli,NETC,1,4,137,137.0,0.0,True,0.306011,8
+BraTS-GLI-02084-102,gli_main_rl,val,gli,NETC,1,5,1174,1174.0,0.0,True,0.395412,15 51
+BraTS-GLI-02084-102,gli_main_rl,val,gli,NETC,1,7,199,199.0,0.0,True,0.724512,23
+BraTS-GLI-02084-102,gli_main_rl,val,gli,NETC,1,19,58,58.0,0.0,True,0.284884,32
+BraTS-GLI-02084-102,gli_main_rl,val,gli,NETC,1,26,292,292.0,0.0,True,0.83391,46
+BraTS-GLI-02084-102,gli_main_rl,val,gli,SNFH,2,1,80066,80066.0,0.0,True,0.951997,2 7 10
+BraTS-GLI-02084-102,gli_main_rl,val,gli,ET,3,1,45347,45347.0,0.0,True,0.953092,1
+BraTS-GLI-02084-103,gli_main_rl,val,gli,NETC,1,3,59,59.0,0.0,True,0.428571,9
+BraTS-GLI-02084-103,gli_main_rl,val,gli,NETC,1,4,309,309.0,0.0,True,0.717557,6
+BraTS-GLI-02084-103,gli_main_rl,val,gli,NETC,1,8,1469,1469.0,0.0,True,0.699439,7
+BraTS-GLI-02084-103,gli_main_rl,val,gli,NETC,1,12,113,113.0,0.0,True,0.717105,11
+BraTS-GLI-02084-103,gli_main_rl,val,gli,NETC,1,14,110,110.0,0.0,True,0.08547,24
+BraTS-GLI-02084-103,gli_main_rl,val,gli,NETC,1,16,1245,1245.0,0.0,True,0.730144,16 17 21 28
+BraTS-GLI-02084-103,gli_main_rl,val,gli,NETC,1,30,205,205.0,0.0,True,0.756436,27 33
+BraTS-GLI-02084-103,gli_main_rl,val,gli,NETC,1,33,171,171.0,0.0,True,0.566265,30
+BraTS-GLI-02084-103,gli_main_rl,val,gli,NETC,1,60,127,127.0,0.0,True,0.852941,52
+BraTS-GLI-02084-103,gli_main_rl,val,gli,NETC,1,63,109,109.0,0.0,True,0.796209,55 61
+BraTS-GLI-02084-103,gli_main_rl,val,gli,SNFH,2,1,72105,72105.0,0.0,True,0.941991,1 5 12 17 21 27 28 29 30 33
+BraTS-GLI-02084-103,gli_main_rl,val,gli,SNFH,2,14,62,62.0,0.0,True,0.031746,7
+BraTS-GLI-02084-103,gli_main_rl,val,gli,ET,3,1,60251,60251.0,0.0,True,0.954645,1
+BraTS-GLI-02084-103,gli_main_rl,val,gli,ET,3,5,323,323.0,0.0,True,0.935275,3
+BraTS-GLI-02086-100,gli_main_rl,val,gli,NETC,1,1,4385,4385.0,0.0,True,0.556556,1 2 3 4 5 6 7 8 9 10 12 13 14 16 20 23 25 26 34 38
+BraTS-GLI-02086-100,gli_main_rl,val,gli,NETC,1,16,311,311.0,0.0,True,0.278723,16 17
+BraTS-GLI-02086-100,gli_main_rl,val,gli,NETC,1,34,114,114.0,0.0,True,0.80198,28
+BraTS-GLI-02086-100,gli_main_rl,val,gli,NETC,1,37,154,154.0,0.0,True,0.655022,29
+BraTS-GLI-02086-100,gli_main_rl,val,gli,SNFH,2,1,63349,63349.0,0.0,True,0.92433,1
+BraTS-GLI-02086-100,gli_main_rl,val,gli,SNFH,2,8,54,54.0,0.0,True,0.001627,1
+BraTS-GLI-02086-100,gli_main_rl,val,gli,SNFH,2,12,107,107.0,0.0,True,0.003315,1
+BraTS-GLI-02086-100,gli_main_rl,val,gli,SNFH,2,13,64,64.0,1.0,False,0.0,
+BraTS-GLI-02086-100,gli_main_rl,val,gli,SNFH,2,14,84,84.0,4.123,True,0.669323,4
+BraTS-GLI-02086-100,gli_main_rl,val,gli,ET,3,1,26317,26317.0,0.0,True,0.919668,1 4 7 13
+BraTS-GLI-02086-101,gli_main_rl,val,gli,NETC,1,1,4588,4588.0,0.0,True,0.731914,1 3 4 10 15 19
+BraTS-GLI-02086-101,gli_main_rl,val,gli,NETC,1,19,174,174.0,0.0,True,0.063865,1 16
+BraTS-GLI-02086-101,gli_main_rl,val,gli,SNFH,2,1,52042,52042.0,0.0,True,0.853447,1 21
+BraTS-GLI-02086-101,gli_main_rl,val,gli,SNFH,2,2,1203,1203.0,0.0,True,0.03955,1
+BraTS-GLI-02086-101,gli_main_rl,val,gli,SNFH,2,14,65,65.0,0.0,True,0.002485,1
+BraTS-GLI-02086-101,gli_main_rl,val,gli,SNFH,2,35,539,539.0,0.0,True,0.020194,1
+BraTS-GLI-02086-101,gli_main_rl,val,gli,ET,3,1,31974,31974.0,0.0,True,0.902608,1 3 10 12 13 14 15 16 18 19 20
+BraTS-GLI-02087-100,gli_main_rl,val,gli,NETC,1,1,184,184.0,27.911,True,0.712803,1 2 3
+BraTS-GLI-02087-100,gli_main_rl,val,gli,NETC,1,2,99,99.0,0.0,True,0.78022,4
+BraTS-GLI-02087-100,gli_main_rl,val,gli,NETC,1,3,56,56.0,0.0,True,0.752475,5
+BraTS-GLI-02087-100,gli_main_rl,val,gli,NETC,1,6,104,104.0,0.0,True,0.802139,7 9
+BraTS-GLI-02087-100,gli_main_rl,val,gli,SNFH,2,1,74113,74113.0,0.0,True,0.94265,1 8 9 11 12 17 21 22 23 24 26 27 29
+BraTS-GLI-02087-100,gli_main_rl,val,gli,SNFH,2,7,118,118.0,0.0,True,0.720812,16 30
+BraTS-GLI-02087-100,gli_main_rl,val,gli,ET,3,1,647,647.0,25.632,True,0.679663,1
+BraTS-GLI-02087-100,gli_main_rl,val,gli,ET,3,2,16847,16847.0,0.0,True,0.97232,3
+BraTS-GLI-02087-100,gli_main_rl,val,gli,RC,4,1,387,387.0,0.0,True,0.713826,1
+BraTS-GLI-02087-101,gli_main_rl,val,gli,NETC,1,1,1754,1754.0,19.647,True,0.00795,1 2
+BraTS-GLI-02087-101,gli_main_rl,val,gli,NETC,1,2,7607,7607.0,0.0,True,0.909785,3 6
+BraTS-GLI-02087-101,gli_main_rl,val,gli,NETC,1,5,514,514.0,0.0,True,0.916016,4
+BraTS-GLI-02087-101,gli_main_rl,val,gli,SNFH,2,1,58835,58835.0,0.0,True,0.934726,1 13 28 29 30 33 34 35 38 42
+BraTS-GLI-02087-101,gli_main_rl,val,gli,SNFH,2,16,63,63.0,0.0,True,0.7,23
+BraTS-GLI-02087-101,gli_main_rl,val,gli,SNFH,2,63,166,166.0,0.0,True,0.715847,50
+BraTS-GLI-02087-101,gli_main_rl,val,gli,ET,3,1,1915,1915.0,17.263,True,0.828557,1
+BraTS-GLI-02087-101,gli_main_rl,val,gli,ET,3,2,42287,42287.0,0.0,True,0.964554,4
+BraTS-GLI-02087-101,gli_main_rl,val,gli,RC,4,1,474,474.0,0.0,True,0.568889,2
+BraTS-GLI-02087-102,gli_main_rl,val,gli,NETC,1,1,22489,22489.0,0.0,True,0.954472,2 9
+BraTS-GLI-02087-102,gli_main_rl,val,gli,NETC,1,2,58,58.0,0.0,True,0.004644,2
+BraTS-GLI-02087-102,gli_main_rl,val,gli,SNFH,2,1,42403,42403.0,0.0,True,0.879163,1 2 3 53 54 56
+BraTS-GLI-02087-102,gli_main_rl,val,gli,SNFH,2,2,11794,11794.0,0.0,True,0.919282,6 17 19
+BraTS-GLI-02087-102,gli_main_rl,val,gli,SNFH,2,16,56,56.0,13.115,False,0.0,
+BraTS-GLI-02087-102,gli_main_rl,val,gli,SNFH,2,26,761,761.0,0.0,True,0.019272,3 51
+BraTS-GLI-02087-102,gli_main_rl,val,gli,SNFH,2,37,85,85.0,0.0,True,0.659898,49
+BraTS-GLI-02087-102,gli_main_rl,val,gli,SNFH,2,44,166,166.0,0.0,True,0.008161,3
+BraTS-GLI-02087-102,gli_main_rl,val,gli,SNFH,2,74,101,101.0,0.0,True,0.821429,90
+BraTS-GLI-02087-102,gli_main_rl,val,gli,ET,3,1,58468,58468.0,0.0,True,0.956673,2 7
+BraTS-GLI-02087-102,gli_main_rl,val,gli,RC,4,1,333,333.0,0.0,False,0.0,
+BraTS-GLI-02089-100,gli_main_rl,val,gli,SNFH,2,1,210707,210707.0,0.0,True,0.934878,1 7 8 11 12 13 16
+BraTS-GLI-02089-100,gli_main_rl,val,gli,SNFH,2,3,326,326.0,4.583,True,0.927803,3
+BraTS-GLI-02089-100,gli_main_rl,val,gli,SNFH,2,4,1417,1417.0,5.477,True,0.917431,5
+BraTS-GLI-02089-100,gli_main_rl,val,gli,SNFH,2,11,83,83.0,6.164,True,0.75,9
+BraTS-GLI-02089-100,gli_main_rl,val,gli,SNFH,2,12,60,60.0,2.828,True,0.75,14
+BraTS-GLI-02089-100,gli_main_rl,val,gli,SNFH,2,14,165,165.0,6.403,True,0.619137,17
+BraTS-GLI-02089-100,gli_main_rl,val,gli,SNFH,2,15,64,64.0,5.477,True,0.752941,21
+BraTS-GLI-02089-100,gli_main_rl,val,gli,ET,3,1,1202,1202.0,0.0,True,0.505761,2 7 10 11 13
+BraTS-GLI-02089-100,gli_main_rl,val,gli,ET,3,9,176,176.0,0.0,True,0.52381,15
+BraTS-GLI-02089-100,gli_main_rl,val,gli,ET,3,10,264,264.0,0.0,True,0.272305,20
+BraTS-GLI-02089-100,gli_main_rl,val,gli,ET,3,12,110,110.0,0.0,True,0.123249,20
+BraTS-GLI-02089-100,gli_main_rl,val,gli,RC,4,1,21448,21448.0,0.0,True,0.844426,1
+BraTS-GLI-02089-101,gli_main_rl,val,gli,SNFH,2,1,203659,203659.0,0.0,True,0.924928,1 3 5 8 12 22 34
+BraTS-GLI-02089-101,gli_main_rl,val,gli,SNFH,2,3,341,341.0,9.695,True,0.56457,17
+BraTS-GLI-02089-101,gli_main_rl,val,gli,SNFH,2,5,121,121.0,5.831,True,0.704082,25
+BraTS-GLI-02089-101,gli_main_rl,val,gli,SNFH,2,7,490,490.0,8.062,True,0.66394,27
+BraTS-GLI-02089-101,gli_main_rl,val,gli,SNFH,2,8,79,79.0,2.0,True,0.795455,28
+BraTS-GLI-02089-101,gli_main_rl,val,gli,SNFH,2,9,294,294.0,0.0,True,0.003072,1
+BraTS-GLI-02089-101,gli_main_rl,val,gli,SNFH,2,10,498,498.0,2.828,True,0.823529,33
+BraTS-GLI-02089-101,gli_main_rl,val,gli,ET,3,3,205,205.0,0.0,True,0.616352,15
+BraTS-GLI-02089-101,gli_main_rl,val,gli,ET,3,4,427,427.0,0.0,True,0.774648,16
+BraTS-GLI-02089-101,gli_main_rl,val,gli,RC,4,1,26972,26972.0,0.0,True,0.837199,1
+BraTS-GLI-02111-100,gli_main_rl,val,gli,SNFH,2,1,17220,17220.0,0.0,True,0.941496,1
+BraTS-GLI-02111-100,gli_main_rl,val,gli,ET,3,1,56,56.0,0.0,True,0.621359,1
+BraTS-GLI-02111-100,gli_main_rl,val,gli,RC,4,1,10084,10084.0,0.0,True,0.415523,1
+BraTS-GLI-02111-101,gli_main_rl,val,gli,SNFH,2,1,2228,2228.0,15.166,True,0.674678,1
+BraTS-GLI-02111-101,gli_main_rl,val,gli,SNFH,2,3,23315,23315.0,0.0,True,0.942281,2
+BraTS-GLI-02111-101,gli_main_rl,val,gli,RC,4,1,12006,12006.0,0.0,True,0.558785,1
+BraTS-GLI-02111-102,gli_main_rl,val,gli,SNFH,2,1,4105,4105.0,12.53,True,0.879668,1
+BraTS-GLI-02111-102,gli_main_rl,val,gli,SNFH,2,2,27103,27103.0,0.0,True,0.947689,2
+BraTS-GLI-02111-102,gli_main_rl,val,gli,SNFH,2,3,255,255.0,6.708,True,0.552546,3
+BraTS-GLI-02111-102,gli_main_rl,val,gli,RC,4,1,10216,10216.0,0.0,True,0.591358,2
+BraTS-GLI-02111-103,gli_main_rl,val,gli,SNFH,2,1,4454,4454.0,11.662,True,0.8655,1
+BraTS-GLI-02111-103,gli_main_rl,val,gli,SNFH,2,2,28588,28588.0,0.0,True,0.939327,2 4
+BraTS-GLI-02111-103,gli_main_rl,val,gli,RC,4,1,10355,10355.0,0.0,True,0.525707,3 4
+BraTS-GLI-02111-104,gli_main_rl,val,gli,SNFH,2,1,4491,4491.0,11.18,True,0.888457,1
+BraTS-GLI-02111-104,gli_main_rl,val,gli,SNFH,2,2,27857,27857.0,0.0,True,0.943758,2 11
+BraTS-GLI-02111-104,gli_main_rl,val,gli,RC,4,1,11853,11853.0,0.0,True,0.61897,1
+BraTS-GLI-02111-105,gli_main_rl,val,gli,SNFH,2,1,3761,3761.0,13.565,True,0.899397,1
+BraTS-GLI-02111-105,gli_main_rl,val,gli,SNFH,2,2,30595,30595.0,0.0,True,0.942097,2
+BraTS-GLI-02111-105,gli_main_rl,val,gli,SNFH,2,4,80,80.0,0.0,True,0.753846,6
+BraTS-GLI-02111-105,gli_main_rl,val,gli,ET,3,2,1881,1881.0,0.0,True,0.865438,2
+BraTS-GLI-02111-105,gli_main_rl,val,gli,RC,4,1,11915,11915.0,0.0,True,0.503202,1
+BraTS-GLI-02111-106,gli_main_rl,val,gli,SNFH,2,1,1372,1372.0,15.395,True,0.769231,1
+BraTS-GLI-02111-106,gli_main_rl,val,gli,SNFH,2,2,109133,109133.0,0.0,True,0.970003,2 3
+BraTS-GLI-02111-106,gli_main_rl,val,gli,ET,3,1,14626,14626.0,0.0,True,0.934274,1
+BraTS-GLI-02111-106,gli_main_rl,val,gli,RC,4,1,10817,10817.0,0.0,True,0.656688,1 2
+BraTS-GLI-02111-107,gli_main_rl,val,gli,SNFH,2,1,1400,1400.0,14.353,True,0.852071,2
+BraTS-GLI-02111-107,gli_main_rl,val,gli,SNFH,2,2,30031,30031.0,0.0,True,0.914,3 11 13 18 19
+BraTS-GLI-02111-107,gli_main_rl,val,gli,ET,3,1,12006,12006.0,0.0,True,0.937397,1
+BraTS-GLI-02111-107,gli_main_rl,val,gli,RC,4,1,11674,11674.0,0.0,True,0.77128,1
+BraTS-GLI-02120-100,gli_main_rl,val,gli,NETC,1,1,2083,2083.0,0.0,True,0.926667,3
+BraTS-GLI-02120-100,gli_main_rl,val,gli,SNFH,2,1,58135,58135.0,0.0,True,0.96566,7 9 10 12 13
+BraTS-GLI-02120-100,gli_main_rl,val,gli,ET,3,1,11844,11844.0,0.0,True,0.923881,1 2
+BraTS-GLI-02120-101,gli_main_rl,val,gli,NETC,1,1,7210,7210.0,0.0,True,0.711206,1 4 6 12
+BraTS-GLI-02120-101,gli_main_rl,val,gli,NETC,1,4,57,57.0,0.0,True,0.854839,9
+BraTS-GLI-02120-101,gli_main_rl,val,gli,SNFH,2,1,77760,77760.0,0.0,True,0.961197,2 5 14
+BraTS-GLI-02120-101,gli_main_rl,val,gli,SNFH,2,10,96,96.0,0.0,True,0.059981,6
+BraTS-GLI-02120-101,gli_main_rl,val,gli,ET,3,1,28745,28745.0,0.0,True,0.938641,1
+BraTS-GLI-02129-100,gli_main_rl,val,gli,NETC,1,3,81,81.0,25.671,True,0.768212,1 2
+BraTS-GLI-02129-100,gli_main_rl,val,gli,SNFH,2,1,54056,54056.0,0.0,True,0.925401,1
+BraTS-GLI-02129-100,gli_main_rl,val,gli,SNFH,2,4,6221,6221.0,3.742,True,0.862632,2
+BraTS-GLI-02129-100,gli_main_rl,val,gli,SNFH,2,5,15264,15264.0,16.492,True,0.911607,8
+BraTS-GLI-02129-100,gli_main_rl,val,gli,ET,3,1,1507,1507.0,20.224,True,0.944789,2
+BraTS-GLI-02129-100,gli_main_rl,val,gli,ET,3,3,321,321.0,29.732,True,0.227027,3
+BraTS-GLI-02129-101,gli_main_rl,val,gli,SNFH,2,1,53841,53841.0,0.0,True,0.868646,1
+BraTS-GLI-02129-101,gli_main_rl,val,gli,SNFH,2,2,8076,8076.0,0.0,True,0.190459,1 4 5
+BraTS-GLI-02129-101,gli_main_rl,val,gli,SNFH,2,8,19964,19964.0,17.464,True,0.959177,6
+BraTS-GLI-02129-101,gli_main_rl,val,gli,ET,3,1,2668,2668.0,0.0,True,0.957355,1
+BraTS-GLI-02129-101,gli_main_rl,val,gli,ET,3,2,121,121.0,0.0,True,0.035714,2
+BraTS-GLI-02129-102,gli_main_rl,val,gli,SNFH,2,1,84626,84626.0,0.0,True,0.934346,1 4
+BraTS-GLI-02129-102,gli_main_rl,val,gli,SNFH,2,5,24885,24885.0,14.177,True,0.935501,8
+BraTS-GLI-02129-102,gli_main_rl,val,gli,ET,3,1,2752,2752.0,0.0,True,0.960983,1
+BraTS-GLI-02129-102,gli_main_rl,val,gli,ET,3,2,176,176.0,0.0,True,0.362264,2
+BraTS-GLI-02129-103,gli_main_rl,val,gli,SNFH,2,1,83156,83156.0,0.0,True,0.796135,1 5 6 7
+BraTS-GLI-02129-103,gli_main_rl,val,gli,SNFH,2,5,33708,33708.0,0.0,True,0.409417,1 11 12 14
+BraTS-GLI-02129-103,gli_main_rl,val,gli,SNFH,2,7,274,274.0,4.0,True,0.565445,17 20
+BraTS-GLI-02129-103,gli_main_rl,val,gli,ET,3,1,1343,1343.0,0.0,True,0.928826,1
+BraTS-GLI-02129-103,gli_main_rl,val,gli,ET,3,2,80,80.0,1.0,False,0.0,
+BraTS-GLI-02129-104,gli_main_rl,val,gli,SNFH,2,1,121773,121773.0,0.0,True,0.925012,1 10 14 15 19
+BraTS-GLI-02129-104,gli_main_rl,val,gli,SNFH,2,3,206,206.0,13.038,True,0.542113,2
+BraTS-GLI-02129-104,gli_main_rl,val,gli,ET,3,1,601,601.0,15.652,True,0.90038,1
+BraTS-GLI-02129-105,gli_main_rl,val,gli,NETC,1,1,166,166.0,0.0,True,0.547718,1 2
+BraTS-GLI-02129-105,gli_main_rl,val,gli,SNFH,2,1,121146,121146.0,0.0,True,0.942043,1 2 5 8 9 11 12 15 18 21 22
+BraTS-GLI-02129-105,gli_main_rl,val,gli,SNFH,2,17,4467,4467.0,25.02,True,0.529382,19
+BraTS-GLI-02129-105,gli_main_rl,val,gli,ET,3,1,5545,5545.0,0.0,True,0.872666,1
+BraTS-GLI-02129-106,gli_main_rl,val,gli,SNFH,2,1,129615,129615.0,0.0,True,0.909801,1 11 12 13
+BraTS-GLI-02129-106,gli_main_rl,val,gli,SNFH,2,2,186,186.0,3.0,False,0.0,
+BraTS-GLI-02129-106,gli_main_rl,val,gli,SNFH,2,3,100,100.0,3.162,False,0.0,
+BraTS-GLI-02129-106,gli_main_rl,val,gli,SNFH,2,4,7304,7304.0,5.0,True,0.684859,11
+BraTS-GLI-02129-106,gli_main_rl,val,gli,ET,3,1,2164,2164.0,9.644,True,0.573414,1 2
+BraTS-GLI-02146-100,gli_main_rl,val,gli,SNFH,2,1,3984,3984.0,61.098,True,0.896496,1
+BraTS-GLI-02146-100,gli_main_rl,val,gli,SNFH,2,2,2406,2406.0,41.821,True,0.563153,3
+BraTS-GLI-02146-100,gli_main_rl,val,gli,SNFH,2,4,8580,8580.0,0.0,True,0.713812,4 15
+BraTS-GLI-02146-100,gli_main_rl,val,gli,ET,3,1,391,391.0,67.985,True,0.783278,1
+BraTS-GLI-02146-101,gli_main_rl,val,gli,SNFH,2,1,2334,2334.0,62.081,True,0.905838,2 3
+BraTS-GLI-02146-101,gli_main_rl,val,gli,SNFH,2,2,4434,4434.0,40.311,True,0.828194,4 5
+BraTS-GLI-02146-101,gli_main_rl,val,gli,SNFH,2,3,5097,5097.0,0.0,True,0.893155,9 11
+BraTS-GLI-02146-101,gli_main_rl,val,gli,ET,3,1,444,444.0,65.81,True,0.685492,1
+BraTS-GLI-02146-102,gli_main_rl,val,gli,SNFH,2,1,11443,11443.0,0.0,True,0.870124,1 2 3 4 5
+BraTS-GLI-02146-102,gli_main_rl,val,gli,ET,3,1,723,723.0,0.0,True,0.793545,1
+BraTS-GLI-02146-103,gli_main_rl,val,gli,SNFH,2,1,12351,12351.0,0.0,True,0.864913,1
+BraTS-GLI-02146-103,gli_main_rl,val,gli,ET,3,1,1200,1200.0,0.0,True,0.881558,1
+BraTS-GLI-02154-100,gli_main_rl,val,gli,SNFH,2,1,57640,57640.0,0.0,True,0.937065,2 33
+BraTS-GLI-02154-100,gli_main_rl,val,gli,SNFH,2,2,1127,1127.0,2.236,True,0.592126,3
+BraTS-GLI-02154-100,gli_main_rl,val,gli,SNFH,2,3,144,144.0,4.359,True,0.665127,4
+BraTS-GLI-02154-100,gli_main_rl,val,gli,SNFH,2,5,234,234.0,19.131,True,0.724138,5
+BraTS-GLI-02154-100,gli_main_rl,val,gli,SNFH,2,22,803,803.0,5.745,True,0.770747,21
+BraTS-GLI-02154-100,gli_main_rl,val,gli,SNFH,2,38,206,206.0,4.472,False,0.0,
+BraTS-GLI-02154-100,gli_main_rl,val,gli,ET,3,8,2230,2230.0,0.0,True,0.827454,5
+BraTS-GLI-02154-100,gli_main_rl,val,gli,ET,3,10,477,477.0,0.0,True,0.395851,6
+BraTS-GLI-02154-100,gli_main_rl,val,gli,ET,3,13,255,255.0,0.0,True,0.23309,6
+BraTS-GLI-02154-100,gli_main_rl,val,gli,ET,3,14,125,125.0,19.647,True,0.88,7
+BraTS-GLI-02154-100,gli_main_rl,val,gli,RC,4,1,73870,73870.0,0.0,True,0.965169,1
+BraTS-GLI-02154-101,gli_main_rl,val,gli,SNFH,2,1,79514,79514.0,0.0,True,0.950303,1 27 29
+BraTS-GLI-02154-101,gli_main_rl,val,gli,SNFH,2,2,161,161.0,0.0,True,0.369231,19
+BraTS-GLI-02154-101,gli_main_rl,val,gli,SNFH,2,10,92,92.0,0.0,True,0.385809,19
+BraTS-GLI-02154-101,gli_main_rl,val,gli,SNFH,2,18,124,124.0,7.483,False,0.0,
+BraTS-GLI-02154-101,gli_main_rl,val,gli,ET,3,1,17334,17334.0,0.0,True,0.859729,2 3 4 8 9 10 12 13 14 15 17 19 20 21
+BraTS-GLI-02154-101,gli_main_rl,val,gli,RC,4,1,49780,49780.0,0.0,True,0.949036,1
+BraTS-GLI-02155-100,gli_main_rl,val,gli,NETC,1,1,86,86.0,0.0,True,0.877778,1
+BraTS-GLI-02155-100,gli_main_rl,val,gli,SNFH,2,1,40656,40656.0,0.0,True,0.889133,1 2 3 4 6 7
+BraTS-GLI-02155-100,gli_main_rl,val,gli,ET,3,2,1682,1682.0,0.0,True,0.949938,1
+BraTS-GLI-02155-100,gli_main_rl,val,gli,ET,3,3,322,322.0,0.0,True,0.696655,2
+BraTS-GLI-02155-100,gli_main_rl,val,gli,ET,3,4,50,50.0,0.0,True,0.830508,4
+BraTS-GLI-02155-100,gli_main_rl,val,gli,RC,4,1,6991,6991.0,0.0,True,0.413815,1 2 3
+BraTS-GLI-02155-101,gli_main_rl,val,gli,NETC,1,1,173,173.0,0.0,True,0.881356,1
+BraTS-GLI-02155-101,gli_main_rl,val,gli,SNFH,2,1,53916,53916.0,0.0,True,0.860213,1 2 3 4 6 7 8 11
+BraTS-GLI-02155-101,gli_main_rl,val,gli,ET,3,2,3597,3597.0,0.0,True,0.949276,1 3
+BraTS-GLI-02155-101,gli_main_rl,val,gli,ET,3,3,741,741.0,0.0,True,0.753577,2
+BraTS-GLI-02155-101,gli_main_rl,val,gli,RC,4,1,6788,6788.0,0.0,True,0.3462,1 2
+BraTS-GLI-02155-101,gli_main_rl,val,gli,RC,4,2,112,112.0,1.0,True,0.110617,2
+BraTS-GLI-02156-100,gli_main_rl,val,gli,NETC,1,1,32201,32201.0,0.0,True,0.943344,1 2 7
+BraTS-GLI-02156-100,gli_main_rl,val,gli,NETC,1,40,1886,1886.0,0.0,True,0.746367,15
+BraTS-GLI-02156-100,gli_main_rl,val,gli,NETC,1,42,52,52.0,0.0,True,0.206009,13
+BraTS-GLI-02156-100,gli_main_rl,val,gli,SNFH,2,1,73764,73764.0,0.0,True,0.918532,1 6 20
+BraTS-GLI-02156-100,gli_main_rl,val,gli,ET,3,1,34957,34957.0,0.0,True,0.929827,1 3 5
+BraTS-GLI-02156-101,gli_main_rl,val,gli,NETC,1,1,31883,31883.0,0.0,True,0.848032,1 23
+BraTS-GLI-02156-101,gli_main_rl,val,gli,NETC,1,2,414,414.0,0.0,True,0.004819,10
+BraTS-GLI-02156-101,gli_main_rl,val,gli,NETC,1,16,179,179.0,0.0,True,0.901163,15
+BraTS-GLI-02156-101,gli_main_rl,val,gli,NETC,1,18,1297,1297.0,0.0,True,0.853723,16
+BraTS-GLI-02156-101,gli_main_rl,val,gli,NETC,1,19,125,125.0,0.0,True,0.132898,16
+BraTS-GLI-02156-101,gli_main_rl,val,gli,NETC,1,26,84,84.0,0.0,True,0.091365,16
+BraTS-GLI-02156-101,gli_main_rl,val,gli,NETC,1,27,208,208.0,0.0,True,0.271605,25 26 27
+BraTS-GLI-02156-101,gli_main_rl,val,gli,SNFH,2,1,140224,140224.0,0.0,True,0.933198,1 2 3 11 19
+BraTS-GLI-02156-101,gli_main_rl,val,gli,ET,3,1,61709,61709.0,0.0,True,0.934121,1 5
+BraTS-GLI-02172-100,gli_main_rl,val,gli,SNFH,2,1,3392,3392.0,8.944,True,0.413387,8 9 11 13
+BraTS-GLI-02172-100,gli_main_rl,val,gli,SNFH,2,2,18678,18678.0,0.0,True,0.822015,3 15 40 46
+BraTS-GLI-02172-100,gli_main_rl,val,gli,SNFH,2,3,94,94.0,24.556,True,0.048642,9
+BraTS-GLI-02172-100,gli_main_rl,val,gli,SNFH,2,6,515,515.0,7.28,True,0.233784,9
+BraTS-GLI-02172-100,gli_main_rl,val,gli,ET,3,1,10563,10563.0,0.0,True,0.862205,1 3 5 6 9 10 11
+BraTS-GLI-02172-100,gli_main_rl,val,gli,RC,4,1,14329,14329.0,0.0,True,0.816492,1 2 3
+BraTS-GLI-02172-100,gli_main_rl,val,gli,RC,4,2,634,634.0,0.0,True,0.037152,9 11 12 13
+BraTS-GLI-02172-101,gli_main_rl,val,gli,NETC,1,6,202,202.0,0.0,True,0.084906,14
+BraTS-GLI-02172-101,gli_main_rl,val,gli,NETC,1,8,86,86.0,0.0,False,0.0,
+BraTS-GLI-02172-101,gli_main_rl,val,gli,NETC,1,9,97,97.0,0.0,True,0.520548,12 13 20
+BraTS-GLI-02172-101,gli_main_rl,val,gli,NETC,1,10,225,225.0,0.0,True,0.669584,11 21
+BraTS-GLI-02172-101,gli_main_rl,val,gli,NETC,1,11,113,113.0,0.0,True,0.601156,22 24
+BraTS-GLI-02172-101,gli_main_rl,val,gli,NETC,1,18,145,145.0,0.0,False,0.0,
+BraTS-GLI-02172-101,gli_main_rl,val,gli,SNFH,2,1,57261,57261.0,0.0,True,0.879999,1 6 9 22 24 32 34 35 37 38 39 40 42 43 49 50 51 60 61 62 63 84 86 87 88 89 93 95 96 97 98 101 102 103 104 105 109 110 117 133 182 184 185 186
+BraTS-GLI-02172-101,gli_main_rl,val,gli,SNFH,2,26,88,88.0,0.0,True,0.00265,1
+BraTS-GLI-02172-101,gli_main_rl,val,gli,ET,3,1,54950,54950.0,0.0,True,0.91557,1 3 4 5 6 10
+BraTS-GLI-02172-101,gli_main_rl,val,gli,RC,4,1,1097,1097.0,0.0,True,0.855888,1
+BraTS-GLI-02175-100,gli_main_rl,val,gli,NETC,1,4,918,918.0,0.0,True,0.225035,1
+BraTS-GLI-02175-100,gli_main_rl,val,gli,NETC,1,9,199,199.0,0.0,False,0.0,
+BraTS-GLI-02175-100,gli_main_rl,val,gli,NETC,1,10,2878,2878.0,0.0,True,0.529189,1
+BraTS-GLI-02175-100,gli_main_rl,val,gli,NETC,1,11,338,338.0,0.0,True,0.837607,11
+BraTS-GLI-02175-100,gli_main_rl,val,gli,SNFH,2,1,34156,34156.0,0.0,True,0.799724,1 5 7 8 9 11 12 13 16 20
+BraTS-GLI-02175-100,gli_main_rl,val,gli,SNFH,2,19,95,95.0,3.317,True,0.627063,21
+BraTS-GLI-02175-100,gli_main_rl,val,gli,ET,3,1,18093,18093.0,0.0,True,0.925921,1
+BraTS-GLI-02175-101,gli_main_rl,val,gli,NETC,1,1,12405,12405.0,0.0,True,0.929962,1 14 17 20
+BraTS-GLI-02175-101,gli_main_rl,val,gli,NETC,1,25,91,91.0,0.0,True,0.833333,22
+BraTS-GLI-02175-101,gli_main_rl,val,gli,SNFH,2,1,38324,38324.0,0.0,True,0.892207,1 2 8 12 13 15 16 17 18 19 20 21 22 23
+BraTS-GLI-02175-101,gli_main_rl,val,gli,ET,3,1,33705,33705.0,0.0,True,0.944448,1
+BraTS-GLI-02175-102,gli_main_rl,val,gli,NETC,1,1,10957,10957.0,0.0,True,0.746405,1
+BraTS-GLI-02175-102,gli_main_rl,val,gli,NETC,1,8,277,277.0,0.0,True,0.049405,1
+BraTS-GLI-02175-102,gli_main_rl,val,gli,SNFH,2,1,34214,34214.0,0.0,True,0.796208,1 38 41 42
+BraTS-GLI-02175-102,gli_main_rl,val,gli,SNFH,2,8,132,132.0,0.0,True,0.005669,1
+BraTS-GLI-02175-102,gli_main_rl,val,gli,SNFH,2,10,538,538.0,0.0,True,0.02086,1
+BraTS-GLI-02175-102,gli_main_rl,val,gli,SNFH,2,31,64,64.0,0.0,True,0.003304,1
+BraTS-GLI-02175-102,gli_main_rl,val,gli,ET,3,1,26794,26794.0,0.0,True,0.906156,1
+BraTS-GLI-02175-103,gli_main_rl,val,gli,NETC,1,1,12599,12599.0,0.0,True,0.429205,1 2 3 4 7 9 10 14 16 17 21 25 32 35 36 37 38 39
+BraTS-GLI-02175-103,gli_main_rl,val,gli,NETC,1,8,74,74.0,0.0,True,0.764228,13
+BraTS-GLI-02175-103,gli_main_rl,val,gli,NETC,1,12,78,78.0,0.0,True,0.215517,14
+BraTS-GLI-02175-103,gli_main_rl,val,gli,NETC,1,19,167,167.0,0.0,True,0.859701,33
+BraTS-GLI-02175-103,gli_main_rl,val,gli,NETC,1,23,89,89.0,0.0,True,0.488722,31
+BraTS-GLI-02175-103,gli_main_rl,val,gli,NETC,1,25,65,65.0,0.0,True,0.347107,31
+BraTS-GLI-02175-103,gli_main_rl,val,gli,SNFH,2,1,61537,61537.0,0.0,True,0.812489,1 7 9 10 12 15 23 24 27 42 46 47 48 50 52
+BraTS-GLI-02175-103,gli_main_rl,val,gli,SNFH,2,23,72,72.0,0.0,True,0.612717,26
+BraTS-GLI-02175-103,gli_main_rl,val,gli,SNFH,2,31,736,736.0,0.0,True,0.01433,1
+BraTS-GLI-02175-103,gli_main_rl,val,gli,ET,3,2,31278,31278.0,0.0,True,0.887166,2 3 9 10
+BraTS-GLI-02175-103,gli_main_rl,val,gli,ET,3,13,198,198.0,0.0,True,0.008249,2
+BraTS-GLI-02184-100,gli_main_rl,val,gli,SNFH,2,1,57525,57525.0,0.0,True,0.892927,2 5 6 9 11 12 13 14 16 17 19
+BraTS-GLI-02184-100,gli_main_rl,val,gli,SNFH,2,2,97,97.0,4.123,False,0.0,
+BraTS-GLI-02184-100,gli_main_rl,val,gli,SNFH,2,3,62,62.0,3.742,True,0.57732,3
+BraTS-GLI-02184-100,gli_main_rl,val,gli,RC,4,1,2073,2073.0,0.0,True,0.877258,1
+BraTS-GLI-02184-101,gli_main_rl,val,gli,SNFH,2,1,50714,50714.0,0.0,True,0.893613,2 3 5 6 9
+BraTS-GLI-02184-101,gli_main_rl,val,gli,RC,4,1,3058,3058.0,0.0,True,0.840477,1
+BraTS-GLI-02195-100,gli_main_rl,val,gli,NETC,1,5,72,72.0,0.0,True,0.330097,3
+BraTS-GLI-02195-100,gli_main_rl,val,gli,SNFH,2,1,16037,16037.0,0.0,True,0.846738,1
+BraTS-GLI-02195-100,gli_main_rl,val,gli,SNFH,2,5,119,119.0,0.0,True,0.171429,6 7
+BraTS-GLI-02195-100,gli_main_rl,val,gli,ET,3,1,3128,3128.0,0.0,True,0.893455,1
+BraTS-GLI-02195-100,gli_main_rl,val,gli,ET,3,3,344,344.0,0.0,True,0.89396,9
+BraTS-GLI-02195-100,gli_main_rl,val,gli,RC,4,1,12254,12254.0,0.0,True,0.889338,1 2
+BraTS-GLI-02195-101,gli_main_rl,val,gli,NETC,1,4,59,59.0,0.0,True,0.384615,5
+BraTS-GLI-02195-101,gli_main_rl,val,gli,NETC,1,5,76,76.0,0.0,True,0.349835,5
+BraTS-GLI-02195-101,gli_main_rl,val,gli,NETC,1,11,152,152.0,0.0,True,0.767213,9
+BraTS-GLI-02195-101,gli_main_rl,val,gli,SNFH,2,1,26946,26946.0,0.0,True,0.921564,1 12 14
+BraTS-GLI-02195-101,gli_main_rl,val,gli,SNFH,2,9,95,95.0,0.0,True,0.040404,9
+BraTS-GLI-02195-101,gli_main_rl,val,gli,ET,3,1,7056,7056.0,0.0,True,0.893539,1 2
+BraTS-GLI-02195-101,gli_main_rl,val,gli,ET,3,5,128,128.0,0.0,True,0.286765,7
+BraTS-GLI-02195-101,gli_main_rl,val,gli,ET,3,7,3617,3617.0,0.0,True,0.950713,11
+BraTS-GLI-02195-101,gli_main_rl,val,gli,RC,4,1,9570,9570.0,0.0,True,0.866883,1
+BraTS-GLI-02197-100,gli_main_rl,val,gli,SNFH,2,1,39306,39306.0,0.0,True,0.933114,3 5 6 9 11
+BraTS-GLI-02197-100,gli_main_rl,val,gli,ET,3,1,3772,3772.0,0.0,True,0.817618,1
+BraTS-GLI-02197-100,gli_main_rl,val,gli,RC,4,1,7877,7877.0,0.0,True,0.836434,1
+BraTS-GLI-02197-101,gli_main_rl,val,gli,SNFH,2,1,52694,52694.0,0.0,True,0.941787,2 3 6 10
+BraTS-GLI-02197-101,gli_main_rl,val,gli,ET,3,2,298,298.0,0.0,True,0.497288,3
+BraTS-GLI-02197-101,gli_main_rl,val,gli,RC,4,1,6021,6021.0,0.0,True,0.813864,1
+BraTS-GLI-02197-101,gli_main_rl,val,gli,RC,4,2,105,105.0,1.0,True,0.026667,1
+BraTS-GLI-02207-100,gli_main_rl,val,gli,SNFH,2,1,133924,133924.0,0.0,True,0.921846,1
+BraTS-GLI-02207-100,gli_main_rl,val,gli,RC,4,1,61045,61045.0,0.0,True,0.982065,1
+BraTS-GLI-02207-101,gli_main_rl,val,gli,SNFH,2,1,59405,59405.0,0.0,True,0.806671,1
+BraTS-GLI-02207-101,gli_main_rl,val,gli,RC,4,1,63818,63818.0,0.0,True,0.982031,1
+BraTS-GLI-02209-100,gli_main_rl,val,gli,SNFH,2,1,24783,24783.0,0.0,True,0.913145,1
+BraTS-GLI-02209-100,gli_main_rl,val,gli,ET,3,1,1178,1178.0,0.0,True,0.878814,2
+BraTS-GLI-02209-100,gli_main_rl,val,gli,ET,3,2,246,246.0,0.0,True,0.780172,3 4 5 8
+BraTS-GLI-02209-100,gli_main_rl,val,gli,RC,4,1,10077,10077.0,0.0,True,0.944407,1
+BraTS-GLI-02209-101,gli_main_rl,val,gli,SNFH,2,1,49226,49226.0,0.0,True,0.942655,3 4
+BraTS-GLI-02209-101,gli_main_rl,val,gli,SNFH,2,3,201,201.0,7.0,True,0.489051,5
+BraTS-GLI-02209-101,gli_main_rl,val,gli,RC,4,1,16035,16035.0,0.0,True,0.934349,1
+BraTS-GLI-02209-102,gli_main_rl,val,gli,SNFH,2,1,105363,105363.0,0.0,True,0.907446,1 2 3 4 5 6 7 11
+BraTS-GLI-02209-102,gli_main_rl,val,gli,ET,3,1,241,241.0,0.0,True,0.892193,2
+BraTS-GLI-02209-102,gli_main_rl,val,gli,RC,4,1,15176,15176.0,0.0,True,0.924003,1
+BraTS-GLI-02209-103,gli_main_rl,val,gli,SNFH,2,1,83451,83451.0,0.0,True,0.972565,1 2
+BraTS-GLI-02209-103,gli_main_rl,val,gli,ET,3,1,273,273.0,0.0,True,0.895082,2
+BraTS-GLI-02209-103,gli_main_rl,val,gli,RC,4,1,15014,15014.0,0.0,True,0.94048,1
+BraTS-GLI-02209-104,gli_main_rl,val,gli,SNFH,2,1,74436,74436.0,0.0,True,0.910853,1 2
+BraTS-GLI-02209-104,gli_main_rl,val,gli,SNFH,2,2,287,287.0,0.0,True,0.001763,1
+BraTS-GLI-02209-104,gli_main_rl,val,gli,ET,3,1,218,218.0,0.0,True,0.941176,2
+BraTS-GLI-02209-104,gli_main_rl,val,gli,RC,4,1,15419,15419.0,0.0,True,0.949822,1
+BraTS-GLI-02226-100,gli_main_rl,val,gli,SNFH,2,1,24630,24630.0,0.0,True,0.960957,1 3
+BraTS-GLI-02226-100,gli_main_rl,val,gli,RC,4,1,7743,7743.0,0.0,True,0.921789,1
+BraTS-GLI-02226-101,gli_main_rl,val,gli,SNFH,2,1,16960,16960.0,0.0,True,0.938205,2
+BraTS-GLI-02226-101,gli_main_rl,val,gli,RC,4,1,9051,9051.0,0.0,True,0.938901,2
+BraTS-GLI-02228-100,gli_main_rl,val,gli,SNFH,2,1,51575,51575.0,0.0,True,0.942242,1 2 3
+BraTS-GLI-02228-100,gli_main_rl,val,gli,SNFH,2,2,196,196.0,0.0,True,0.007095,1
+BraTS-GLI-02228-100,gli_main_rl,val,gli,ET,3,1,906,906.0,0.0,True,0.751028,1 3
+BraTS-GLI-02230-100,gli_main_rl,val,gli,SNFH,2,1,14513,14513.0,22.023,True,0.960495,4
+BraTS-GLI-02230-100,gli_main_rl,val,gli,SNFH,2,2,19617,19617.0,0.0,True,0.983396,6
+BraTS-GLI-02230-100,gli_main_rl,val,gli,RC,4,1,16288,16288.0,30.017,True,0.952471,1
+BraTS-GLI-02230-100,gli_main_rl,val,gli,RC,4,2,246,246.0,0.0,True,0.775904,2
+BraTS-GLI-02230-101,gli_main_rl,val,gli,SNFH,2,1,18331,18331.0,0.0,True,0.963837,1
+BraTS-GLI-02230-101,gli_main_rl,val,gli,SNFH,2,2,9091,9091.0,19.131,True,0.936085,2
+BraTS-GLI-02230-101,gli_main_rl,val,gli,SNFH,2,3,75,75.0,45.88,True,0.333333,3
+BraTS-GLI-02230-101,gli_main_rl,val,gli,RC,4,1,18841,18841.0,0.0,True,0.957641,1
+BraTS-GLI-02230-101,gli_main_rl,val,gli,RC,4,2,6659,6659.0,22.113,True,0.766943,2
+BraTS-GLI-02230-102,gli_main_rl,val,gli,SNFH,2,1,19689,19689.0,0.0,True,0.949574,1
+BraTS-GLI-02230-102,gli_main_rl,val,gli,SNFH,2,2,10262,10262.0,18.055,True,0.928996,3 5
+BraTS-GLI-02230-102,gli_main_rl,val,gli,RC,4,1,16933,16933.0,0.0,True,0.954577,1
+BraTS-GLI-02230-102,gli_main_rl,val,gli,RC,4,2,7377,7377.0,20.421,True,0.87573,4
+BraTS-GLI-02239-100,gli_main_rl,val,gli,NETC,1,1,376,376.0,0.0,False,0.0,
+BraTS-GLI-02239-100,gli_main_rl,val,gli,SNFH,2,1,10478,10478.0,0.0,True,0.852059,2
+BraTS-GLI-02239-100,gli_main_rl,val,gli,RC,4,1,21117,21117.0,0.0,True,0.94284,1
+BraTS-GLI-02239-101,gli_main_rl,val,gli,SNFH,2,1,11700,11700.0,0.0,True,0.872271,1
+BraTS-GLI-02239-101,gli_main_rl,val,gli,RC,4,1,8707,8707.0,0.0,True,0.721964,1
+BraTS-GLI-02239-102,gli_main_rl,val,gli,SNFH,2,1,9650,9650.0,0.0,True,0.866022,1
+BraTS-GLI-02239-102,gli_main_rl,val,gli,RC,4,1,9086,9086.0,0.0,True,0.798275,1
+BraTS-GLI-02239-103,gli_main_rl,val,gli,SNFH,2,1,10320,10320.0,0.0,True,0.897965,1 2
+BraTS-GLI-02239-103,gli_main_rl,val,gli,RC,4,1,10152,10152.0,0.0,True,0.876003,1
+BraTS-GLI-02244-100,gli_main_rl,val,gli,SNFH,2,2,22056,22056.0,0.0,True,0.843967,2 7 9 10 13 14
+BraTS-GLI-02244-100,gli_main_rl,val,gli,RC,4,1,39484,39484.0,0.0,True,0.949355,1
+BraTS-GLI-02244-101,gli_main_rl,val,gli,SNFH,2,1,27191,27191.0,0.0,True,0.943541,1
+BraTS-GLI-02244-101,gli_main_rl,val,gli,RC,4,1,40185,40185.0,0.0,True,0.944147,1 2
+BraTS-GLI-02244-102,gli_main_rl,val,gli,SNFH,2,1,34179,34179.0,0.0,True,0.941198,2
+BraTS-GLI-02244-102,gli_main_rl,val,gli,SNFH,2,2,168,168.0,0.0,True,0.008051,2
+BraTS-GLI-02244-102,gli_main_rl,val,gli,RC,4,1,38887,38887.0,0.0,True,0.935745,1
+BraTS-GLI-02244-103,gli_main_rl,val,gli,SNFH,2,1,35795,35795.0,0.0,True,0.948016,3
+BraTS-GLI-02244-103,gli_main_rl,val,gli,RC,4,1,40704,40704.0,0.0,True,0.938857,1
+BraTS-GLI-02244-104,gli_main_rl,val,gli,SNFH,2,1,26670,26670.0,0.0,True,0.912027,3 4
+BraTS-GLI-02244-104,gli_main_rl,val,gli,ET,3,3,136,136.0,0.0,True,0.310559,4
+BraTS-GLI-02244-104,gli_main_rl,val,gli,ET,3,4,66,66.0,0.0,False,0.0,
+BraTS-GLI-02244-104,gli_main_rl,val,gli,RC,4,1,43426,43426.0,0.0,True,0.955534,1
+BraTS-GLI-02259-100,gli_main_rl,val,gli,SNFH,2,1,15506,15506.0,0.0,True,0.792109,1
+BraTS-GLI-02259-100,gli_main_rl,val,gli,ET,3,1,649,649.0,0.0,True,0.784561,1 4 5
+BraTS-GLI-02259-100,gli_main_rl,val,gli,RC,4,1,1715,1715.0,0.0,True,0.886139,1
+BraTS-GLI-02287-100,gli_main_rl,val,gli,NETC,1,2,852,852.0,0.0,True,0.858093,5
+BraTS-GLI-02287-100,gli_main_rl,val,gli,NETC,1,16,572,572.0,0.0,True,0.696335,10 12
+BraTS-GLI-02287-100,gli_main_rl,val,gli,SNFH,2,1,60648,60648.0,0.0,True,0.944215,1 2 4 7
+BraTS-GLI-02287-100,gli_main_rl,val,gli,ET,3,1,16944,16944.0,0.0,True,0.932376,1 3 11
+BraTS-GLI-02287-100,gli_main_rl,val,gli,ET,3,2,100,100.0,0.0,False,0.0,
+BraTS-GLI-02287-100,gli_main_rl,val,gli,RC,4,1,5989,5989.0,0.0,True,0.934691,1
+BraTS-GLI-02287-101,gli_main_rl,val,gli,NETC,1,1,811,811.0,0.0,True,0.865396,1
+BraTS-GLI-02287-101,gli_main_rl,val,gli,NETC,1,3,1740,1740.0,0.0,True,0.040472,10 11 12 14
+BraTS-GLI-02287-101,gli_main_rl,val,gli,SNFH,2,2,55625,55625.0,0.0,True,0.920404,2 7 18 26 31
+BraTS-GLI-02287-101,gli_main_rl,val,gli,SNFH,2,39,176,176.0,0.0,True,0.020143,23
+BraTS-GLI-02287-101,gli_main_rl,val,gli,ET,3,2,29598,29598.0,0.0,True,0.894292,2 5 6
+BraTS-GLI-02287-101,gli_main_rl,val,gli,RC,4,1,637,637.0,0.0,True,0.497713,8
+BraTS-GLI-02287-101,gli_main_rl,val,gli,RC,4,2,22374,22374.0,0.0,True,0.930987,1 18
+BraTS-GLI-02288-100,gli_main_rl,val,gli,NETC,1,2,231,231.0,0.0,True,0.855835,1
+BraTS-GLI-02288-100,gli_main_rl,val,gli,NETC,1,4,284,284.0,0.0,True,0.899351,3
+BraTS-GLI-02288-100,gli_main_rl,val,gli,NETC,1,12,266,266.0,0.0,True,0.86785,10
+BraTS-GLI-02288-100,gli_main_rl,val,gli,SNFH,2,1,50923,50923.0,0.0,True,0.881903,1 2 5
+BraTS-GLI-02288-100,gli_main_rl,val,gli,SNFH,2,2,86,86.0,0.0,True,0.002906,1
+BraTS-GLI-02288-100,gli_main_rl,val,gli,ET,3,1,5053,5053.0,0.0,True,0.938414,1
+BraTS-GLI-02288-100,gli_main_rl,val,gli,ET,3,2,91,91.0,0.0,False,0.0,
+BraTS-GLI-02288-100,gli_main_rl,val,gli,RC,4,2,5211,5211.0,0.0,True,0.825193,2
+BraTS-GLI-02290-100,gli_main_rl,val,gli,NETC,1,1,14853,14853.0,0.0,True,0.892104,2 3 4 5 8 9 10 12
+BraTS-GLI-02290-100,gli_main_rl,val,gli,NETC,1,13,54,54.0,0.0,True,0.005311,2
+BraTS-GLI-02290-100,gli_main_rl,val,gli,SNFH,2,1,22033,22033.0,0.0,True,0.800794,1 2 3 4 5 7 8 9 10 11 12 13 14 15 18 19 26 29 41 45 56
+BraTS-GLI-02290-100,gli_main_rl,val,gli,SNFH,2,14,99,99.0,0.0,True,0.610687,14
+BraTS-GLI-02290-100,gli_main_rl,val,gli,ET,3,1,40320,40320.0,0.0,True,0.928984,1 2 4
+BraTS-GLI-02290-101,gli_main_rl,val,gli,NETC,1,1,19105,19105.0,0.0,True,0.779467,1 5 7 8 9
+BraTS-GLI-02290-101,gli_main_rl,val,gli,SNFH,2,1,32688,32688.0,0.0,True,0.847053,1 2 3 4 5 7 14 20 24 26 45 47 49 50 51 54
+BraTS-GLI-02290-101,gli_main_rl,val,gli,ET,3,1,25010,25010.0,0.0,True,0.898776,1 4 9 10 11 12 14
+BraTS-GLI-02290-101,gli_main_rl,val,gli,RC,4,1,4227,4227.0,0.0,True,0.448843,1
+BraTS-GLI-02290-102,gli_main_rl,val,gli,NETC,1,1,22140,22140.0,0.0,True,0.793992,1 4 6 14
+BraTS-GLI-02290-102,gli_main_rl,val,gli,NETC,1,65,152,152.0,0.0,True,0.529231,9
+BraTS-GLI-02290-102,gli_main_rl,val,gli,SNFH,2,1,48155,48155.0,0.0,True,0.870235,1 69
+BraTS-GLI-02290-102,gli_main_rl,val,gli,SNFH,2,15,922,922.0,0.0,True,0.919294,22
+BraTS-GLI-02290-102,gli_main_rl,val,gli,ET,3,1,48499,48499.0,0.0,True,0.933924,1 5 6 7
+BraTS-GLI-02290-102,gli_main_rl,val,gli,ET,3,2,65,65.0,0.0,True,0.142857,4
+BraTS-GLI-02290-102,gli_main_rl,val,gli,RC,4,1,8813,8813.0,0.0,True,0.518994,1
+BraTS-GLI-02336-100,gli_main_rl,val,gli,SNFH,2,1,21638,21638.0,0.0,True,0.909575,2
+BraTS-GLI-02336-100,gli_main_rl,val,gli,SNFH,2,2,5880,5880.0,0.0,True,0.860909,3 15
+BraTS-GLI-02336-100,gli_main_rl,val,gli,SNFH,2,4,634,634.0,0.0,True,0.738916,16
+BraTS-GLI-02336-100,gli_main_rl,val,gli,SNFH,2,6,74,74.0,2.0,True,0.244604,22 26 29 34
+BraTS-GLI-02336-100,gli_main_rl,val,gli,SNFH,2,7,98,98.0,6.481,True,0.297297,26
+BraTS-GLI-02336-100,gli_main_rl,val,gli,ET,3,1,8045,8045.0,0.0,True,0.781148,1 3 4 5 6 7 9 10 11 13 14 15 16 17 18 19 20 21 22
+BraTS-GLI-02336-100,gli_main_rl,val,gli,RC,4,1,25862,25862.0,0.0,True,0.92983,1 12 14
+BraTS-GLI-02340-100,gli_main_rl,val,gli,SNFH,2,1,108141,108141.0,0.0,True,0.912627,1 2 19
+BraTS-GLI-02340-100,gli_main_rl,val,gli,SNFH,2,3,126,126.0,0.0,True,0.000372,1
+BraTS-GLI-02340-100,gli_main_rl,val,gli,ET,3,1,230,230.0,0.0,True,0.106996,14
+BraTS-GLI-02340-100,gli_main_rl,val,gli,RC,4,1,27774,27774.0,0.0,True,0.761272,1 2 3 5 7 8 12 14 17
+BraTS-GLI-02340-100,gli_main_rl,val,gli,RC,4,2,185,185.0,1.0,False,0.0,
+BraTS-GLI-02342-100,gli_main_rl,val,gli,NETC,1,1,339,339.0,0.0,False,0.0,
+BraTS-GLI-02342-100,gli_main_rl,val,gli,SNFH,2,1,2986,2986.0,9.487,True,0.934416,8
+BraTS-GLI-02342-100,gli_main_rl,val,gli,SNFH,2,2,13546,13546.0,0.0,True,0.809255,14 16 18 37 38 42
+BraTS-GLI-02342-100,gli_main_rl,val,gli,ET,3,1,5835,5835.0,0.0,True,0.822806,2 10
+BraTS-GLI-02342-100,gli_main_rl,val,gli,ET,3,2,195,195.0,0.0,True,0.875706,1
+BraTS-GLI-02342-100,gli_main_rl,val,gli,RC,4,1,32811,32811.0,0.0,True,0.928092,1 5
+BraTS-GLI-02342-100,gli_main_rl,val,gli,RC,4,9,55,55.0,0.0,False,0.0,
+BraTS-GLI-02369-100,gli_main_rl,val,gli,SNFH,2,1,312,312.0,2.0,True,0.479495,1
+BraTS-GLI-02369-100,gli_main_rl,val,gli,SNFH,2,8,50,50.0,0.0,True,0.10728,2
+BraTS-GLI-02369-100,gli_main_rl,val,gli,SNFH,2,22,3528,3528.0,0.0,True,0.551474,7
+BraTS-GLI-02369-100,gli_main_rl,val,gli,SNFH,2,29,70,70.0,1.0,False,0.0,
+BraTS-GLI-02369-100,gli_main_rl,val,gli,SNFH,2,44,745,745.0,0.0,True,0.16727,7 31 32
+BraTS-GLI-02369-100,gli_main_rl,val,gli,ET,3,1,852,852.0,0.0,True,0.137705,1
+BraTS-GLI-02369-100,gli_main_rl,val,gli,ET,3,2,2338,2338.0,0.0,True,0.585294,2 4
+BraTS-GLI-02369-100,gli_main_rl,val,gli,ET,3,13,179,179.0,11.79,False,0.0,
+BraTS-GLI-02369-100,gli_main_rl,val,gli,ET,3,25,1310,1310.0,0.0,True,0.780223,7 8
+BraTS-GLI-02369-100,gli_main_rl,val,gli,ET,3,27,73,73.0,0.0,True,0.62963,6
+BraTS-GLI-02369-100,gli_main_rl,val,gli,RC,4,1,33679,33679.0,0.0,True,0.943134,1
+BraTS-GLI-02382-100,gli_main_rl,val,gli,NETC,1,1,988,988.0,0.0,True,0.541086,1
+BraTS-GLI-02382-100,gli_main_rl,val,gli,SNFH,2,1,57752,57752.0,0.0,True,0.954781,1 14 21
+BraTS-GLI-02382-100,gli_main_rl,val,gli,ET,3,1,22808,22808.0,0.0,True,0.921498,1 4 5
+BraTS-GLI-02382-100,gli_main_rl,val,gli,ET,3,2,638,638.0,0.0,True,0.962279,2
+BraTS-GLI-02382-100,gli_main_rl,val,gli,ET,3,3,80,80.0,0.0,True,0.699187,3
+BraTS-GLI-02382-100,gli_main_rl,val,gli,RC,4,1,4917,4917.0,0.0,True,0.644204,4
+BraTS-GLI-02517-100,gli_main_rl,val,gli,SNFH,2,1,7853,7853.0,0.0,True,0.947429,6
+BraTS-GLI-02517-100,gli_main_rl,val,gli,SNFH,2,5,59,59.0,0.0,True,0.506329,7 8 12 13
+BraTS-GLI-02517-100,gli_main_rl,val,gli,ET,3,1,287,287.0,0.0,True,0.843373,1
+BraTS-GLI-02517-100,gli_main_rl,val,gli,ET,3,2,333,333.0,0.0,True,0.906849,2
+BraTS-GLI-02517-100,gli_main_rl,val,gli,RC,4,1,822,822.0,0.0,True,0.772608,1
+BraTS-GLI-02517-100,gli_main_rl,val,gli,RC,4,2,121,121.0,0.0,True,0.186469,1
+BraTS-GLI-02517-101,gli_main_rl,val,gli,SNFH,2,1,17285,17285.0,0.0,True,0.92606,13
+BraTS-GLI-02517-101,gli_main_rl,val,gli,SNFH,2,3,14103,14103.0,9.381,True,0.910623,15 20
+BraTS-GLI-02517-101,gli_main_rl,val,gli,ET,3,1,4071,4071.0,0.0,True,0.948468,1
+BraTS-GLI-02517-101,gli_main_rl,val,gli,ET,3,2,95,95.0,29.223,True,0.597484,4
+BraTS-GLI-02517-101,gli_main_rl,val,gli,RC,4,1,524,524.0,23.022,True,0.493469,1
+BraTS-GLI-02546-100,gli_main_rl,val,gli,NETC,1,1,193,193.0,0.0,True,0.895288,2
+BraTS-GLI-02546-100,gli_main_rl,val,gli,SNFH,2,1,190757,190757.0,0.0,True,0.950994,1 2 3 4
+BraTS-GLI-02546-100,gli_main_rl,val,gli,ET,3,1,3504,3504.0,0.0,True,0.766629,2
+BraTS-GLI-02546-100,gli_main_rl,val,gli,ET,3,2,1333,1333.0,0.0,True,0.388815,2
+BraTS-GLI-02561-100,gli_main_rl,val,gli,SNFH,2,2,153,153.0,8.544,False,0.0,
+BraTS-GLI-02561-100,gli_main_rl,val,gli,SNFH,2,3,210,210.0,3.606,False,0.0,
+BraTS-GLI-02561-100,gli_main_rl,val,gli,SNFH,2,4,139,139.0,6.708,False,0.0,
+BraTS-GLI-02561-100,gli_main_rl,val,gli,SNFH,2,5,1073,1073.0,4.123,False,0.0,
+BraTS-GLI-02561-100,gli_main_rl,val,gli,SNFH,2,6,13017,13017.0,0.0,True,0.736418,4 5 10
+BraTS-GLI-02561-100,gli_main_rl,val,gli,SNFH,2,10,673,673.0,0.0,True,0.00634,4
+BraTS-GLI-02561-100,gli_main_rl,val,gli,SNFH,2,22,197,197.0,0.0,True,0.027551,4
+BraTS-GLI-02561-100,gli_main_rl,val,gli,ET,3,1,1104,1104.0,0.0,True,0.777911,2
+BraTS-GLI-02561-100,gli_main_rl,val,gli,ET,3,7,267,267.0,0.0,True,0.007463,7
+BraTS-GLI-02561-100,gli_main_rl,val,gli,RC,4,1,11838,11838.0,0.0,True,0.224347,5
+BraTS-GLI-02561-101,gli_main_rl,val,gli,SNFH,2,1,137,137.0,6.0,True,0.419753,5
+BraTS-GLI-02561-101,gli_main_rl,val,gli,SNFH,2,3,849,849.0,6.403,True,0.126951,8
+BraTS-GLI-02561-101,gli_main_rl,val,gli,SNFH,2,4,14012,14012.0,0.0,True,0.868553,7 11 12
+BraTS-GLI-02561-101,gli_main_rl,val,gli,SNFH,2,6,65,65.0,0.0,True,0.008683,7
+BraTS-GLI-02561-101,gli_main_rl,val,gli,SNFH,2,7,744,744.0,2.828,False,0.0,
+BraTS-GLI-02561-101,gli_main_rl,val,gli,ET,3,1,299,299.0,0.0,True,0.674699,2
+BraTS-GLI-02561-101,gli_main_rl,val,gli,RC,4,1,5032,5032.0,0.0,True,0.277811,2
+BraTS-GLI-02602-100,gli_main_rl,val,gli,SNFH,2,1,33741,33741.0,0.0,True,0.882414,1 3
+BraTS-GLI-02602-100,gli_main_rl,val,gli,ET,3,1,5653,5653.0,0.0,True,0.854501,1
+BraTS-GLI-02602-100,gli_main_rl,val,gli,RC,4,1,3700,3700.0,0.0,True,0.629756,1 4
+BraTS-GLI-02602-100,gli_main_rl,val,gli,RC,4,7,61,61.0,0.0,True,0.014013,1
+BraTS-GLI-02608-100,gli_main_rl,val,gli,NETC,1,1,1936,1936.0,0.0,True,0.50544,1
+BraTS-GLI-02608-100,gli_main_rl,val,gli,SNFH,2,1,149725,149725.0,0.0,True,0.899133,1 5 6 7 10
+BraTS-GLI-02608-100,gli_main_rl,val,gli,ET,3,1,10123,10123.0,0.0,True,0.934701,1
+BraTS-GLI-02608-100,gli_main_rl,val,gli,RC,4,1,3317,3317.0,0.0,True,0.001205,2
+BraTS-GLI-02608-101,gli_main_rl,val,gli,NETC,1,6,201,201.0,0.0,True,0.712251,5 6 8
+BraTS-GLI-02608-101,gli_main_rl,val,gli,NETC,1,12,171,171.0,0.0,True,0.619048,13 16
+BraTS-GLI-02608-101,gli_main_rl,val,gli,SNFH,2,1,111466,111466.0,0.0,True,0.81244,1 8 10 12 13 14
+BraTS-GLI-02608-101,gli_main_rl,val,gli,ET,3,1,17430,17430.0,0.0,True,0.944413,1
+BraTS-GLI-02608-101,gli_main_rl,val,gli,ET,3,9,1005,1005.0,0.0,True,0.884004,11
+BraTS-GLI-02608-101,gli_main_rl,val,gli,RC,4,1,833,833.0,0.0,True,0.875648,3
+BraTS-GLI-02608-102,gli_main_rl,val,gli,NETC,1,6,71,71.0,0.0,True,0.69,5
+BraTS-GLI-02608-102,gli_main_rl,val,gli,NETC,1,7,258,258.0,0.0,True,0.681818,11 14
+BraTS-GLI-02608-102,gli_main_rl,val,gli,SNFH,2,1,86910,86910.0,0.0,True,0.9206,1
+BraTS-GLI-02608-102,gli_main_rl,val,gli,ET,3,1,15064,15064.0,0.0,True,0.960592,1
+BraTS-GLI-02608-102,gli_main_rl,val,gli,RC,4,1,1230,1230.0,0.0,True,0.951872,1
+BraTS-GLI-02608-103,gli_main_rl,val,gli,SNFH,2,1,73732,73732.0,0.0,True,0.935132,1 8 9
+BraTS-GLI-02608-103,gli_main_rl,val,gli,ET,3,1,12601,12601.0,0.0,True,0.947477,1
+BraTS-GLI-02608-103,gli_main_rl,val,gli,ET,3,9,97,97.0,0.0,False,0.0,
+BraTS-GLI-02608-103,gli_main_rl,val,gli,ET,3,10,159,159.0,0.0,False,0.0,
+BraTS-GLI-02608-103,gli_main_rl,val,gli,ET,3,13,95,95.0,0.0,False,0.0,
+BraTS-GLI-02608-103,gli_main_rl,val,gli,ET,3,17,64,64.0,0.0,False,0.0,
+BraTS-GLI-02608-103,gli_main_rl,val,gli,RC,4,1,147,147.0,0.0,False,0.0,
+BraTS-GLI-02608-103,gli_main_rl,val,gli,RC,4,2,3597,3597.0,0.0,True,0.002222,1 2 3
+BraTS-GLI-02608-104,gli_main_rl,val,gli,SNFH,2,1,68449,68449.0,0.0,True,0.924395,1 2 3 6
+BraTS-GLI-02608-104,gli_main_rl,val,gli,ET,3,1,9384,9384.0,0.0,True,0.910552,1 6 8 9
+BraTS-GLI-02608-104,gli_main_rl,val,gli,ET,3,10,102,102.0,0.0,True,0.126126,5 7
+BraTS-GLI-02608-104,gli_main_rl,val,gli,RC,4,1,7943,7943.0,0.0,True,0.001258,1 2 3
+BraTS-GLI-02608-105,gli_main_rl,val,gli,SNFH,2,1,32358,32358.0,0.0,True,0.910761,1 9 11
+BraTS-GLI-02608-105,gli_main_rl,val,gli,ET,3,1,11441,11441.0,0.0,True,0.935136,1
+BraTS-GLI-02608-105,gli_main_rl,val,gli,RC,4,1,13986,13986.0,0.0,True,0.98448,1
+BraTS-GLI-02631-100,gli_main_rl,val,gli,SNFH,2,1,3947,3947.0,21.0,True,0.929326,2
+BraTS-GLI-02631-100,gli_main_rl,val,gli,SNFH,2,2,6065,6065.0,23.854,True,0.443934,11 12
+BraTS-GLI-02631-100,gli_main_rl,val,gli,RC,4,1,62,62.0,36.069,True,0.290816,5
+BraTS-GLI-02631-101,gli_main_rl,val,gli,SNFH,2,1,4513,4513.0,0.0,True,0.908356,8
+BraTS-GLI-02631-101,gli_main_rl,val,gli,SNFH,2,2,638,638.0,32.696,True,0.084151,13
+BraTS-GLI-02631-101,gli_main_rl,val,gli,RC,4,1,105,105.0,38.549,False,0.0,
+BraTS-GLI-02632-100,gli_main_rl,val,gli,SNFH,2,1,15239,15239.0,0.0,True,0.849132,1
+BraTS-GLI-02632-100,gli_main_rl,val,gli,ET,3,2,309,309.0,0.0,True,0.115891,1
+BraTS-GLI-02632-100,gli_main_rl,val,gli,ET,3,3,975,975.0,0.0,True,0.325546,1
+BraTS-GLI-02632-100,gli_main_rl,val,gli,ET,3,6,94,94.0,0.0,True,0.036858,1
+BraTS-GLI-02632-100,gli_main_rl,val,gli,ET,3,8,56,56.0,1.0,True,0.25,2
+BraTS-GLI-02632-100,gli_main_rl,val,gli,ET,3,12,119,119.0,0.0,True,0.575064,8
+BraTS-GLI-02632-100,gli_main_rl,val,gli,ET,3,16,276,276.0,0.0,True,0.118063,1
+BraTS-GLI-02632-100,gli_main_rl,val,gli,RC,4,1,17915,17915.0,0.0,True,0.818734,1 3 6 7 8 9
+BraTS-GLI-02632-101,gli_main_rl,val,gli,SNFH,2,1,8736,8736.0,0.0,True,0.801452,1 3 10 11 12 14 18 19
+BraTS-GLI-02632-101,gli_main_rl,val,gli,ET,3,1,6960,6960.0,0.0,True,0.881024,1
+BraTS-GLI-02632-101,gli_main_rl,val,gli,RC,4,1,2872,2872.0,0.0,True,0.53327,1 2 4
+BraTS-GLI-02632-102,gli_main_rl,val,gli,NETC,1,1,69,69.0,0.0,True,0.834532,1
+BraTS-GLI-02632-102,gli_main_rl,val,gli,SNFH,2,1,35308,35308.0,0.0,True,0.953917,1 5 11 16
+BraTS-GLI-02632-102,gli_main_rl,val,gli,ET,3,1,9451,9451.0,0.0,True,0.941701,1
+BraTS-GLI-02632-102,gli_main_rl,val,gli,RC,4,1,2702,2702.0,0.0,True,0.518459,1
+BraTS-GLI-02632-103,gli_main_rl,val,gli,SNFH,2,1,46336,46336.0,0.0,True,0.920248,1 6 14 24 26 27 28
+BraTS-GLI-02632-103,gli_main_rl,val,gli,ET,3,1,5282,5282.0,0.0,True,0.809872,1 3 12
+BraTS-GLI-02632-103,gli_main_rl,val,gli,ET,3,10,133,133.0,0.0,True,0.654867,9
+BraTS-GLI-02632-103,gli_main_rl,val,gli,ET,3,13,112,112.0,0.0,True,0.036021,1
+BraTS-GLI-02632-103,gli_main_rl,val,gli,ET,3,14,104,104.0,0.0,True,0.724138,14 15
+BraTS-GLI-02632-103,gli_main_rl,val,gli,RC,4,1,311,311.0,0.0,True,0.356627,4
+BraTS-GLI-02632-103,gli_main_rl,val,gli,RC,4,2,18901,18901.0,0.0,True,0.949538,5
+BraTS-GLI-02632-104,gli_main_rl,val,gli,SNFH,2,1,226664,226664.0,0.0,True,0.921686,1 2 10
+BraTS-GLI-02632-104,gli_main_rl,val,gli,ET,3,2,11359,11359.0,0.0,True,0.858216,1 4 23
+BraTS-GLI-02632-104,gli_main_rl,val,gli,ET,3,4,156,156.0,0.0,True,0.53617,3 6
+BraTS-GLI-02632-104,gli_main_rl,val,gli,ET,3,6,70,70.0,0.0,True,0.008935,1
+BraTS-GLI-02632-104,gli_main_rl,val,gli,ET,3,14,598,598.0,0.0,True,0.488537,9
+BraTS-GLI-02632-104,gli_main_rl,val,gli,ET,3,16,51,51.0,0.0,False,0.0,
+BraTS-GLI-02632-104,gli_main_rl,val,gli,ET,3,18,123,123.0,0.0,True,0.008447,1
+BraTS-GLI-02632-104,gli_main_rl,val,gli,ET,3,21,123,123.0,0.0,True,0.01614,1
+BraTS-GLI-02632-104,gli_main_rl,val,gli,RC,4,1,23885,23885.0,0.0,True,0.061095,4 5 6 7 8 9 10 11 12 14 15 16 17 21 22 23 24 25 26
+BraTS-GLI-02632-104,gli_main_rl,val,gli,RC,4,4,1075,1075.0,0.0,True,0.076241,3
+BraTS-GLI-02634-100,gli_main_rl,val,gli,SNFH,2,1,20197,20197.0,0.0,True,0.856687,1 5
+BraTS-GLI-02634-100,gli_main_rl,val,gli,ET,3,1,3308,3308.0,0.0,True,0.751704,2 3 4
+BraTS-GLI-02634-100,gli_main_rl,val,gli,RC,4,1,5404,5404.0,0.0,True,0.893507,1 2
+BraTS-GLI-02634-100,gli_main_rl,val,gli,RC,4,3,71,71.0,1.0,True,0.255814,3
+BraTS-GLI-02634-100,gli_main_rl,val,gli,RC,4,7,115,115.0,0.0,True,0.372671,5
+BraTS-GLI-02634-100,gli_main_rl,val,gli,RC,4,8,73,73.0,1.0,True,0.717172,4
+BraTS-GLI-02634-101,gli_main_rl,val,gli,SNFH,2,1,83926,83926.0,0.0,True,0.933201,1 2 4 7 8 9 10 14 17 18 23
+BraTS-GLI-02634-101,gli_main_rl,val,gli,SNFH,2,8,54,54.0,2.828,True,0.404255,12
+BraTS-GLI-02634-101,gli_main_rl,val,gli,ET,3,1,31596,31596.0,0.0,True,0.940465,1 7
+BraTS-GLI-02634-101,gli_main_rl,val,gli,ET,3,10,75,75.0,0.0,True,0.004564,1
+BraTS-GLI-02634-101,gli_main_rl,val,gli,RC,4,1,136,136.0,0.0,True,0.371257,1
+BraTS-GLI-02634-101,gli_main_rl,val,gli,RC,4,2,2160,2160.0,0.0,True,0.925201,2
+BraTS-GLI-02647-100,gli_main_rl,val,gli,SNFH,2,1,41360,41360.0,0.0,True,0.900678,1 3
+BraTS-GLI-02647-100,gli_main_rl,val,gli,SNFH,2,4,1038,1038.0,7.616,False,0.0,
+BraTS-GLI-02647-100,gli_main_rl,val,gli,RC,4,1,104324,104324.0,0.0,True,0.952999,1 2 3
+BraTS-GLI-02649-100,gli_main_rl,val,gli,SNFH,2,1,18736,18736.0,0.0,True,0.910396,1 7
+BraTS-GLI-02649-100,gli_main_rl,val,gli,ET,3,1,761,761.0,0.0,True,0.555174,1
+BraTS-GLI-02649-100,gli_main_rl,val,gli,RC,4,1,9103,9103.0,0.0,True,0.89725,2
+BraTS-GLI-02659-100,gli_main_rl,val,gli,SNFH,2,1,22615,22615.0,0.0,True,0.917212,1
+BraTS-GLI-02659-100,gli_main_rl,val,gli,RC,4,1,11717,11717.0,0.0,True,0.93189,1
+BraTS-GLI-02666-100,gli_main_rl,val,gli,SNFH,2,1,30810,30810.0,0.0,True,0.900473,1 2
+BraTS-GLI-02666-100,gli_main_rl,val,gli,RC,4,1,60259,60259.0,0.0,True,0.968993,1
+BraTS-GLI-02694-100,gli_main_rl,val,gli,SNFH,2,3,35090,35090.0,0.0,True,0.660596,1 9
+BraTS-GLI-02694-100,gli_main_rl,val,gli,SNFH,2,18,107,107.0,0.0,True,0.003082,1
+BraTS-GLI-02694-100,gli_main_rl,val,gli,SNFH,2,19,50,50.0,0.0,True,0.001659,1
+BraTS-GLI-02694-100,gli_main_rl,val,gli,SNFH,2,64,469,469.0,0.0,True,0.015419,1
+BraTS-GLI-02694-100,gli_main_rl,val,gli,ET,3,2,1002,1002.0,0.0,True,0.768405,3
+BraTS-GLI-02694-100,gli_main_rl,val,gli,RC,4,1,42216,42216.0,0.0,True,0.500738,1 2 3 4 5 6 7 8
+BraTS-GLI-02707-100,gli_main_rl,val,gli,SNFH,2,1,62406,62406.0,0.0,True,0.964695,5 10 11
+BraTS-GLI-02707-100,gli_main_rl,val,gli,RC,4,1,22635,22635.0,0.0,True,0.975532,1
+BraTS-GLI-02709-100,gli_main_rl,val,gli,SNFH,2,1,11700,11700.0,0.0,True,0.779257,1 2
+BraTS-GLI-02709-100,gli_main_rl,val,gli,RC,4,1,2908,2908.0,0.0,True,0.849821,1
+BraTS-GLI-02720-100,gli_main_rl,val,gli,SNFH,2,1,10664,10664.0,0.0,True,0.815767,1
+BraTS-GLI-02720-100,gli_main_rl,val,gli,RC,4,1,19753,19753.0,0.0,True,0.767881,4
+BraTS-GLI-02721-100,gli_main_rl,val,gli,SNFH,2,1,34371,34371.0,0.0,True,0.929,1
+BraTS-GLI-02721-100,gli_main_rl,val,gli,RC,4,1,11779,11779.0,0.0,True,0.847704,1 3 4 5 6
+BraTS-GLI-02722-100,gli_main_rl,val,gli,SNFH,2,1,324,324.0,3.0,False,0.0,
+BraTS-GLI-02722-100,gli_main_rl,val,gli,SNFH,2,2,23184,23184.0,0.0,True,0.901599,1
+BraTS-GLI-02722-100,gli_main_rl,val,gli,SNFH,2,3,257,257.0,8.367,False,0.0,
+BraTS-GLI-02722-100,gli_main_rl,val,gli,RC,4,3,683,683.0,1.0,True,0.565631,2
+BraTS-GLI-02746-100,gli_main_rl,val,gli,SNFH,2,1,17680,17680.0,0.0,True,0.918994,1
+BraTS-GLI-02746-100,gli_main_rl,val,gli,SNFH,2,5,381,381.0,4.583,True,0.855869,2
+BraTS-GLI-02746-100,gli_main_rl,val,gli,ET,3,1,120,120.0,1.0,False,0.0,
+BraTS-GLI-02746-100,gli_main_rl,val,gli,RC,4,1,12998,12998.0,0.0,True,0.929806,1
+BraTS-GLI-02746-101,gli_main_rl,val,gli,SNFH,2,1,18447,18447.0,0.0,True,0.923735,1 2
+BraTS-GLI-02746-101,gli_main_rl,val,gli,SNFH,2,3,240,240.0,5.0,True,0.848598,6
+BraTS-GLI-02746-101,gli_main_rl,val,gli,ET,3,1,68,68.0,2.0,False,0.0,
+BraTS-GLI-02746-101,gli_main_rl,val,gli,RC,4,1,11388,11388.0,0.0,True,0.921804,1
+BraTS-GLI-02750-100,gli_main_rl,val,gli,SNFH,2,1,7676,7676.0,0.0,True,0.873051,1 4 6 7
+BraTS-GLI-02750-100,gli_main_rl,val,gli,ET,3,1,1028,1028.0,0.0,True,0.869328,1
+BraTS-GLI-02750-100,gli_main_rl,val,gli,ET,3,2,323,323.0,0.0,True,0.771863,4
+BraTS-GLI-02750-100,gli_main_rl,val,gli,RC,4,1,2325,2325.0,0.0,True,0.853693,1
+BraTS-GLI-02750-101,gli_main_rl,val,gli,SNFH,2,1,9227,9227.0,0.0,True,0.896235,1 2
+BraTS-GLI-02750-101,gli_main_rl,val,gli,ET,3,1,1041,1041.0,0.0,True,0.920202,1
+BraTS-GLI-02750-101,gli_main_rl,val,gli,ET,3,2,55,55.0,0.0,True,0.515789,5
+BraTS-GLI-02750-101,gli_main_rl,val,gli,ET,3,4,330,330.0,0.0,True,0.854758,6
+BraTS-GLI-02750-101,gli_main_rl,val,gli,ET,3,5,157,157.0,0.0,True,0.794613,7
+BraTS-GLI-02750-101,gli_main_rl,val,gli,RC,4,1,1647,1647.0,0.0,True,0.782885,1
+BraTS-GLI-02764-100,gli_main_rl,val,gli,SNFH,2,1,30404,30404.0,0.0,True,0.851929,1
+BraTS-GLI-02764-100,gli_main_rl,val,gli,SNFH,2,3,164,164.0,5.831,True,0.244287,2
+BraTS-GLI-02764-100,gli_main_rl,val,gli,SNFH,2,4,135,135.0,1.414,False,0.0,
+BraTS-GLI-02764-100,gli_main_rl,val,gli,RC,4,1,33813,33813.0,0.0,True,0.908224,1
+BraTS-GLI-02764-100,gli_main_rl,val,gli,RC,4,12,50,50.0,1.732,True,0.000113,1
+BraTS-GLI-02764-101,gli_main_rl,val,gli,SNFH,2,1,31655,31655.0,0.0,True,0.899767,1
+BraTS-GLI-02764-101,gli_main_rl,val,gli,SNFH,2,2,121,121.0,6.708,True,0.220561,2
+BraTS-GLI-02764-101,gli_main_rl,val,gli,RC,4,1,33333,33333.0,0.0,True,0.910689,1
+BraTS-GLI-02767-100,gli_main_rl,val,gli,SNFH,2,1,803,803.0,nan,False,0.0,
+BraTS-GLI-02767-101,gli_main_rl,val,gli,SNFH,2,1,1076,1076.0,0.0,True,0.122164,2
+BraTS-GLI-02777-100,gli_main_rl,val,gli,SNFH,2,1,58321,58321.0,0.0,True,0.914354,1 3 4 6
+BraTS-GLI-02777-100,gli_main_rl,val,gli,ET,3,1,1909,1909.0,0.0,True,0.793786,1
+BraTS-GLI-02777-100,gli_main_rl,val,gli,ET,3,2,64,64.0,0.0,True,0.559524,5
+BraTS-GLI-02777-100,gli_main_rl,val,gli,ET,3,4,1019,1019.0,0.0,True,0.898271,11
+BraTS-GLI-02777-100,gli_main_rl,val,gli,RC,4,1,41949,41949.0,0.0,True,0.963129,1
+BraTS-GLI-02777-101,gli_main_rl,val,gli,SNFH,2,1,31808,31808.0,0.0,True,0.874393,1 5 7 8 10 11
+BraTS-GLI-02777-101,gli_main_rl,val,gli,SNFH,2,2,58,58.0,2.828,True,0.423358,3
+BraTS-GLI-02777-101,gli_main_rl,val,gli,SNFH,2,3,1414,1414.0,3.0,True,0.67289,11
+BraTS-GLI-02777-101,gli_main_rl,val,gli,ET,3,1,582,582.0,0.0,True,0.713475,2
+BraTS-GLI-02777-101,gli_main_rl,val,gli,ET,3,2,188,188.0,0.0,True,0.652632,5 9
+BraTS-GLI-02777-101,gli_main_rl,val,gli,ET,3,3,293,293.0,0.0,True,0.833021,8
+BraTS-GLI-02777-101,gli_main_rl,val,gli,RC,4,1,43671,43671.0,0.0,True,0.970262,1
+BraTS-GLI-02786-100,gli_main_rl,val,gli,SNFH,2,1,52,52.0,2.236,True,0.675325,1
+BraTS-GLI-02786-100,gli_main_rl,val,gli,SNFH,2,2,18459,18459.0,0.0,True,0.886522,2
+BraTS-GLI-02786-100,gli_main_rl,val,gli,SNFH,2,3,79,79.0,5.0,True,0.645161,4
+BraTS-GLI-02786-100,gli_main_rl,val,gli,RC,4,1,49730,49730.0,0.0,True,0.964828,1
+BraTS-GLI-02786-101,gli_main_rl,val,gli,SNFH,2,1,74,74.0,0.0,True,0.008319,1
+BraTS-GLI-02786-101,gli_main_rl,val,gli,SNFH,2,2,17006,17006.0,0.0,True,0.890591,1
+BraTS-GLI-02786-101,gli_main_rl,val,gli,RC,4,1,47855,47855.0,0.0,True,0.969129,1
+BraTS-GLI-02789-100,gli_main_rl,val,gli,SNFH,2,1,43113,43113.0,0.0,True,0.895182,2
+BraTS-GLI-02789-100,gli_main_rl,val,gli,SNFH,2,2,125,125.0,0.0,True,0.00548,2
+BraTS-GLI-02789-100,gli_main_rl,val,gli,RC,4,1,34428,34428.0,0.0,True,0.54393,2
+BraTS-GLI-02789-101,gli_main_rl,val,gli,SNFH,2,1,41393,41393.0,0.0,True,0.885318,3 8
+BraTS-GLI-02789-101,gli_main_rl,val,gli,SNFH,2,3,126,126.0,0.0,True,0.00589,3
+BraTS-GLI-02789-101,gli_main_rl,val,gli,RC,4,1,37303,37303.0,0.0,True,0.569485,2
+BraTS-GLI-02804-100,gli_main_rl,val,gli,NETC,1,1,578,578.0,0.0,False,0.0,
+BraTS-GLI-02804-100,gli_main_rl,val,gli,NETC,1,2,1133,1133.0,0.0,True,0.918342,3
+BraTS-GLI-02804-100,gli_main_rl,val,gli,SNFH,2,1,77564,77564.0,0.0,True,0.930099,1 3 6
+BraTS-GLI-02804-100,gli_main_rl,val,gli,ET,3,1,11398,11398.0,0.0,True,0.915502,1 2
+BraTS-GLI-02804-100,gli_main_rl,val,gli,RC,4,1,88,88.0,1.414,False,0.0,
+BraTS-GLI-02804-101,gli_main_rl,val,gli,NETC,1,1,577,577.0,0.0,False,0.0,
+BraTS-GLI-02804-101,gli_main_rl,val,gli,NETC,1,2,382,382.0,0.0,True,0.890995,2
+BraTS-GLI-02804-101,gli_main_rl,val,gli,NETC,1,3,492,492.0,0.0,True,0.911985,3
+BraTS-GLI-02804-101,gli_main_rl,val,gli,SNFH,2,1,66933,66933.0,0.0,True,0.941026,1 6
+BraTS-GLI-02804-101,gli_main_rl,val,gli,ET,3,1,10173,10173.0,0.0,True,0.938292,1 2 3
+BraTS-GLI-02804-101,gli_main_rl,val,gli,RC,4,1,74,74.0,0.0,False,0.0,
+BraTS-GLI-02808-100,gli_main_rl,val,gli,SNFH,2,1,907,907.0,5.916,True,0.645258,2
+BraTS-GLI-02808-100,gli_main_rl,val,gli,SNFH,2,2,15487,15487.0,0.0,True,0.888231,1 22
+BraTS-GLI-02808-100,gli_main_rl,val,gli,SNFH,2,9,12465,12465.0,1.732,True,0.839826,17
+BraTS-GLI-02808-100,gli_main_rl,val,gli,ET,3,1,1211,1211.0,0.0,True,0.387985,2 4 6
+BraTS-GLI-02808-100,gli_main_rl,val,gli,RC,4,1,62249,62249.0,0.0,True,0.938232,1 3
+BraTS-GLI-02808-101,gli_main_rl,val,gli,SNFH,2,1,21646,21646.0,0.0,True,0.680408,1 2 3 6 12
+BraTS-GLI-02808-101,gli_main_rl,val,gli,SNFH,2,4,79,79.0,0.0,True,0.005089,1
+BraTS-GLI-02808-101,gli_main_rl,val,gli,SNFH,2,6,5697,5697.0,0.0,True,0.262103,1
+BraTS-GLI-02808-101,gli_main_rl,val,gli,SNFH,2,9,4887,4887.0,0.0,True,0.235114,1
+BraTS-GLI-02808-101,gli_main_rl,val,gli,ET,3,1,1047,1047.0,0.0,True,0.458753,2
+BraTS-GLI-02808-101,gli_main_rl,val,gli,RC,4,1,62124,62124.0,0.0,True,0.955123,1 5
+BraTS-GLI-02816-100,gli_main_rl,val,gli,SNFH,2,1,7969,7969.0,0.0,True,0.873887,1 3 4 6
+BraTS-GLI-02816-100,gli_main_rl,val,gli,SNFH,2,2,3521,3521.0,17.578,True,0.92696,2
+BraTS-GLI-02816-100,gli_main_rl,val,gli,ET,3,1,126,126.0,0.0,True,0.483871,1
+BraTS-GLI-02816-100,gli_main_rl,val,gli,RC,4,1,5917,5917.0,0.0,True,0.895668,1
+BraTS-GLI-02816-101,gli_main_rl,val,gli,SNFH,2,1,17040,17040.0,0.0,True,0.868921,2 4 5 7 11
+BraTS-GLI-02816-101,gli_main_rl,val,gli,SNFH,2,2,2173,2173.0,8.185,True,0.94967,6
+BraTS-GLI-02816-101,gli_main_rl,val,gli,ET,3,1,198,198.0,0.0,True,0.475556,1 5
+BraTS-GLI-02816-101,gli_main_rl,val,gli,ET,3,3,5642,5642.0,0.0,True,0.889759,3 4 7
+BraTS-GLI-02816-101,gli_main_rl,val,gli,ET,3,4,62,62.0,0.0,True,0.666667,11 13 14
+BraTS-GLI-02816-101,gli_main_rl,val,gli,RC,4,1,5576,5576.0,0.0,True,0.797101,1
+BraTS-GLI-02817-100,gli_main_rl,val,gli,SNFH,2,1,51086,51086.0,0.0,True,0.839162,1 2 3 4 5 6 7 8
+BraTS-GLI-02817-100,gli_main_rl,val,gli,ET,3,1,279,279.0,10.198,False,0.0,
+BraTS-GLI-02817-100,gli_main_rl,val,gli,ET,3,2,2141,2141.0,0.0,True,0.734929,1
+BraTS-GLI-02817-100,gli_main_rl,val,gli,RC,4,1,1046,1046.0,0.0,True,0.428256,1 2
+BraTS-GLI-02817-101,gli_main_rl,val,gli,SNFH,2,1,52497,52497.0,0.0,True,0.88395,1 2 3 4
+BraTS-GLI-02817-101,gli_main_rl,val,gli,ET,3,1,1386,1386.0,0.0,True,0.906615,1
+BraTS-GLI-02817-101,gli_main_rl,val,gli,ET,3,2,1414,1414.0,0.0,True,0.783349,2
+BraTS-GLI-02817-101,gli_main_rl,val,gli,RC,4,1,347,347.0,0.0,True,0.866225,2
+BraTS-GLI-02821-100,gli_main_rl,val,gli,SNFH,2,1,30256,30256.0,0.0,True,0.695212,1 2 6
+BraTS-GLI-02821-100,gli_main_rl,val,gli,SNFH,2,2,174,174.0,3.0,True,0.646388,3
+BraTS-GLI-02821-100,gli_main_rl,val,gli,ET,3,1,257,257.0,0.0,True,0.891616,3
+BraTS-GLI-02821-100,gli_main_rl,val,gli,ET,3,2,128,128.0,0.0,True,0.835714,4
+BraTS-GLI-02821-100,gli_main_rl,val,gli,RC,4,1,2136,2136.0,0.0,True,0.884558,1
+BraTS-GLI-02821-101,gli_main_rl,val,gli,NETC,1,2,102,102.0,0.0,True,0.813397,1
+BraTS-GLI-02821-101,gli_main_rl,val,gli,SNFH,2,1,39442,39442.0,0.0,True,0.755778,1
+BraTS-GLI-02821-101,gli_main_rl,val,gli,SNFH,2,2,53,53.0,3.0,True,0.623377,4
+BraTS-GLI-02821-101,gli_main_rl,val,gli,ET,3,1,2856,2856.0,0.0,True,0.958601,2
+BraTS-GLI-02821-101,gli_main_rl,val,gli,RC,4,1,1324,1324.0,0.0,True,0.885282,1
+BraTS-GLI-02826-100,gli_main_rl,val,gli,SNFH,2,1,24993,24993.0,0.0,True,0.930744,1
+BraTS-GLI-02826-100,gli_main_rl,val,gli,ET,3,1,220,220.0,0.0,True,0.665227,1
+BraTS-GLI-02826-100,gli_main_rl,val,gli,RC,4,1,29499,29499.0,0.0,True,0.946006,1
+BraTS-GLI-02826-101,gli_main_rl,val,gli,SNFH,2,1,21722,21722.0,0.0,True,0.927611,1 14
+BraTS-GLI-02826-101,gli_main_rl,val,gli,ET,3,1,105,105.0,0.0,True,0.52439,3
+BraTS-GLI-02826-101,gli_main_rl,val,gli,RC,4,1,28414,28414.0,0.0,True,0.9577,1
+BraTS-GLI-02843-100,gli_main_rl,val,gli,SNFH,2,1,13703,13703.0,0.0,True,0.897774,1
+BraTS-GLI-02843-100,gli_main_rl,val,gli,RC,4,1,9443,9443.0,0.0,True,0.920205,1
+BraTS-GLI-02843-101,gli_main_rl,val,gli,SNFH,2,1,15429,15429.0,0.0,True,0.921298,1
+BraTS-GLI-02843-101,gli_main_rl,val,gli,RC,4,1,14395,14395.0,0.0,True,0.958148,1
+BraTS-GLI-02858-100,gli_main_rl,val,gli,SNFH,2,1,12351,12351.0,0.0,True,0.946714,1
+BraTS-GLI-02858-100,gli_main_rl,val,gli,RC,4,1,7814,7814.0,0.0,True,0.935266,1
+BraTS-GLI-02858-101,gli_main_rl,val,gli,SNFH,2,1,10899,10899.0,0.0,True,0.89656,1
+BraTS-GLI-02858-101,gli_main_rl,val,gli,RC,4,1,8717,8717.0,0.0,True,0.921459,1
+BraTS-GLI-02876-100,gli_main_rl,val,gli,SNFH,2,1,4634,4634.0,18.894,True,0.805763,1
+BraTS-GLI-02876-100,gli_main_rl,val,gli,SNFH,2,2,20847,20847.0,0.0,True,0.912967,5 23
+BraTS-GLI-02876-100,gli_main_rl,val,gli,SNFH,2,3,906,906.0,1.0,True,0.696567,4
+BraTS-GLI-02876-100,gli_main_rl,val,gli,SNFH,2,4,273,273.0,0.0,True,0.249237,6
+BraTS-GLI-02876-100,gli_main_rl,val,gli,SNFH,2,6,98,98.0,8.602,True,0.144649,15
+BraTS-GLI-02876-100,gli_main_rl,val,gli,SNFH,2,8,93,93.0,25.729,True,0.478149,24
+BraTS-GLI-02876-100,gli_main_rl,val,gli,SNFH,2,11,55,55.0,5.099,True,0.531401,33
+BraTS-GLI-02876-100,gli_main_rl,val,gli,ET,3,1,66,66.0,0.0,True,0.140845,2
+BraTS-GLI-02876-100,gli_main_rl,val,gli,ET,3,2,63,63.0,8.775,False,0.0,
+BraTS-GLI-02876-100,gli_main_rl,val,gli,ET,3,3,127,127.0,0.0,False,0.0,
+BraTS-GLI-02876-100,gli_main_rl,val,gli,RC,4,1,67307,67307.0,0.0,True,0.756874,1 3
+BraTS-GLI-02876-101,gli_main_rl,val,gli,SNFH,2,1,4425,4425.0,17.234,True,0.825597,1
+BraTS-GLI-02876-101,gli_main_rl,val,gli,SNFH,2,3,1045,1045.0,4.583,True,0.607747,5
+BraTS-GLI-02876-101,gli_main_rl,val,gli,SNFH,2,4,19922,19922.0,0.0,True,0.90166,6 14 31
+BraTS-GLI-02876-101,gli_main_rl,val,gli,SNFH,2,6,273,273.0,0.0,True,0.247779,8
+BraTS-GLI-02876-101,gli_main_rl,val,gli,SNFH,2,10,226,226.0,0.0,True,0.478697,13
+BraTS-GLI-02876-101,gli_main_rl,val,gli,SNFH,2,12,86,86.0,11.747,True,0.070457,14
+BraTS-GLI-02876-101,gli_main_rl,val,gli,SNFH,2,13,197,197.0,3.0,True,0.579505,21 22
+BraTS-GLI-02876-101,gli_main_rl,val,gli,SNFH,2,14,153,153.0,29.732,True,0.659259,23
+BraTS-GLI-02876-101,gli_main_rl,val,gli,ET,3,1,73,73.0,6.403,False,0.0,
+BraTS-GLI-02876-101,gli_main_rl,val,gli,RC,4,1,63846,63846.0,0.0,True,0.650995,1 3 4
+BraTS-GLI-02898-100,gli_main_rl,val,gli,NETC,1,3,5523,5523.0,0.0,True,0.884173,1
+BraTS-GLI-02898-100,gli_main_rl,val,gli,SNFH,2,2,46565,46565.0,0.0,True,0.824687,1 2 3 4 5 12 14 21 22
+BraTS-GLI-02898-100,gli_main_rl,val,gli,SNFH,2,24,56,56.0,0.0,True,0.2,11
+BraTS-GLI-02898-100,gli_main_rl,val,gli,SNFH,2,26,53,53.0,0.0,True,0.13442,7
+BraTS-GLI-02898-100,gli_main_rl,val,gli,SNFH,2,36,117,117.0,0.0,True,0.126126,7
+BraTS-GLI-02898-100,gli_main_rl,val,gli,ET,3,1,11058,11058.0,0.0,True,0.827841,1 7
+BraTS-GLI-02898-100,gli_main_rl,val,gli,ET,3,2,108,108.0,0.0,True,0.015708,1
+BraTS-GLI-02898-100,gli_main_rl,val,gli,RC,4,1,9621,9621.0,0.0,True,0.948783,1
+BraTS-GLI-02898-101,gli_main_rl,val,gli,NETC,1,2,5014,5014.0,0.0,True,0.919255,1
+BraTS-GLI-02898-101,gli_main_rl,val,gli,SNFH,2,1,54256,54256.0,0.0,True,0.885505,2 11 18 20
+BraTS-GLI-02898-101,gli_main_rl,val,gli,SNFH,2,10,143,143.0,1.0,False,0.0,
+BraTS-GLI-02898-101,gli_main_rl,val,gli,SNFH,2,22,63,63.0,0.0,True,0.31068,12 17
+BraTS-GLI-02898-101,gli_main_rl,val,gli,ET,3,1,13339,13339.0,0.0,True,0.894421,1 2 5
+BraTS-GLI-02898-101,gli_main_rl,val,gli,ET,3,2,138,138.0,0.0,True,0.016593,1
+BraTS-GLI-02898-101,gli_main_rl,val,gli,RC,4,1,8625,8625.0,0.0,True,0.947845,1
+BraTS-GLI-02910-100,gli_main_rl,val,gli,SNFH,2,1,52,52.0,0.0,False,0.0,
+BraTS-GLI-02910-100,gli_main_rl,val,gli,SNFH,2,2,54,54.0,5.0,True,0.365385,2
+BraTS-GLI-02910-100,gli_main_rl,val,gli,SNFH,2,3,19098,19098.0,0.0,True,0.834196,1
+BraTS-GLI-02910-100,gli_main_rl,val,gli,SNFH,2,4,56,56.0,7.81,False,0.0,
+BraTS-GLI-02910-100,gli_main_rl,val,gli,SNFH,2,12,479,479.0,0.0,True,0.038134,1
+BraTS-GLI-02910-100,gli_main_rl,val,gli,RC,4,1,25958,25958.0,0.0,True,0.842445,1 3
+BraTS-GLI-02910-101,gli_main_rl,val,gli,SNFH,2,1,19846,19846.0,0.0,True,0.857175,1 4 11
+BraTS-GLI-02910-101,gli_main_rl,val,gli,SNFH,2,6,83,83.0,7.874,True,0.619403,6
+BraTS-GLI-02910-101,gli_main_rl,val,gli,SNFH,2,7,541,541.0,2.449,True,0.92721,10
+BraTS-GLI-02910-101,gli_main_rl,val,gli,RC,4,1,26867,26867.0,0.0,True,0.906046,1
+BraTS-GLI-02920-100,gli_main_rl,val,gli,NETC,1,7,168,168.0,0.0,True,0.423423,2 3 4
+BraTS-GLI-02920-100,gli_main_rl,val,gli,NETC,1,32,71,71.0,0.0,True,0.403226,11
+BraTS-GLI-02920-100,gli_main_rl,val,gli,NETC,1,37,297,297.0,0.0,True,0.637899,12
+BraTS-GLI-02920-100,gli_main_rl,val,gli,SNFH,2,2,160790,160790.0,0.0,True,0.930366,1 6
+BraTS-GLI-02920-100,gli_main_rl,val,gli,ET,3,1,20259,20259.0,0.0,True,0.866644,1
+BraTS-GLI-02920-100,gli_main_rl,val,gli,ET,3,5,94,94.0,0.0,True,0.004772,1
+BraTS-GLI-02920-100,gli_main_rl,val,gli,RC,4,1,543,543.0,0.0,True,0.016984,1
+BraTS-GLI-02920-100,gli_main_rl,val,gli,RC,4,3,50,50.0,1.0,True,0.001594,1
+BraTS-GLI-02920-100,gli_main_rl,val,gli,RC,4,6,4303,4303.0,0.0,True,0.304769,1
+BraTS-GLI-02920-101,gli_main_rl,val,gli,NETC,1,19,110,110.0,0.0,False,0.0,
+BraTS-GLI-02920-101,gli_main_rl,val,gli,SNFH,2,1,177051,177051.0,0.0,True,0.897776,1 2 3 4 5 6 7 8 9 10 11 12 13 14
+BraTS-GLI-02920-101,gli_main_rl,val,gli,ET,3,2,36904,36904.0,0.0,True,0.936744,2 13 14 15 16 17
+BraTS-GLI-02920-101,gli_main_rl,val,gli,ET,3,5,235,235.0,0.0,True,0.9375,3
+BraTS-GLI-02920-101,gli_main_rl,val,gli,ET,3,6,105,105.0,0.0,False,0.0,
+BraTS-GLI-02920-101,gli_main_rl,val,gli,ET,3,14,52,52.0,0.0,False,0.0,
+BraTS-GLI-02920-101,gli_main_rl,val,gli,ET,3,15,60,60.0,11.0,False,0.0,
+BraTS-GLI-02920-101,gli_main_rl,val,gli,RC,4,3,2675,2675.0,0.0,True,0.204064,1
+BraTS-GLI-02920-101,gli_main_rl,val,gli,RC,4,4,286,286.0,1.0,True,0.018267,1
+BraTS-GLI-02921-100,gli_main_rl,val,gli,NETC,1,3,521,521.0,0.0,True,0.712619,1
+BraTS-GLI-02921-100,gli_main_rl,val,gli,NETC,1,6,129,129.0,0.0,True,0.657534,4
+BraTS-GLI-02921-100,gli_main_rl,val,gli,NETC,1,7,151,151.0,0.0,True,0.727273,3
+BraTS-GLI-02921-100,gli_main_rl,val,gli,NETC,1,15,928,928.0,0.0,True,0.312937,9 10 11 14 20
+BraTS-GLI-02921-100,gli_main_rl,val,gli,NETC,1,50,118,118.0,0.0,True,0.36478,27
+BraTS-GLI-02921-100,gli_main_rl,val,gli,NETC,1,52,296,296.0,0.0,True,0.252149,25
+BraTS-GLI-02921-100,gli_main_rl,val,gli,SNFH,2,1,79677,79677.0,0.0,True,0.811808,1 2 5 9 11 12 17 24 26 27 28 29 30 31
+BraTS-GLI-02921-100,gli_main_rl,val,gli,SNFH,2,20,52,52.0,2.236,False,0.0,
+BraTS-GLI-02921-100,gli_main_rl,val,gli,SNFH,2,21,152,152.0,2.236,True,0.025974,13
+BraTS-GLI-02921-100,gli_main_rl,val,gli,SNFH,2,78,180,180.0,0.0,True,0.668213,32
+BraTS-GLI-02921-100,gli_main_rl,val,gli,ET,3,1,3793,3793.0,0.0,True,0.848917,1
+BraTS-GLI-02921-100,gli_main_rl,val,gli,ET,3,2,16002,16002.0,0.0,True,0.863139,2
+BraTS-GLI-02921-100,gli_main_rl,val,gli,RC,4,2,3106,3106.0,0.0,True,0.801519,1
+BraTS-GLI-02921-100,gli_main_rl,val,gli,RC,4,3,60,60.0,0.0,False,0.0,
+BraTS-GLI-02921-101,gli_main_rl,val,gli,NETC,1,2,1413,1413.0,0.0,True,0.883193,2
+BraTS-GLI-02921-101,gli_main_rl,val,gli,NETC,1,9,82,82.0,0.0,True,0.658385,4
+BraTS-GLI-02921-101,gli_main_rl,val,gli,NETC,1,18,102,102.0,0.0,True,0.6,6
+BraTS-GLI-02921-101,gli_main_rl,val,gli,NETC,1,20,312,312.0,0.0,False,0.0,
+BraTS-GLI-02921-101,gli_main_rl,val,gli,NETC,1,31,480,480.0,0.0,True,0.427039,8 9 16 17 18
+BraTS-GLI-02921-101,gli_main_rl,val,gli,NETC,1,42,131,131.0,0.0,True,0.402299,11 15 21
+BraTS-GLI-02921-101,gli_main_rl,val,gli,NETC,1,47,113,113.0,0.0,True,0.234375,13 14 20
+BraTS-GLI-02921-101,gli_main_rl,val,gli,NETC,1,59,268,268.0,0.0,True,0.007353,19
+BraTS-GLI-02921-101,gli_main_rl,val,gli,SNFH,2,7,108934,108934.0,0.0,True,0.868,2 4 6 7 10 11 12 13 14 16 17 18 19 21 23 24 25 31 33
+BraTS-GLI-02921-101,gli_main_rl,val,gli,SNFH,2,10,72,72.0,0.0,True,0.80292,5
+BraTS-GLI-02921-101,gli_main_rl,val,gli,SNFH,2,47,139,139.0,0.0,True,0.570194,32
+BraTS-GLI-02921-101,gli_main_rl,val,gli,ET,3,1,5816,5816.0,0.0,True,0.916814,1
+BraTS-GLI-02921-101,gli_main_rl,val,gli,ET,3,4,13658,13658.0,0.0,True,0.914145,2 3
+BraTS-GLI-02921-101,gli_main_rl,val,gli,ET,3,9,169,169.0,0.0,False,0.0,
+BraTS-GLI-02921-101,gli_main_rl,val,gli,RC,4,1,2409,2409.0,0.0,True,0.592135,2
+BraTS-GLI-02929-100,gli_main_rl,val,gli,SNFH,2,1,78273,78273.0,0.0,True,0.851792,1 2 4 5 6 7 8 10
+BraTS-GLI-02929-100,gli_main_rl,val,gli,ET,3,2,644,644.0,0.0,True,0.569589,2
+BraTS-GLI-02929-100,gli_main_rl,val,gli,ET,3,7,329,329.0,0.0,True,0.657177,3
+BraTS-GLI-02929-100,gli_main_rl,val,gli,ET,3,9,253,253.0,0.0,True,0.719536,4
+BraTS-GLI-02929-100,gli_main_rl,val,gli,ET,3,20,919,919.0,0.0,True,0.757869,7
+BraTS-GLI-02929-100,gli_main_rl,val,gli,ET,3,21,454,454.0,0.0,True,0.157895,8 9 11 13
+BraTS-GLI-02929-100,gli_main_rl,val,gli,ET,3,28,71,71.0,0.0,True,0.372414,12
+BraTS-GLI-02929-100,gli_main_rl,val,gli,RC,4,1,28314,28314.0,0.0,True,0.868153,1 4
+BraTS-GLI-02929-101,gli_main_rl,val,gli,SNFH,2,1,75801,75801.0,0.0,True,0.865133,1 2 3 4 6 8 9 10 11
+BraTS-GLI-02929-101,gli_main_rl,val,gli,ET,3,1,1186,1186.0,0.0,True,0.716981,2
+BraTS-GLI-02929-101,gli_main_rl,val,gli,ET,3,3,797,797.0,0.0,True,0.859599,3
+BraTS-GLI-02929-101,gli_main_rl,val,gli,ET,3,4,304,304.0,0.0,True,0.680412,5
+BraTS-GLI-02929-101,gli_main_rl,val,gli,ET,3,7,54,54.0,0.0,True,0.622517,8
+BraTS-GLI-02929-101,gli_main_rl,val,gli,ET,3,12,130,130.0,0.0,False,0.0,
+BraTS-GLI-02929-101,gli_main_rl,val,gli,ET,3,13,2686,2686.0,0.0,True,0.867736,10 11
+BraTS-GLI-02929-101,gli_main_rl,val,gli,RC,4,1,26193,26193.0,0.0,True,0.869556,1 3
+BraTS-GLI-02937-100,gli_main_rl,val,gli,SNFH,2,1,41225,41225.0,0.0,True,0.85655,1 3
+BraTS-GLI-02937-100,gli_main_rl,val,gli,ET,3,1,638,638.0,0.0,True,0.670799,1
+BraTS-GLI-02937-100,gli_main_rl,val,gli,RC,4,1,7222,7222.0,0.0,True,0.85842,1
+BraTS-GLI-02937-101,gli_main_rl,val,gli,SNFH,2,1,40366,40366.0,0.0,True,0.870815,1
+BraTS-GLI-02937-101,gli_main_rl,val,gli,ET,3,1,439,439.0,0.0,True,0.528198,1
+BraTS-GLI-02937-101,gli_main_rl,val,gli,RC,4,1,6996,6996.0,0.0,True,0.807426,1 2 3
+BraTS-GLI-02939-100,gli_main_rl,val,gli,SNFH,2,2,11874,11874.0,0.0,True,0.833937,1
+BraTS-GLI-02939-100,gli_main_rl,val,gli,ET,3,1,1126,1126.0,0.0,True,0.576064,1 2
+BraTS-GLI-02939-100,gli_main_rl,val,gli,RC,4,1,511,511.0,0.0,True,0.733766,1
+BraTS-GLI-02939-101,gli_main_rl,val,gli,SNFH,2,1,12720,12720.0,0.0,True,0.870486,1
+BraTS-GLI-02939-101,gli_main_rl,val,gli,ET,3,1,684,684.0,0.0,True,0.634308,1
+BraTS-GLI-02939-101,gli_main_rl,val,gli,RC,4,1,434,434.0,0.0,True,0.519928,1
+BraTS-GLI-02939-101,gli_main_rl,val,gli,RC,4,4,52,52.0,45.891,False,0.0,
+BraTS-GLI-02943-100,gli_main_rl,val,gli,SNFH,2,1,22989,22989.0,0.0,True,0.842312,1
+BraTS-GLI-02943-100,gli_main_rl,val,gli,SNFH,2,2,3587,3587.0,4.123,True,0.777778,3
+BraTS-GLI-02943-100,gli_main_rl,val,gli,SNFH,2,6,237,237.0,3.0,True,0.525714,15
+BraTS-GLI-02943-100,gli_main_rl,val,gli,RC,4,1,85599,85599.0,0.0,True,0.886308,1
+BraTS-GLI-02943-101,gli_main_rl,val,gli,SNFH,2,1,21566,21566.0,0.0,True,0.853005,1
+BraTS-GLI-02943-101,gli_main_rl,val,gli,SNFH,2,2,113,113.0,19.416,True,0.05103,3
+BraTS-GLI-02943-101,gli_main_rl,val,gli,SNFH,2,3,2917,2917.0,3.162,True,0.813737,3
+BraTS-GLI-02943-101,gli_main_rl,val,gli,SNFH,2,4,249,249.0,0.0,True,0.017831,1
+BraTS-GLI-02943-101,gli_main_rl,val,gli,SNFH,2,5,63,63.0,7.81,True,0.428571,14
+BraTS-GLI-02943-101,gli_main_rl,val,gli,SNFH,2,6,239,239.0,3.0,True,0.216418,17
+BraTS-GLI-02943-101,gli_main_rl,val,gli,RC,4,1,83759,83759.0,0.0,True,0.897549,1
+BraTS-GLI-02946-100,gli_main_rl,val,gli,SNFH,2,1,444,444.0,24.125,False,0.0,
+BraTS-GLI-02946-100,gli_main_rl,val,gli,SNFH,2,2,263,263.0,14.491,False,0.0,
+BraTS-GLI-02946-100,gli_main_rl,val,gli,SNFH,2,3,2577,2577.0,0.0,True,0.781708,1
+BraTS-GLI-02946-101,gli_main_rl,val,gli,SNFH,2,1,327,327.0,23.452,True,0.619835,1
+BraTS-GLI-02946-101,gli_main_rl,val,gli,SNFH,2,2,423,423.0,12.689,True,0.724544,2
+BraTS-GLI-02946-101,gli_main_rl,val,gli,SNFH,2,3,2183,2183.0,0.0,True,0.693085,3
+BraTS-GLI-02958-100,gli_main_rl,val,gli,SNFH,2,1,44908,44908.0,0.0,True,0.868334,1 3 8 9 10 11
+BraTS-GLI-02958-100,gli_main_rl,val,gli,SNFH,2,6,4988,4988.0,11.446,True,0.576557,13 15 16
+BraTS-GLI-02958-100,gli_main_rl,val,gli,SNFH,2,7,830,830.0,17.464,True,0.756116,14
+BraTS-GLI-02958-100,gli_main_rl,val,gli,ET,3,1,4684,4684.0,0.0,True,0.943207,2
+BraTS-GLI-02958-100,gli_main_rl,val,gli,RC,4,1,9175,9175.0,0.0,True,0.94938,1
+BraTS-GLI-02958-101,gli_main_rl,val,gli,NETC,1,1,117,117.0,0.0,True,0.766667,1
+BraTS-GLI-02958-101,gli_main_rl,val,gli,NETC,1,2,2627,2627.0,0.0,True,0.718466,2
+BraTS-GLI-02958-101,gli_main_rl,val,gli,SNFH,2,1,58887,58887.0,0.0,True,0.848329,1 3 4 12 16 19 26
+BraTS-GLI-02958-101,gli_main_rl,val,gli,SNFH,2,4,98,98.0,0.0,True,0.002209,1
+BraTS-GLI-02958-101,gli_main_rl,val,gli,SNFH,2,13,2363,2363.0,0.0,True,0.393038,22 25 30
+BraTS-GLI-02958-101,gli_main_rl,val,gli,SNFH,2,14,238,238.0,19.647,True,0.163138,30
+BraTS-GLI-02958-101,gli_main_rl,val,gli,SNFH,2,15,831,831.0,16.763,True,0.819277,31
+BraTS-GLI-02958-101,gli_main_rl,val,gli,SNFH,2,16,79,79.0,11.576,True,0.058046,30
+BraTS-GLI-02958-101,gli_main_rl,val,gli,ET,3,1,17866,17866.0,0.0,True,0.877707,3 14
+BraTS-GLI-02958-101,gli_main_rl,val,gli,RC,4,1,5697,5697.0,0.0,True,0.714304,1
+BraTS-GLI-02965-100,gli_main_rl,val,gli,NETC,1,2,266,266.0,0.0,True,0.764957,2 4
+BraTS-GLI-02965-100,gli_main_rl,val,gli,SNFH,2,1,20006,20006.0,0.0,True,0.9245,1
+BraTS-GLI-02965-100,gli_main_rl,val,gli,ET,3,1,6108,6108.0,0.0,True,0.910383,1
+BraTS-GLI-02965-100,gli_main_rl,val,gli,ET,3,2,222,222.0,0.0,True,0.824147,2
+BraTS-GLI-02965-100,gli_main_rl,val,gli,RC,4,2,6930,6930.0,0.0,True,0.855984,3
+BraTS-GLI-02965-101,gli_main_rl,val,gli,NETC,1,1,222,222.0,0.0,True,0.699187,2 4
+BraTS-GLI-02965-101,gli_main_rl,val,gli,SNFH,2,1,18408,18408.0,0.0,True,0.925361,1 4
+BraTS-GLI-02965-101,gli_main_rl,val,gli,SNFH,2,6,55,55.0,0.0,True,0.6,3
+BraTS-GLI-02965-101,gli_main_rl,val,gli,ET,3,1,65,65.0,5.196,False,0.0,
+BraTS-GLI-02965-101,gli_main_rl,val,gli,ET,3,2,5126,5126.0,0.0,True,0.886239,1 2 3
+BraTS-GLI-02965-101,gli_main_rl,val,gli,ET,3,3,74,74.0,0.0,True,0.783784,4
+BraTS-GLI-02965-101,gli_main_rl,val,gli,RC,4,1,7081,7081.0,0.0,True,0.877571,2
+BraTS-GLI-02977-100,gli_main_rl,val,gli,SNFH,2,1,10895,10895.0,0.0,True,0.732048,1
+BraTS-GLI-02977-100,gli_main_rl,val,gli,SNFH,2,4,67,67.0,0.0,True,0.010822,1
+BraTS-GLI-02977-100,gli_main_rl,val,gli,ET,3,1,219,219.0,17.029,False,0.0,
+BraTS-GLI-02977-100,gli_main_rl,val,gli,RC,4,1,8233,8233.0,0.0,True,0.800102,1 2
+BraTS-GLI-02977-101,gli_main_rl,val,gli,SNFH,2,1,13555,13555.0,0.0,True,0.830771,1 2 3 4 5 6
+BraTS-GLI-02977-101,gli_main_rl,val,gli,RC,4,1,9233,9233.0,0.0,True,0.829387,2
+BraTS-GLI-02989-100,gli_main_rl,val,gli,SNFH,2,1,16353,16353.0,0.0,True,0.831153,1 4
+BraTS-GLI-02989-100,gli_main_rl,val,gli,SNFH,2,2,74,74.0,2.236,True,0.52,2
+BraTS-GLI-02989-100,gli_main_rl,val,gli,SNFH,2,3,51,51.0,7.071,False,0.0,
+BraTS-GLI-02989-100,gli_main_rl,val,gli,SNFH,2,15,50,50.0,0.0,True,0.006695,1
+BraTS-GLI-02989-100,gli_main_rl,val,gli,ET,3,1,529,529.0,0.0,True,0.607547,1 2
+BraTS-GLI-02989-100,gli_main_rl,val,gli,ET,3,3,128,128.0,0.0,True,0.744868,3
+BraTS-GLI-02989-100,gli_main_rl,val,gli,RC,4,1,1798,1798.0,0.0,True,0.570568,1
+BraTS-GLI-02989-100,gli_main_rl,val,gli,RC,4,2,162,162.0,0.0,True,0.01227,2
+BraTS-GLI-02989-101,gli_main_rl,val,gli,NETC,1,1,266,266.0,0.0,True,0.613466,1 3 4 5
+BraTS-GLI-02989-101,gli_main_rl,val,gli,SNFH,2,1,21342,21342.0,0.0,True,0.845351,1 2 3 16 17
+BraTS-GLI-02989-101,gli_main_rl,val,gli,SNFH,2,2,50,50.0,3.162,True,0.616352,4
+BraTS-GLI-02989-101,gli_main_rl,val,gli,SNFH,2,7,81,81.0,0.0,True,0.005623,1
+BraTS-GLI-02989-101,gli_main_rl,val,gli,ET,3,1,3083,3083.0,0.0,True,0.887281,2 3
+BraTS-GLI-02989-101,gli_main_rl,val,gli,RC,4,1,1228,1228.0,0.0,True,0.555682,1
+BraTS-GLI-02989-101,gli_main_rl,val,gli,RC,4,2,119,119.0,0.0,True,0.585859,3
+BraTS-GLI-02989-101,gli_main_rl,val,gli,RC,4,3,132,132.0,0.0,True,0.873016,4
+BraTS-GLI-03009-100,gli_main_rl,val,gli,NETC,1,1,293,293.0,0.0,True,0.755927,1
+BraTS-GLI-03009-100,gli_main_rl,val,gli,NETC,1,3,1247,1247.0,0.0,True,0.613422,2
+BraTS-GLI-03009-100,gli_main_rl,val,gli,NETC,1,7,236,236.0,0.0,True,0.696335,3 5
+BraTS-GLI-03009-100,gli_main_rl,val,gli,NETC,1,16,118,118.0,0.0,True,0.093346,2
+BraTS-GLI-03009-100,gli_main_rl,val,gli,NETC,1,30,68,68.0,0.0,False,0.0,
+BraTS-GLI-03009-100,gli_main_rl,val,gli,SNFH,2,1,23821,23821.0,0.0,True,0.807312,1 2 4 13 14 15 19 28 34 35
+BraTS-GLI-03009-100,gli_main_rl,val,gli,SNFH,2,6,59,59.0,0.0,True,0.033333,6
+BraTS-GLI-03009-100,gli_main_rl,val,gli,SNFH,2,17,283,283.0,0.0,True,0.774848,10
+BraTS-GLI-03009-100,gli_main_rl,val,gli,SNFH,2,24,155,155.0,0.0,True,0.011766,1 23
+BraTS-GLI-03009-100,gli_main_rl,val,gli,SNFH,2,42,105,105.0,3.0,True,0.828571,33
+BraTS-GLI-03009-100,gli_main_rl,val,gli,ET,3,1,11003,11003.0,0.0,True,0.806699,1 2 3 9
+BraTS-GLI-03009-100,gli_main_rl,val,gli,RC,4,1,6982,6982.0,0.0,True,0.832362,1 2 3
+BraTS-GLI-03009-101,gli_main_rl,val,gli,NETC,1,1,920,920.0,0.0,True,0.074275,1 3
+BraTS-GLI-03009-101,gli_main_rl,val,gli,SNFH,2,1,27875,27875.0,0.0,True,0.789147,1 2 3 6 7 8 11 12 13 14 15 16 17 19 23 24 25
+BraTS-GLI-03009-101,gli_main_rl,val,gli,SNFH,2,8,67,67.0,0.0,True,0.057971,10 18
+BraTS-GLI-03009-101,gli_main_rl,val,gli,ET,3,2,6440,6440.0,0.0,True,0.833125,1 2 3 6 7 9 13 20
+BraTS-GLI-03009-101,gli_main_rl,val,gli,RC,4,1,54,54.0,0.0,False,0.0,
+BraTS-GLI-03009-101,gli_main_rl,val,gli,RC,4,2,8788,8788.0,0.0,True,0.785996,1 2
+BraTS-GLI-03009-101,gli_main_rl,val,gli,RC,4,11,113,113.0,0.0,True,0.018938,1
+BraTS-GLI-03009-101,gli_main_rl,val,gli,RC,4,18,87,87.0,0.0,True,0.010124,1
+BraTS-GLI-03009-101,gli_main_rl,val,gli,RC,4,24,89,89.0,0.0,True,0.009218,1
+BraTS-GLI-03019-100,gli_main_rl,val,gli,NETC,1,1,254,254.0,0.0,True,0.686391,1 3 4 5
+BraTS-GLI-03019-100,gli_main_rl,val,gli,SNFH,2,1,8628,8628.0,13.638,True,0.769433,1
+BraTS-GLI-03019-100,gli_main_rl,val,gli,SNFH,2,2,469,469.0,18.276,True,0.557505,3
+BraTS-GLI-03019-100,gli_main_rl,val,gli,SNFH,2,3,1654,1654.0,11.705,True,0.066275,2 7 9
+BraTS-GLI-03019-100,gli_main_rl,val,gli,SNFH,2,11,59,59.0,23.728,True,0.003166,1
+BraTS-GLI-03019-100,gli_main_rl,val,gli,SNFH,2,12,1475,1475.0,50.961,True,0.259542,14
+BraTS-GLI-03019-100,gli_main_rl,val,gli,SNFH,2,13,99,99.0,16.279,False,0.0,
+BraTS-GLI-03019-100,gli_main_rl,val,gli,SNFH,2,14,748,748.0,51.166,True,0.658897,12
+BraTS-GLI-03019-100,gli_main_rl,val,gli,SNFH,2,15,5821,5821.0,13.191,True,0.836948,11
+BraTS-GLI-03019-100,gli_main_rl,val,gli,SNFH,2,17,6591,6591.0,0.0,True,0.614697,16 22 32
+BraTS-GLI-03019-100,gli_main_rl,val,gli,SNFH,2,27,547,547.0,3.317,True,0.536822,24
+BraTS-GLI-03019-100,gli_main_rl,val,gli,SNFH,2,28,1610,1610.0,10.488,True,0.528726,35 41
+BraTS-GLI-03019-100,gli_main_rl,val,gli,SNFH,2,30,186,186.0,0.0,True,0.039411,16
+BraTS-GLI-03019-100,gli_main_rl,val,gli,SNFH,2,36,59,59.0,0.0,True,0.312169,34
+BraTS-GLI-03019-100,gli_main_rl,val,gli,SNFH,2,37,262,262.0,49.132,False,0.0,
+BraTS-GLI-03019-100,gli_main_rl,val,gli,SNFH,2,40,852,852.0,58.447,True,0.637347,46
+BraTS-GLI-03019-100,gli_main_rl,val,gli,ET,3,1,632,632.0,32.078,True,0.72602,1
+BraTS-GLI-03019-100,gli_main_rl,val,gli,ET,3,2,87,87.0,20.976,True,0.076046,5
+BraTS-GLI-03019-100,gli_main_rl,val,gli,ET,3,3,285,285.0,15.937,True,0.350829,5
+BraTS-GLI-03019-100,gli_main_rl,val,gli,ET,3,4,141,141.0,7.141,True,0.109589,3
+BraTS-GLI-03019-100,gli_main_rl,val,gli,ET,3,7,189,189.0,17.059,True,0.073826,7
+BraTS-GLI-03019-100,gli_main_rl,val,gli,ET,3,9,112,112.0,54.571,False,0.0,
+BraTS-GLI-03019-100,gli_main_rl,val,gli,ET,3,11,58,58.0,0.0,True,0.086038,8
+BraTS-GLI-03019-100,gli_main_rl,val,gli,ET,3,12,563,563.0,13.379,True,0.103853,11
+BraTS-GLI-03019-100,gli_main_rl,val,gli,ET,3,15,7065,7065.0,0.0,True,0.868524,9
+BraTS-GLI-03019-100,gli_main_rl,val,gli,ET,3,18,193,193.0,59.473,True,0.59867,12
+BraTS-GLI-03019-100,gli_main_rl,val,gli,RC,4,1,104417,104417.0,0.0,True,0.938812,1
+BraTS-GLI-03019-101,gli_main_rl,val,gli,NETC,1,1,89,89.0,34.073,True,0.125,1
+BraTS-GLI-03019-101,gli_main_rl,val,gli,NETC,1,6,1222,1222.0,0.0,True,0.297429,3 4 6 7 8 9 10 12 13 14 15
+BraTS-GLI-03019-101,gli_main_rl,val,gli,NETC,1,10,427,427.0,0.0,True,0.719068,11
+BraTS-GLI-03019-101,gli_main_rl,val,gli,NETC,1,17,253,253.0,10.817,True,0.674817,17 22
+BraTS-GLI-03019-101,gli_main_rl,val,gli,NETC,1,19,108,108.0,0.0,True,0.503311,18 19 20
+BraTS-GLI-03019-101,gli_main_rl,val,gli,NETC,1,27,338,338.0,31.67,True,0.720887,23
+BraTS-GLI-03019-101,gli_main_rl,val,gli,NETC,1,29,87,87.0,29.343,True,0.641221,25 26 28
+BraTS-GLI-03019-101,gli_main_rl,val,gli,SNFH,2,1,9367,9367.0,11.832,True,0.808374,1
+BraTS-GLI-03019-101,gli_main_rl,val,gli,SNFH,2,4,151,151.0,33.496,True,0.583826,4
+BraTS-GLI-03019-101,gli_main_rl,val,gli,SNFH,2,5,543,543.0,4.123,True,0.840864,5
+BraTS-GLI-03019-101,gli_main_rl,val,gli,SNFH,2,6,1966,1966.0,26.571,True,0.684731,6 7
+BraTS-GLI-03019-101,gli_main_rl,val,gli,SNFH,2,7,830,830.0,28.983,True,0.740922,8
+BraTS-GLI-03019-101,gli_main_rl,val,gli,SNFH,2,54,2285,2285.0,0.0,True,0.668878,23 69
+BraTS-GLI-03019-101,gli_main_rl,val,gli,SNFH,2,69,2070,2070.0,0.0,True,0.6385,26 34 36 37 38 39 40 41 42 43 45 46 47 50 51 52 55 57 58
+BraTS-GLI-03019-101,gli_main_rl,val,gli,SNFH,2,80,180,180.0,13.638,True,0.03051,1
+BraTS-GLI-03019-101,gli_main_rl,val,gli,SNFH,2,91,6933,6933.0,4.0,True,0.819922,28
+BraTS-GLI-03019-101,gli_main_rl,val,gli,SNFH,2,98,4393,4393.0,0.0,True,0.569469,56
+BraTS-GLI-03019-101,gli_main_rl,val,gli,SNFH,2,129,112,112.0,11.533,True,0.28978,66
+BraTS-GLI-03019-101,gli_main_rl,val,gli,SNFH,2,138,127,127.0,0.0,True,0.028297,23
+BraTS-GLI-03019-101,gli_main_rl,val,gli,SNFH,2,143,3307,3307.0,0.0,True,0.489233,23 75 122
+BraTS-GLI-03019-101,gli_main_rl,val,gli,SNFH,2,144,742,742.0,0.0,True,0.099503,56
+BraTS-GLI-03019-101,gli_main_rl,val,gli,SNFH,2,148,756,756.0,0.0,True,0.223332,23 85
+BraTS-GLI-03019-101,gli_main_rl,val,gli,SNFH,2,153,1127,1127.0,0.0,True,0.179232,56
+BraTS-GLI-03019-101,gli_main_rl,val,gli,SNFH,2,154,223,223.0,0.0,True,0.041872,56
+BraTS-GLI-03019-101,gli_main_rl,val,gli,SNFH,2,155,730,730.0,0.0,True,0.127633,56
+BraTS-GLI-03019-101,gli_main_rl,val,gli,SNFH,2,158,776,776.0,0.0,True,0.874539,87
+BraTS-GLI-03019-101,gli_main_rl,val,gli,SNFH,2,162,134,134.0,21.84,True,0.556701,88
+BraTS-GLI-03019-101,gli_main_rl,val,gli,SNFH,2,180,82,82.0,30.676,False,0.0,
+BraTS-GLI-03019-101,gli_main_rl,val,gli,SNFH,2,194,91,91.0,29.017,True,0.098765,89 126
+BraTS-GLI-03019-101,gli_main_rl,val,gli,SNFH,2,212,109,109.0,25.632,True,0.538922,117 142
+BraTS-GLI-03019-101,gli_main_rl,val,gli,ET,3,1,7932,7932.0,21.494,True,0.882983,1 6
+BraTS-GLI-03019-101,gli_main_rl,val,gli,ET,3,6,56,56.0,4.899,True,0.765957,3
+BraTS-GLI-03019-101,gli_main_rl,val,gli,ET,3,8,8469,8469.0,0.0,True,0.858817,4
+BraTS-GLI-03019-101,gli_main_rl,val,gli,ET,3,9,320,320.0,33.838,True,0.584071,5
+BraTS-GLI-03019-101,gli_main_rl,val,gli,ET,3,17,79,79.0,12.042,True,0.518519,12
+BraTS-GLI-03019-101,gli_main_rl,val,gli,ET,3,19,97,97.0,0.0,False,0.0,
+BraTS-GLI-03019-101,gli_main_rl,val,gli,ET,3,22,924,924.0,0.0,True,0.876643,15
+BraTS-GLI-03019-101,gli_main_rl,val,gli,ET,3,23,621,621.0,0.0,True,0.765056,16
+BraTS-GLI-03019-101,gli_main_rl,val,gli,ET,3,24,295,295.0,7.55,True,0.713043,17
+BraTS-GLI-03019-101,gli_main_rl,val,gli,ET,3,25,98,98.0,18.493,True,0.884793,18
+BraTS-GLI-03019-101,gli_main_rl,val,gli,ET,3,33,4254,4254.0,5.0,True,0.929997,20
+BraTS-GLI-03019-101,gli_main_rl,val,gli,ET,3,34,368,368.0,0.0,True,0.688293,21
+BraTS-GLI-03019-101,gli_main_rl,val,gli,ET,3,38,94,94.0,0.0,False,0.0,
+BraTS-GLI-03019-101,gli_main_rl,val,gli,ET,3,39,3633,3633.0,0.0,True,0.921176,23
+BraTS-GLI-03019-101,gli_main_rl,val,gli,ET,3,40,9364,9364.0,7.681,True,0.9399,24 25
+BraTS-GLI-03019-101,gli_main_rl,val,gli,RC,4,1,93278,93278.0,0.0,True,0.906281,1 4 6
+BraTS-GLI-03025-100,gli_main_rl,val,gli,SNFH,2,1,8297,8297.0,0.0,True,0.872132,1
+BraTS-GLI-03025-100,gli_main_rl,val,gli,ET,3,1,578,578.0,0.0,True,0.739946,1
+BraTS-GLI-03025-100,gli_main_rl,val,gli,RC,4,1,3526,3526.0,0.0,True,0.828829,1
+BraTS-GLI-03025-101,gli_main_rl,val,gli,SNFH,2,1,10179,10179.0,0.0,True,0.889374,1 3
+BraTS-GLI-03025-101,gli_main_rl,val,gli,ET,3,1,761,761.0,0.0,True,0.799511,1
+BraTS-GLI-03025-101,gli_main_rl,val,gli,RC,4,1,2851,2851.0,0.0,True,0.806904,1 2
+BraTS-GLI-03026-100,gli_main_rl,val,gli,NETC,1,2,58,58.0,0.0,True,0.552632,1
+BraTS-GLI-03026-100,gli_main_rl,val,gli,SNFH,2,1,56416,56416.0,0.0,True,0.887994,1 9 10 12 15
+BraTS-GLI-03026-100,gli_main_rl,val,gli,SNFH,2,3,184,184.0,3.0,True,0.725333,5
+BraTS-GLI-03026-100,gli_main_rl,val,gli,SNFH,2,19,20765,20765.0,11.0,True,0.827261,16 19
+BraTS-GLI-03026-100,gli_main_rl,val,gli,ET,3,1,4345,4345.0,0.0,True,0.875838,1
+BraTS-GLI-03026-100,gli_main_rl,val,gli,ET,3,2,90,90.0,1.0,True,0.215686,2
+BraTS-GLI-03026-100,gli_main_rl,val,gli,ET,3,3,69,69.0,1.0,False,0.0,
+BraTS-GLI-03026-100,gli_main_rl,val,gli,RC,4,1,17489,17489.0,0.0,True,0.949613,1
+BraTS-GLI-03026-101,gli_main_rl,val,gli,NETC,1,3,58,58.0,0.0,True,0.763636,1
+BraTS-GLI-03026-101,gli_main_rl,val,gli,SNFH,2,1,52515,52515.0,0.0,True,0.892045,1 5
+BraTS-GLI-03026-101,gli_main_rl,val,gli,SNFH,2,2,81,81.0,0.0,False,0.0,
+BraTS-GLI-03026-101,gli_main_rl,val,gli,SNFH,2,7,136,136.0,4.123,True,0.425287,9 10 12
+BraTS-GLI-03026-101,gli_main_rl,val,gli,SNFH,2,11,21112,21112.0,11.0,True,0.857,13
+BraTS-GLI-03026-101,gli_main_rl,val,gli,ET,3,1,4167,4167.0,0.0,True,0.845978,1
+BraTS-GLI-03026-101,gli_main_rl,val,gli,ET,3,3,114,114.0,2.0,True,0.648936,2
+BraTS-GLI-03026-101,gli_main_rl,val,gli,RC,4,1,18918,18918.0,0.0,True,0.963227,1
+BraTS-GLI-03049-100,gli_main_rl,val,gli,SNFH,2,1,13717,13717.0,0.0,True,0.655576,1 2 3 5 11
+BraTS-GLI-03049-100,gli_main_rl,val,gli,RC,4,1,21087,21087.0,0.0,True,0.711884,1 3 4
+BraTS-GLI-03049-101,gli_main_rl,val,gli,SNFH,2,1,5345,5345.0,0.0,True,0.741832,7 12 23 25 30 40
+BraTS-GLI-03049-101,gli_main_rl,val,gli,ET,3,2,8881,8881.0,0.0,True,0.800984,1 2 3 6 8 10 11
+BraTS-GLI-03049-101,gli_main_rl,val,gli,ET,3,16,236,236.0,0.0,True,0.191571,4 5 7
+BraTS-GLI-03049-101,gli_main_rl,val,gli,RC,4,1,12253,12253.0,0.0,True,0.932089,1
+BraTS-GLI-03050-100,gli_main_rl,val,gli,NETC,1,1,343,343.0,0.0,True,0.931785,1
+BraTS-GLI-03050-100,gli_main_rl,val,gli,NETC,1,3,13200,13200.0,0.0,True,0.919304,3
+BraTS-GLI-03050-100,gli_main_rl,val,gli,NETC,1,9,2517,2517.0,0.0,True,0.943684,7
+BraTS-GLI-03050-100,gli_main_rl,val,gli,NETC,1,12,53,53.0,0.0,True,0.731343,8
+BraTS-GLI-03050-100,gli_main_rl,val,gli,SNFH,2,1,182,182.0,16.823,True,0.42204,1
+BraTS-GLI-03050-100,gli_main_rl,val,gli,SNFH,2,2,44479,44479.0,0.0,True,0.913463,5 7 17 24
+BraTS-GLI-03050-100,gli_main_rl,val,gli,ET,3,1,850,850.0,14.248,True,0.954649,1
+BraTS-GLI-03050-100,gli_main_rl,val,gli,ET,3,2,38886,38886.0,0.0,True,0.95163,2
+BraTS-GLI-03050-100,gli_main_rl,val,gli,ET,3,9,1042,1042.0,7.0,True,0.825737,4
+BraTS-GLI-03050-101,gli_main_rl,val,gli,NETC,1,1,441,441.0,0.0,True,0.899791,1
+BraTS-GLI-03050-101,gli_main_rl,val,gli,NETC,1,3,11789,11789.0,0.0,True,0.82532,3
+BraTS-GLI-03050-101,gli_main_rl,val,gli,NETC,1,4,3040,3040.0,0.0,True,0.32414,3
+BraTS-GLI-03050-101,gli_main_rl,val,gli,NETC,1,8,123,123.0,0.0,True,0.14126,5
+BraTS-GLI-03050-101,gli_main_rl,val,gli,NETC,1,11,1342,1342.0,0.0,True,0.891707,5
+BraTS-GLI-03050-101,gli_main_rl,val,gli,SNFH,2,1,980,980.0,5.745,True,0.877358,2
+BraTS-GLI-03050-101,gli_main_rl,val,gli,SNFH,2,7,66974,66974.0,0.0,True,0.848713,6 7 8 10 17 18 21 22 23 24
+BraTS-GLI-03050-101,gli_main_rl,val,gli,SNFH,2,23,4995,4995.0,0.0,True,0.105964,6 31 33 34
+BraTS-GLI-03050-101,gli_main_rl,val,gli,ET,3,1,1217,1217.0,11.358,True,0.960032,1
+BraTS-GLI-03050-101,gli_main_rl,val,gli,ET,3,2,44623,44623.0,0.0,True,0.955791,2
+BraTS-GLI-03050-101,gli_main_rl,val,gli,ET,3,5,1246,1246.0,0.0,True,0.897029,3 4
+BraTS-GLI-03050-102,gli_main_rl,val,gli,NETC,1,1,477,477.0,0.0,True,0.85124,1
+BraTS-GLI-03050-102,gli_main_rl,val,gli,NETC,1,4,338,338.0,0.0,True,0.893064,2
+BraTS-GLI-03050-102,gli_main_rl,val,gli,NETC,1,6,15547,15547.0,0.0,True,0.872163,4
+BraTS-GLI-03050-102,gli_main_rl,val,gli,NETC,1,13,743,743.0,0.0,True,0.079533,4
+BraTS-GLI-03050-102,gli_main_rl,val,gli,SNFH,2,1,45088,45088.0,0.0,True,0.919193,1 2 3 8 11 14 25 26 27 34 53 58
+BraTS-GLI-03050-102,gli_main_rl,val,gli,SNFH,2,4,12420,12420.0,0.0,True,0.937355,4 13
+BraTS-GLI-03050-102,gli_main_rl,val,gli,SNFH,2,18,286,286.0,0.0,True,0.896907,21
+BraTS-GLI-03050-102,gli_main_rl,val,gli,SNFH,2,24,139,139.0,7.616,False,0.0,
+BraTS-GLI-03050-102,gli_main_rl,val,gli,SNFH,2,30,55,55.0,0.0,True,0.208955,52
+BraTS-GLI-03050-102,gli_main_rl,val,gli,SNFH,2,31,123,123.0,0.0,True,0.692913,40 60
+BraTS-GLI-03050-102,gli_main_rl,val,gli,SNFH,2,42,236,236.0,0.0,True,0.509573,66 68
+BraTS-GLI-03050-102,gli_main_rl,val,gli,SNFH,2,52,22345,22345.0,13.601,True,0.87425,74 76
+BraTS-GLI-03050-102,gli_main_rl,val,gli,ET,3,1,5407,5407.0,0.0,True,0.934259,1
+BraTS-GLI-03050-102,gli_main_rl,val,gli,ET,3,2,34602,34602.0,0.0,True,0.915919,3 4 5 6 7 8 9 10
+BraTS-GLI-03050-102,gli_main_rl,val,gli,ET,3,8,795,795.0,8.124,True,0.814266,11 12

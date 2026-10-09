@@ -553,25 +553,106 @@ The headline stays on the single-pass model: an 8x inference cost for +0.0006
 is not a trade worth making. Note that the test split was scored for both
 variants and the better one was *not* adopted on that basis.
 
+### A learned relabeller: the runner-up class is usually not the answer
+
+The oracle above says renaming mislabelled components is worth +0.0611 and
+that the selector cannot reach it. `mri3d.relabel` is the attempt to reach it
+without the oracle. `predict.py --save-components` now records each
+component's mean probability for every class and its runner-up class, and a
+logistic model (the selector's design matrix and conventions) learns on
+validation when the runner-up is the reference's majority class underneath.
+A component is renamed when that posterior clears 0.5: a wrong rename of a
+correct component costs about what a right rename of a mislabelled one gains,
+and renaming an invented lesion only moves a false positive between classes,
+so 0.5 is break-even or conservative. Validation was scored out-of-fold - five
+models grouped by patient, each validation case renamed by one that never saw
+that patient - and the test split was gated on that: proceed only if
+relabelling beat the current model on validation before selection.
+
+| | validation, no selector | test, no selector | test, + selector |
+|---|---|---|---|
+| current model | 0.5598 | 0.5761 | **0.6202** |
+| + relabeller | 0.5637 | **0.5840** | 0.6184 |
+
+The gate passed narrowly (+0.004), test agreed (+0.008), and once the
+selector runs the gain is gone (-0.0018; NETC and TC up, SNFH, RC and WT down).
+False positives after selection fall further, 0.59 -> 0.52 per case, for 0.7
+points of per-lesion sensitivity. The headline stays on the model without it.
+
+The answer is mostly in the network: of the 207 validation false positives
+that sit on tumour, the runner-up class is the right name for **152 (73%)**.
+What limits the relabeller is finding them. They are 152 of 1575 decidable
+components, and an out-of-fold AUC of 0.907 is not enough separation at that
+base rate: at 0.5 it renames 118 components with 58% precision, fixing 65 of
+the 152 and wrongly renaming 38 that were already correct - each of which
+costs a matched lesion. So it reaches about an eighth of the oracle, and what
+it gains overlaps with what the selector already deletes. The useful next
+features are relational rather than per-component - whether the component
+touches a predicted lesion of its runner-up class, or sits inside the main
+mass - since a mislabelled sub-region is defined by its neighbours.
+
 ## Meningioma (BraTS 2024 MEN-RT), test split
 
 75 held-out patients, single T1c modality, one binary gross-tumour-volume mask.
 
-| | 300 epochs (`men_300`) | 120 epochs (`men_long`) | BraTS best | BraTS median |
-|---|---|---|---|---|
-| Lesion-wise Dice | **0.589** (median 0.732) | 0.509 (median 0.462) | 0.849 | 0.794 |
-| Volumetric Dice | **0.660** (median 0.816) | 0.626 (median 0.786) | | |
-| False lesions per case | 0.53 | 0.57 | | |
-| Cases with any false lesion | 16 | 27 | | |
+| | **final: 3 seeds + flip TTA + fallback** | 300 epochs (`men_300`) | 120 epochs (`men_long`) | BraTS best | BraTS median |
+|---|---|---|---|---|---|
+| Lesion-wise Dice | **0.651** (median 0.781) | 0.589 (median 0.732) | 0.509 (median 0.462) | 0.849 | 0.794 |
+| Volumetric Dice | **0.695** (median 0.823) | 0.660 (median 0.816) | 0.626 (median 0.786) | | |
+| False lesions per case | **0.15** | 0.53 | 0.57 | | |
+| Cases with any false lesion | **10** | 16 | 27 | | |
+| Near-total misses (< 0.2 volumetric) | **9** | 13 | 13 | | |
 
-Validation Dice 0.7317 at epoch 270 of 300 (`men_long`: 0.6695 at epoch 120).
+Validation Dice of the single models: 0.7317 (`men_300`, seed 0), 0.7210
+(seed 1), 0.7282 (seed 2); `men_long` 0.6695 at epoch 120.
 
 `men_300` is the same model, data, patch size and validation schedule as
-`men_long`, with only the epoch count changed - item 1 of the list at the end
-of this report, taken. The test split has now been scored twice, once per run;
-both numbers are in the table rather than only the better one.
+`men_long`, with only the epoch count changed. The two extra seeds change
+nothing else either. The test split has been scored three times in total, once
+per configuration as it was adopted, and every one of those numbers is in the
+table rather than only the best.
 
-### More training cleaned up the good cases, not the failures
+### Ensembling and flip TTA, chosen on validation
+
+Two more 300-epoch models were trained with seeds 1 and 2, and every
+combination was scored on the **validation** split only - single models,
+2- and 3-model probability averages (`predict.py --members`), each with and
+without 8-way flip averaging (`--tta`) and the empty-mask fallback
+(`--fill-empty`, `mri3d.fallback`). The best on validation was then scored on
+test once.
+
+| validation, lesion-wise (volumetric) | plain | + fallback | + flip TTA | + TTA + fallback |
+|---|---|---|---|---|
+| `men_300` alone | 0.637 (0.741) | 0.637 (0.741) | 0.701 (0.768) | 0.705 (0.772) |
+| seed 1 alone | 0.649 (0.744) | | 0.687 (0.745) | |
+| seed 2 alone | 0.640 (0.742) | | 0.696 (0.754) | |
+| 2 seeds | 0.670 (0.760) | 0.670 (0.760) | 0.713 (0.766) | 0.717 (0.770) |
+| **3 seeds** | 0.696 (0.761) | 0.698 (0.763) | 0.714 (0.767) | **0.718 (0.771)** |
+| `men_300` + `men_long` | 0.631 (0.751) | | 0.688 (0.761) | |
+
+Four things in that table:
+
+- **Flip TTA is worth +0.06 on meningioma** (0.637 -> 0.701 for one model),
+  three times what it gave glioma before selection, and here nothing else
+  competes for the same errors - MEN-RT has no selector.
+- **Ensembling and TTA overlap.** Without TTA, seeds add steadily (0.637 ->
+  0.670 -> 0.696); with TTA most of that is already captured (0.701 -> 0.713
+  -> 0.714). Both mainly average away the same unstable false positives.
+- **The fallback barely matters** (+0.000 to +0.004). On test it fired on 7
+  cases and rescued 2 of them (to 0.15 and 0.41 lesion-wise); the other 5 got
+  a half-max region in the wrong place. Averaging over 24 forward passes
+  already leaves few masks empty.
+- Adding the weaker 120-epoch model *lowers* the score (0.637 -> 0.631):
+  ensembling needs members of similar quality.
+
+On test the chosen configuration moved lesion-wise Dice 0.589 -> 0.651 and
+volumetric 0.660 -> 0.695. Most of the gain is false positives: 0.53 -> 0.15
+per case. Per case, 31 improved by more than 0.01 lesion-wise and 13 got
+worse. The near-total misses fell from 13 to 9 (five fixed, one new). The
+price is inference time: 24 forward passes per case, about 29 s on the 8 GB
+card instead of under 2.
+
+### Earlier step: more training cleaned up the good cases, not the failures
 
 | Volumetric Dice | `men_300` | `men_long` |
 |---|---|---|
@@ -607,15 +688,13 @@ In rough order of expected value:
 1. ~~**More training.**~~ Done for meningioma: 120 -> 300 epochs moved
    lesion-wise Dice 0.509 -> 0.589 (see the meningioma section). Glioma
    converged at epoch 80, so it is not expected to gain the same way.
-2. **A relabeller, not just a deleter.** The largest measured, un-taken win:
-   renaming the 229 false-positive components that sit on real tumour is worth
-   +0.0611 lesion-wise and improves volumetric Dice at the same time, and it is
-   entirely outside what the current selector can express. The evidence for
-   which name is right is already in the network - it is the runner-up class in
-   the softmax - but `predict.py --save-components` records the probability of
-   the *assigned* class only, so the margin to second place is thrown away. It
-   is a small change to keep all five, and then the same
-   fit-on-validation-apply-once discipline applies.
+2. **A relabeller with relational features.** A per-component relabeller
+   is now built and measured (see "A learned relabeller" above): +0.008 on
+   test before selection, nothing after it, against an oracle worth +0.0611.
+   The runner-up class is the right name for 73% of renameable false positives,
+   so the information exists; per-component softmax features cannot pick those
+   components out precisely enough. Contact with a predicted lesion of the
+   runner-up class is the obvious next feature.
 3. **Flip disagreement as a selector feature.** Flip-*averaging* is done (see
    "Test-time augmentation" above): +0.019 on its own, +0.0006 once the
    selector runs, because both remove the same invented lesions. What has not
@@ -629,21 +708,25 @@ In rough order of expected value:
    component selection would give, and it pays for it with 8 points of
    per-lesion sensitivity. Deep supervision, or a loss term that penalises
    spurious components, would address the cause instead of the symptom.
-5. **Ensembling** across folds - the standard reason challenge entries score
-   where they do, and disagreement between independently trained models is a
-   stronger selector feature than either MC dropout or flip consistency.
+5. **Ensembling for glioma.** Done for meningioma, where three seeds took
+   validation 0.637 -> 0.696 before flips (see the meningioma section). Glioma
+   would need two more 8-hour runs; disagreement between the members would
+   also be a stronger selector feature than MC dropout or flip consistency.
 6. **NETC is the weakest class** (0.478) and the rarest (42% of cases, 0.047%
    of voxels). It is weakest for the selector too - out-of-fold AUC 0.708
    against 0.88-0.91 for the others - and it carries the largest remaining
    margin to perfect selection (0.118). Class-balanced sampling already rescued
    it once during training, from 0.487 to 0.675 on validation; more aggressive
    oversampling may help further.
-7. **Diagnose the meningioma failures.** Not a glioma item, but the largest
-   single number available anywhere in this project. MEN-RT has only 0.53
-   false-positive lesions per case, so the selector has little to delete
-   there, and 13 of 75 test cases still score below 0.2 volumetric after
-   300 epochs - 10 of them the same cases that failed after 120. (Figures
-   below are from the 120-epoch analysis.) They skew small (median GTV
-   2795 voxels against 11138 for the rest) but four of them exceed 10000
-   voxels, so "too small to see" is not the whole explanation.
+7. **The remaining meningioma misses.** The final ensemble leaves 9 of 75
+   test cases below 0.2 volumetric, and false positives are no longer the
+   problem (0.15 per case). Profiling the 10 cases that failed under both
+   single 300- and 120-epoch models showed two kinds: six with an *empty*
+   prediction on a small tumour (median 2.8 cc against 6.6 cc), and four
+   predicted 41-150 mm from the real tumour. Scanner make, field strength and
+   sequence do not explain them - the sequence two of them share is common in
+   training. The empty-mask fallback turned out to be too blunt for the first
+   kind: the half-max region usually lands in the wrong place. A detector
+   with a lower operating point for small lesions, or a second-stage crop
+   around candidate regions, is the next thing to try.
    `reports/lesion_3d_*.html` is the tool for looking at them.

@@ -28,22 +28,23 @@ discussion in [`reports/results.md`](reports/results.md).
 | RC | 0.655 | 0.696 | 0.725 |
 | **mean** (6 regions, incl. TC and WT) | **0.576** | **0.620** | |
 
-**Meningioma** — 75 patients, binary gross tumour volume: lesion-wise **0.589**,
-volumetric 0.660 (median 0.816), after training 300 epochs instead of 120
-(was 0.509 / 0.626).
+**Meningioma** — 75 patients, binary gross tumour volume: lesion-wise **0.651**,
+volumetric 0.695 (median 0.823), from three 300-epoch models averaged with
+8-way flip test-time augmentation, chosen on validation and scored on test
+once. The path there: 0.509 (120 epochs) → 0.589 (300 epochs) → 0.651.
 
-**How that compares.** Against the BraTS 2024 leaderboard median, this single
-model on an 8 GB GPU is above the median on one glioma region (resection
+**How that compares.** Against the BraTS 2024 leaderboard median, the glioma
+model (one network, 8 GB GPU) is above the median on one region (resection
 cavity, 0.696 vs 0.672) and within 0.07 of it on two more (ET 0.650 vs 0.712,
-TC 0.628 vs 0.692). Overall it is below the median: glioma mean 0.620 vs ~0.75,
-meningioma 0.589 vs 0.794. By plain volumetric overlap, oedema (0.851) and
+TC 0.628 vs 0.692). Overall both are below the median: glioma mean 0.620 vs
+~0.75, meningioma 0.651 vs 0.794 (the gap there has halved, from 0.29). By plain volumetric overlap, oedema (0.851) and
 whole tumour (0.861) are at median level; the lesion-wise gap is mostly
 invented extra lesions, which is what the selector work targets. The
 leaderboard figures are validation-phase scores from teams that could resubmit
 and mostly ensembled several models, so they are context, not a like-for-like
 ranking.
 
-Two things in those numbers are worth more than the numbers themselves:
+A few things in those numbers are worth more than the numbers themselves:
 
 - **The 0.30 gap between the glioma columns.** SNFH scores 0.851 volumetric and
   0.533 lesion-wise, because the model invents roughly one spurious lesion per
@@ -61,11 +62,16 @@ Two things in those numbers are worth more than the numbers themselves:
   over 8 flips adds +0.019 on its own, but only +0.0006 on top of the selector:
   it removes invented lesions the selector was already deleting. The headline
   stays on the cheaper single-pass model.
-- **The meningioma mean describes no actual case.** 41 of 75 cases score above
-  0.8 and 13 score below 0.2 — the model is usually good and occasionally blind.
-  Training 2.5× longer cut the cases with an invented lesion from 27 to 16 but
-  left the 13 misses at 13, ten of them the same patients. Those are the real
-  target for the next iteration; more epochs will not reach them.
+- **For meningioma, flips and ensembling were the win.** With no selector
+  competing for the same errors, 8-way flip averaging adds +0.06 on validation,
+  and three seeds add more on top. False lesions fell 0.53 → 0.15 per case on
+  test. What is left is 9 near-total misses — mostly small tumours with an
+  empty prediction — which neither more models nor an empty-mask fallback fix.
+- **A learned relabeller found the right idea and too little of it.** Half the
+  glioma false positives are real tumour with the wrong sub-region name (an
+  oracle fix is worth +0.061). The runner-up class is the right name 73% of the
+  time, but a per-lesion model cannot single those lesions out precisely: +0.008
+  before the selector, nothing after. Reported in full in `reports/results.md`.
 
 ## What's here
 

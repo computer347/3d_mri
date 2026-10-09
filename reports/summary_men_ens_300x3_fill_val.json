@@ -1,0 +1,12 @@
+{
+  "dice_GTV": {
+    "mean_where_present": 0.7629,
+    "n_cases": 75,
+    "mean_all_cases": 0.7629
+  },
+  "lesion_dice_GTV": {
+    "mean_where_present": 0.6977,
+    "n_cases": 75,
+    "mean_all_cases": 0.6977
+  }
+}
